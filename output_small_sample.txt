@@ -1,0 +1,67 @@
+data loaded
+size of training set: 1296
+size of validation set: 145
+classes: ['alt.atheism', 'comp.graphics', 'talk.religion.misc']
+Initializing BertTokenizer
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Epoch 1/10
+----------
+time = 53.11 secondes
+Train loss 7.035583719795133 accuracy 0.35185185074806213
+Val   loss 6.855498027801514 accuracy 0.35862070322036743
+
+Epoch 2/10
+----------
+time = 43.81 secondes
+Train loss 6.764294371192838 accuracy 0.4104938209056854
+Val   loss 6.844936084747315 accuracy 0.35862070322036743
+
+Epoch 3/10
+----------
+time = 55.68 secondes
+Train loss 6.759884634135682 accuracy 0.4104938209056854
+Val   loss 6.844238710403443 accuracy 0.35862070322036743
+
+Epoch 4/10
+----------
+time = 43.29 secondes
+Train loss 6.759109002572519 accuracy 0.4104938209056854
+Val   loss 6.843967247009277 accuracy 0.35862070322036743
+
+Epoch 5/10
+----------
+time = 43.15 secondes
+Train loss 6.758802808361289 accuracy 0.4104938209056854
+Val   loss 6.843824815750122 accuracy 0.35862070322036743
+
+Epoch 6/10
+----------
+time = 46.07 secondes
+Train loss 6.758566673891044 accuracy 0.4104938209056854
+Val   loss 6.843748235702515 accuracy 0.35862070322036743
+
+Epoch 7/10
+----------
+time = 50.11 secondes
+Train loss 6.758495254281127 accuracy 0.4104938209056854
+Val   loss 6.843700885772705 accuracy 0.35862070322036743
+
+Epoch 8/10
+----------
+time = 47.37 secondes
+Train loss 6.758437745365096 accuracy 0.4104938209056854
+Val   loss 6.843670511245728 accuracy 0.35862070322036743
+
+Epoch 9/10
+----------
+time = 45.78 secondes
+Train loss 6.758380813363158 accuracy 0.4104938209056854
+Val   loss 6.843653345108033 accuracy 0.35862070322036743
+
+Epoch 10/10
+----------
+time = 43.95 secondes
+Train loss 6.758378723521291 accuracy 0.4104938209056854
+Val   loss 6.843647766113281 accuracy 0.35862070322036743
+
