@@ -144,7 +144,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:2") # specify  devicethe
+    device = torch.device("cuda:0") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -298,60 +298,36 @@ val_data_loader = create_data_loader(val_ng, tokenizer, MAX_LEN, BATCH_SIZE)
 # In[ ]:
 
 
-class BERT_Hierarchical_Model(nn.Module):
-    def __init__(self, n_classes, pooling_method="mean"):
-        super(BERT_Hierarchical_Model, self).__init__()
-        self.pooling_method = pooling_method
+class RoBERT_Model(nn.Module):
+    def __init__(self, n_classes):
+        super(RoBERT_Model, self).__init__()
         self.bert = BertModel.from_pretrained(BERTMODEL) #bert model from huggingface
-        self.drop = nn.Dropout(p=0.3) # add dropout of 0.3 on top of bert output
-        self.out = nn.Linear(self.bert.config.hidden_size, n_classes) # Linear layer as a classifier
-    
+        self.lstm = nn.LSTM(768, 100, num_layers=1, bidirectional=False)
+        self.out = nn.Linear(100, n_classes)
     def forward(self, input_ids, attention_mask, lengt):
-        
-        # for example, when batch_size=4, four document, doc 1, doc 2, doc 4 are less than 512 tokens, doc 3 about 4*512 tokens
-        # input_ids:  tensor([[ doc 1], [doc 2], [doc 3 seg 1], [ doc 3 seg 2], [doc 3 seg 3], [doc 3 seg 4], [doc 4]])
-        
-        # pooled output: CLS token 
-        # pooled_output shape: (number of segments of all documents in one batch * 786)
-        # In this small example, 7 * 786
-        # here not batch_size * 786 because of segmentation of long document
-        # print(input_ids.shape)
-        #pooled_output_list=[]
-        #for i in range(len(input_ids)):
-           # _, pooled_output = self.bert(
-            #input_ids = input_ids[i].unsqueeze(0),
-            #attention_mask = attention_mask[i].unsqueeze(0),
-            #return_dict=False
-            #)
-            #pooled_output_list.append(pooled_output)
+        _, pooled_output = self.bert(input_ids=input_ids, attention_mask=attention_mask, return_dict=False)
+        chunks_emb = pooled_output.split_with_sizes(lengt)
 
-        #pooled_output = torch.cat(pooled_output_list)
-        _, pooled_output = self.bert(
-             input_ids = input_ids,
-             attention_mask = attention_mask,
-             return_dict=False)
-        # split according to the number of segments 
-        # then know which document the pooled_output belongs to 
-        # chunks_emb (tensor([[doc1]]), tensor([[doc2]]), tensor([[doc3 seg1], [doc3 seg2], [doc3 seg3], [doc4 seg4]]), tensor([[doc4]])
-        chunks_emb = pooled_output.split_with_sizes(lengt) 
+        seq_lengths = torch.LongTensor([x for x in map(len, chunks_emb)])
+
+        batch_emb_pad = nn.utils.rnn.pad_sequence(chunks_emb, padding_value=-2, batch_first=True)
+        batch_emb = batch_emb_pad.transpose(0, 1)  
+        lstm_input = nn.utils.rnn.pack_padded_sequence(
+            batch_emb, seq_lengths.cpu().numpy(), batch_first=False, enforce_sorted=False)
+
+        packed_output, (h_t, h_c) = self.lstm(lstm_input, )  
+
+        h_t = h_t.view(-1, 100)
         
-        if self.pooling_method == "mean":
-            emb_pool = torch.stack([torch.mean(x, dim=0) for x in chunks_emb]) 
-        elif self.pooling_method == "max":
-            # torch.max return (value, indice)
-            # here [0] to get the value
-            emb_pool = torch.stack([torch.max(x, dim=0)[0] for x in chunks_emb])
-        
-        output = self.out(self.drop(emb_pool))
-        #output = self.out(emb_pool)
+        output = self.out(h_t)
+
         return F.softmax(output, dim=1)
-
 
 # In[ ]:
 
 
-model = BERT_Hierarchical_Model(len(set(train_ng['target'])))
-#model =  BERT_Hierarchical_Model(len(train_ng.target_names))
+model = RoBERT_Model(len(set(train_ng['target'])))
+#model =  RoBERT_Model(len(train_ng.target_names))
 model = model.to(device)
 
 
@@ -359,10 +335,10 @@ model = model.to(device)
 
 
 # Hyperparameters
-EPOCHS = 50
+EPOCHS = 20
 #EPOCHS = 2
 
-optimizer = AdamW(model.parameters(), lr=2e-5)
+optimizer = AdamW(model.parameters(), lr=5e-5)
 #optimizer = AdamW(model.parameters(), lr=0.1)
 total_steps = len(train_data_loader) * EPOCHS
 
@@ -546,3 +522,4 @@ plt.legend()
 #plt.xlim([0, 20])
 plt.ylim([0, 1])
 plt.savefig('BERT_Hierarchical_Model.png')
+
