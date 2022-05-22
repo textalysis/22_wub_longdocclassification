@@ -16,7 +16,7 @@ Because of the small samples the accuracy increases very slowly.
 
 Code to train the large dataset (already modified with possible solutions like set batch_size to 1): **BERT_Hierarchical_large.ipynb**
 
-Details of memory message problem when using the whole training dataset: **message.txt**
+Details of memory usage problem when using the whole training dataset: **message.txt**
 
 ## With very small samples (BERT_Hierarchical.ipynb)
 

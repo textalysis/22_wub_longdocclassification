@@ -47,3 +47,15 @@ Val   loss 2.3490769092853254 accuracy 0.729651153087616
 
 Epoch 7/20
 ----------
+time = 272.24 secondes
+Train loss 2.226753913151678 accuracy 0.8528642654418945
+Val   loss 2.3514545403994047 accuracy 0.7248061895370483
+
+Epoch 8/20
+----------
+time = 273.46 secondes
+Train loss 2.2161221857270297 accuracy 0.8629927635192871
+Val   loss 2.341367930632371 accuracy 0.7393410801887512
+
+Epoch 9/20
+----------
