@@ -1,0 +1,49 @@
+Initializing BertTokenizer
+size of training set: 9182
+size of training set: 9182
+size of validation set: 1032
+size of validation set: 1032
+classes: ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey', 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns', 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Epoch 1/20
+----------
+time = 279.79 secondes
+Train loss 2.70805336789387 accuracy 0.45066434144973755
+Val   loss 2.4907207048856295 accuracy 0.6220930218696594
+
+Epoch 2/20
+----------
+time = 274.41 secondes
+Train loss 2.4330532837412497 accuracy 0.6688085198402405
+Val   loss 2.4279931985414946 accuracy 0.6686046719551086
+
+Epoch 3/20
+----------
+time = 276.53 secondes
+Train loss 2.3458349015239226 accuracy 0.7453713417053223
+Val   loss 2.3745417264791637 accuracy 0.7063953280448914
+
+Epoch 4/20
+----------
+time = 272.54 secondes
+Train loss 2.293212424171926 accuracy 0.7918753623962402
+Val   loss 2.366184429021982 accuracy 0.713178277015686
+
+Epoch 5/20
+----------
+time = 273.11 secondes
+Train loss 2.2635820929597066 accuracy 0.8185580372810364
+Val   loss 2.3581289731539212 accuracy 0.7228682041168213
+
+Epoch 6/20
+----------
+time = 272.58 secondes
+Train loss 2.2422501567348787 accuracy 0.837834894657135
+Val   loss 2.3490769092853254 accuracy 0.729651153087616
+
+Epoch 7/20
+----------

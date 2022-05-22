@@ -50,36 +50,66 @@ import os
 # 
 # get the 20newsgroups dataset and then split into training set (90%) and validation set(10%)
 
+print('Initializing BertTokenizer')
+
+BERTMODEL='bert-base-uncased'
+CACHE_DIR='transformers-cache'
+
+tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
+                                          do_lower_case=True)
+
 # In[ ]:
 
 
-categories = [ "alt.atheism", "talk.religion.misc", "comp.graphics",]
+#categories = [ "alt.atheism", "talk.religion.misc", "comp.graphics",]
 
 remove = ("headers", "footers", "quotes")
 
-newsgroups = fetch_20newsgroups(subset='train', categories=categories, shuffle=True, 
-                                        random_state=238, remove=remove)
+# newsgroups = fetch_20newsgroups(subset='train', categories=categories, shuffle=True, 
+#                                        random_state=238, remove=remove)
 # val_ng = fetch_20newsgroups(subset='test',  categories=categories, shuffle=True, 
 #                                        random_state=42, remove=remove)
 
-# newsgroups = fetch_20newsgroups(subset='train', shuffle=True, 
-#                                       random_state=238, remove=remove)
+newsgroups = fetch_20newsgroups(subset='train', shuffle=True, 
+                                       random_state=238, remove=remove)
 # test_ng = fetch_20newsgroups(subset='test', shuffle=True, 
 #                                       random_state=238, remove=remove)
 
+
+
 data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
+
+
 label_train = label_train.tolist()
 label_val = label_val.tolist()
+"""
+tokenized_data = [tokenizer.tokenize(data) for data in data_train]
+data_length = [len(i) for i in tokenized_data]
+del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-1000:]
+for index in sorted(del_data_index, reverse=True):
+    del data_train[index]
+    del label_train[index]
+
+tokenized_data = [tokenizer.tokenize(data) for data in data_val]
+data_length = [len(i) for i in tokenized_data]
+del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-100:]
+for index in sorted(del_data_index, reverse=True):
+    del data_val[index]
+    del label_val[index]
+"""
 train_ng = {'data': data_train, 'target': label_train}
 val_ng = {'data': data_val, 'target': label_val}
 
-print("data loaded")
+#data_train = data_train.pop(66)
+#label_train = label_train.tolist().pop(66)
 
 # print('size of training set:', len(train_ng.data))
 # print('size of validation set:', len(val_ng.data))
 # print('classes:', train_ng.target_names)
 print('size of training set:', len(data_train))
+print('size of training set:', len(label_train))
 print('size of validation set:', len(data_val))
+print('size of validation set:', len(label_val))
 print('classes:', newsgroups.target_names)
 
 # data_train = train_ng.data
@@ -105,20 +135,19 @@ plt.show()
 # In[ ]:
 
 
-print('Initializing BertTokenizer')
+#print('Initializing BertTokenizer')
 
-BERTMODEL='bert-base-uncased'
-CACHE_DIR='transformers-cache'
+#BERTMODEL='bert-base-uncased'
+#CACHE_DIR='transformers-cache'
 
-tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
-                                          do_lower_case=True)
-
+#tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
+#                                          do_lower_case=True)
 
 # In[ ]:
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:2") # specify  devicethe
+    device = torch.device("cuda:1") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -262,7 +291,7 @@ def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
 
 
 BATCH_SIZE = 16
-#BATCH_SIZE = 4
+#BATCH_SIZE = 83
 MAX_LEN = 512
 
 train_data_loader = create_data_loader(train_ng, tokenizer, MAX_LEN, BATCH_SIZE)
@@ -289,12 +318,26 @@ class BERT_Hierarchical_Model(nn.Module):
         # pooled_output shape: (number of segments of all documents in one batch * 786)
         # In this small example, 7 * 786
         # here not batch_size * 786 because of segmentation of long document
-        _, pooled_output = self.bert(
-            input_ids = input_ids,
-            attention_mask = attention_mask,
-            return_dict=False
-        )
-        
+        # print(input_ids.shape)
+        max_num = 32
+        input_ids = torch.split(input_ids, max_num)
+        attention_mask = torch.split(attention_mask, max_num)
+        print(len(input_ids))
+        print(len(attention_mask))
+        pooled_output_list=[]
+        for i in range(len(input_ids)):
+            _, pooled_output = self.bert(
+              input_ids = input_ids[i],
+              attention_mask = attention_mask[i],
+              return_dict=False
+            )
+            pooled_output_list.append(pooled_output)
+        print(len(pooled_output_list))
+        pooled_output = torch.cat(pooled_output_list)
+        #_, pooled_output = self.bert(
+         #    input_ids = input_ids,
+          #   attention_mask = attention_mask,
+           #  return_dict=False)
         # split according to the number of segments 
         # then know which document the pooled_output belongs to 
         # chunks_emb (tensor([[doc1]]), tensor([[doc2]]), tensor([[doc3 seg1], [doc3 seg2], [doc3 seg3], [doc4 seg4]]), tensor([[doc4]])
@@ -324,10 +367,11 @@ model = model.to(device)
 
 
 # Hyperparameters
-EPOCHS = 10
+EPOCHS = 20
 #EPOCHS = 2
 
 optimizer = AdamW(model.parameters(), lr=2e-5)
+#optimizer = AdamW(model.parameters(), lr=1e-3)
 total_steps = len(train_data_loader) * EPOCHS
 
 scheduler = get_linear_schedule_with_warmup(
@@ -403,7 +447,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     print(f"time = {time.time()-t0:.2f} secondes")
     t0 = time.time()
         
-    return np.mean(losses), float(correct_predictions / n_examples)
+    return np.mean(losses), correct_predictions / n_examples
 
 
 # In[ ]:
@@ -443,8 +487,8 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
 
             correct_predictions += torch.sum(preds == targets)
             losses.append(float(loss.item()))
-
-    return np.mean(losses), float(correct_predictions / n_examples)
+            torch.cuda.empty_cache()
+    return np.mean(losses), correct_predictions / n_examples
 
 
 # In[ ]:
@@ -505,7 +549,7 @@ plt.title('Training history')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
-plt.xlim([0, 5])
+#plt.xlim([0, 20])
 plt.ylim([0, 1])
 plt.savefig('BERT_Hierarchical_Model.png')
 
