@@ -1,0 +1,251 @@
+Initializing BertTokenizer
+size of training set: 9182
+size of training set: 9182
+size of validation set: 1032
+size of validation set: 1032
+classes: ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware', 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey', 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns', 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Epoch 1/40
+----------
+time = 278.73 secondes
+Train loss 2.7084150355867394 accuracy 0.43563491106033325
+Val   loss 2.5292641896467942 accuracy 0.5581395626068115
+
+Epoch 2/40
+----------
+time = 276.80 secondes
+Train loss 2.458860808963975 accuracy 0.6443040370941162
+Val   loss 2.4150525423196645 accuracy 0.6753876209259033
+
+Epoch 3/40
+----------
+time = 276.18 secondes
+Train loss 2.3442078891116154 accuracy 0.7496187686920166
+Val   loss 2.3815831991342398 accuracy 0.6937984228134155
+
+Epoch 4/40
+----------
+time = 265.54 secondes
+Train loss 2.2898715352347505 accuracy 0.7949248552322388
+Val   loss 2.361424134327815 accuracy 0.7228682041168213
+
+Epoch 5/40
+----------
+time = 274.55 secondes
+Train loss 2.262261651534237 accuracy 0.8196471333503723
+Val   loss 2.3613654393416184 accuracy 0.7180232405662537
+
+Epoch 6/40
+----------
+time = 275.50 secondes
+Train loss 2.2447224880344776 accuracy 0.8354388475418091
+Val   loss 2.352980136871338 accuracy 0.7286821603775024
+
+Epoch 7/40
+----------
+time = 285.04 secondes
+Train loss 2.230280143458669 accuracy 0.8497059345245361
+Val   loss 2.349480860049908 accuracy 0.729651153087616
+
+Epoch 8/40
+----------
+time = 265.88 secondes
+Train loss 2.220229457479736 accuracy 0.8596166372299194
+Val   loss 2.3472395236675556 accuracy 0.7325581312179565
+
+Epoch 9/40
+----------
+time = 274.18 secondes
+Train loss 2.2108337106605025 accuracy 0.8683292865753174
+Val   loss 2.337736881696261 accuracy 0.7432170510292053
+
+Epoch 10/40
+----------
+time = 276.16 secondes
+Train loss 2.2000757696736564 accuracy 0.8802003860473633
+Val   loss 2.3479523842151346 accuracy 0.7277131676673889
+
+Epoch 11/40
+----------
+time = 274.92 secondes
+Train loss 2.1913571141738095 accuracy 0.8879328966140747
+Val   loss 2.3412700763115515 accuracy 0.7383720874786377
+
+Epoch 12/40
+----------
+time = 273.86 secondes
+Train loss 2.1838025120492595 accuracy 0.8949030637741089
+Val   loss 2.3288028423602762 accuracy 0.7558139562606812
+
+Epoch 13/40
+----------
+time = 276.95 secondes
+Train loss 2.1797563161584144 accuracy 0.8989326357841492
+Val   loss 2.337087048017062 accuracy 0.7432170510292053
+
+Epoch 14/40
+----------
+time = 279.05 secondes
+Train loss 2.173040119613089 accuracy 0.9063384532928467
+Val   loss 2.3341791813190165 accuracy 0.7470930218696594
+
+Epoch 15/40
+----------
+time = 279.90 secondes
+Train loss 2.1696095454152866 accuracy 0.9089522957801819
+Val   loss 2.3438004933870755 accuracy 0.7325581312179565
+
+Epoch 16/40
+----------
+time = 277.04 secondes
+Train loss 2.16793429851532 accuracy 0.9101502895355225
+Val   loss 2.3370544763711782 accuracy 0.7422480583190918
+
+Epoch 17/40
+----------
+time = 277.68 secondes
+Train loss 2.1641531713332864 accuracy 0.9141798615455627
+Val   loss 2.3389883774977465 accuracy 0.7374030947685242
+
+Epoch 18/40
+----------
+time = 278.95 secondes
+Train loss 2.1652750366656206 accuracy 0.9131997227668762
+Val   loss 2.344053374803983 accuracy 0.7364341020584106
+
+Epoch 19/40
+----------
+time = 275.88 secondes
+Train loss 2.1617371084798087 accuracy 0.9163580536842346
+Val   loss 2.3391486718104435 accuracy 0.7422480583190918
+
+Epoch 20/40
+----------
+time = 266.97 secondes
+Train loss 2.160109026922166 accuracy 0.9182094931602478
+Val   loss 2.33886158649738 accuracy 0.7412790656089783
+
+Epoch 21/40
+----------
+time = 281.66 secondes
+Train loss 2.1572305001448258 accuracy 0.9204965829849243
+Val   loss 2.3353906374711255 accuracy 0.7412790656089783
+
+Epoch 22/40
+----------
+time = 265.61 secondes
+Train loss 2.1565515953489296 accuracy 0.9214767813682556
+Val   loss 2.347689672616812 accuracy 0.7277131676673889
+
+Epoch 23/40
+----------
+time = 284.52 secondes
+Train loss 2.155500483014442 accuracy 0.9223480224609375
+Val   loss 2.342892210300152 accuracy 0.7344961166381836
+
+Epoch 24/40
+----------
+time = 275.13 secondes
+Train loss 2.1549077345519114 accuracy 0.9230014681816101
+Val   loss 2.349896214558528 accuracy 0.7257751822471619
+
+Epoch 25/40
+----------
+time = 266.23 secondes
+Train loss 2.152161555838502 accuracy 0.9259420037269592
+Val   loss 2.336931246977586 accuracy 0.7432170510292053
+
+Epoch 26/40
+----------
+time = 272.97 secondes
+Train loss 2.1517682711006456 accuracy 0.9263776540756226
+Val   loss 2.3538573741912843 accuracy 0.7228682041168213
+
+Epoch 27/40
+----------
+time = 275.13 secondes
+Train loss 2.1497372139621693 accuracy 0.9283380508422852
+Val   loss 2.3515487084021935 accuracy 0.7257751822471619
+
+Epoch 28/40
+----------
+time = 276.01 secondes
+Train loss 2.149312328793861 accuracy 0.9286647439002991
+Val   loss 2.3479665719545806 accuracy 0.7277131676673889
+
+Epoch 29/40
+----------
+time = 274.60 secondes
+Train loss 2.1482435527163517 accuracy 0.9294270873069763
+Val   loss 2.346646558321439 accuracy 0.7325581312179565
+
+Epoch 30/40
+----------
+time = 275.77 secondes
+Train loss 2.147582817160709 accuracy 0.9304072856903076
+Val   loss 2.346071749467116 accuracy 0.7335271239280701
+
+Epoch 31/40
+----------
+time = 277.90 secondes
+Train loss 2.1468367580752754 accuracy 0.9309518337249756
+Val   loss 2.334945080830501 accuracy 0.7441860437393188
+
+Epoch 32/40
+----------
+time = 276.28 secondes
+Train loss 2.146968932101951 accuracy 0.9310607314109802
+Val   loss 2.3310971846947304 accuracy 0.7509689927101135
+
+Epoch 33/40
+----------
+time = 276.31 secondes
+Train loss 2.146468577484636 accuracy 0.9312785863876343
+Val   loss 2.3377594470977785 accuracy 0.7422480583190918
+
+Epoch 34/40
+----------
+time = 276.36 secondes
+Train loss 2.145715542786628 accuracy 0.9322587251663208
+Val   loss 2.334423802449153 accuracy 0.7451550364494324
+
+Epoch 35/40
+----------
+time = 276.99 secondes
+Train loss 2.1449569974626814 accuracy 0.933021068572998
+Val   loss 2.331619270031269 accuracy 0.748062014579773
+
+Epoch 36/40
+----------
+time = 269.54 secondes
+Train loss 2.1442138529820727 accuracy 0.9336745738983154
+Val   loss 2.329056901198167 accuracy 0.7509689927101135
+
+Epoch 37/40
+----------
+time = 279.00 secondes
+Train loss 2.1444906930890233 accuracy 0.933565616607666
+Val   loss 2.3305369230417106 accuracy 0.748062014579773
+
+Epoch 38/40
+----------
+time = 265.17 secondes
+Train loss 2.1438536340766667 accuracy 0.934110164642334
+Val   loss 2.332717224267813 accuracy 0.7441860437393188
+
+Epoch 39/40
+----------
+time = 273.19 secondes
+Train loss 2.143816799236922 accuracy 0.9342191219329834
+Val   loss 2.3327036490807167 accuracy 0.7451550364494324
+
+Epoch 40/40
+----------
+time = 265.84 secondes
+Train loss 2.143695764840688 accuracy 0.9342191219329834
+Val   loss 2.331942268518301 accuracy 0.7461240291595459
+

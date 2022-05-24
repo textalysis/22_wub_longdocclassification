@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import (TensorDataset, DataLoader,
-                              RandomSampler, SequentialSampler)
+                             RandomSampler, SequentialSampler)
 from torch.optim import AdamW
 
 #import pandas as pd
@@ -30,21 +30,6 @@ from sklearn.metrics import classification_report
 import time
 
 import os
-
-
-# ### BERT_Hierarchical
-# 
-# The code is to fine-tune BERT by computing the pooled result from the output of each segment of the long document.
-# It first uses BertTokenizer to encode the document, 
-# then get the encoding of the first 512 tokens and also the overflowing tokens if the document has more than the defined max length tokens.
-# Based on the encoding of the first 512 tokens and the overflowing tokens (ids), we can get the encoding of the whole document and then segment
-# the encoding with overlapping tokens. The encoding of each segment is then as input to the Bert model.
-# For each segment we will get an output and then do pooling.
-# 
-# The code is debugged step by step and some comments are added with small examples.
-# 
-# The main code is extracted from https://github.com/helmy-elrais/RoBERT_Recurrence_over_BERT.
-# 
 
 # ### Data Preparing
 # 
@@ -144,7 +129,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:0") # specify  devicethe
+    device = torch.device("cuda:1") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -158,117 +143,46 @@ else:
 
 # get the input_ids_list, attention_mask_list of the long document. Each element in the list correspondes to a segment.
 # also get target for each segment and the number of segments.
-class LongNewsDataset(torch.utils.data.Dataset):
-    def __init__(self, docs, targets, tokenizer, max_len, chunk_len=512, overlap_len=50):
+class newsDataset(torch.utils.data.Dataset):
+    
+    def __init__(self, docs, targets, tokenizer, max_len):
         self.docs = docs
         self.targets = targets
         self.tokenizer = tokenizer
         self.max_len = max_len
-        self.overlap_len = overlap_len
-        self.chunk_len = chunk_len
-
+    
     def __len__(self):
-        return len(self.targets)
-
+        return len(self.docs)
+    
     def __getitem__(self, item):
         doc = str(self.docs[item])
-        target = int(self.targets[item])
-        
-        # get the encoding of the first 512 tokens and the overflowing tokens if the document has more than the defined max length tokens
+        target = self.targets[item]
+
         encoding = self.tokenizer.encode_plus(
           doc,
           add_special_tokens=True,
-          max_length=self.chunk_len,
+          max_length=self.max_len,
           truncation=True,
           return_token_type_ids=False,
           padding='max_length',
+          return_overflowing_tokens=False,
           return_attention_mask=True,
-          return_overflowing_tokens=True,
           return_tensors='pt',
         )
-
-        long_token = self.long_terms_tokenizer(encoding, target)
-
-        return long_token
-
-    def long_terms_tokenizer(self, data_tokenize, target):
-        long_terms_token = []
-        input_ids_list = []
-        attention_mask_list = []
-        target_list = []
         
-        # get the input_ids and attention mask of the first 512 tokens
-        previous_input_ids = data_tokenize["input_ids"].reshape(-1)
-        previous_attention_mask = data_tokenize["attention_mask"].reshape(-1)
-        # get the input_ids of overflowing tokens
-        remain = data_tokenize['overflowing_tokens'].flatten()
-        target = torch.tensor(target, dtype=torch.int)
 
-        input_ids_list.append(previous_input_ids)
-        attention_mask_list.append(previous_attention_mask)
-        target_list.append(target)
-        
-        # segment the input_ids with overlapping
-        # some tricks are used here to segment with overlapping
-        if remain.shape[0] != 0:
-            idxs = range(len(remain)+self.chunk_len)
-            idxs = idxs[(self.chunk_len-self.overlap_len-2)::(self.chunk_len-self.overlap_len-2)]
-            input_ids_first_overlap = previous_input_ids[-(self.overlap_len+1):-1]
-            start_token = torch.tensor([101], dtype=torch.long)
-            end_token = torch.tensor([102], dtype=torch.long)
-
-            for i, idx in enumerate(idxs):
-                if i == 0:
-                    input_ids = torch.cat(
-                        (input_ids_first_overlap, remain[:idx]))
-                elif i == len(idxs):
-                    input_ids = remain[idx:]
-                elif previous_idx >= len(remain):
-                    break
-                else:
-                    input_ids = remain[(previous_idx-self.overlap_len):idx]
-
-                previous_idx = idx
-
-                nb_token = len(input_ids)+2
-                attention_mask = torch.ones(self.chunk_len, dtype=torch.long)
-                attention_mask[nb_token:self.chunk_len] = 0
-                input_ids = torch.cat((start_token, input_ids, end_token))
-
-                if self.chunk_len-nb_token > 0:
-                    padding = torch.zeros(
-                        self.chunk_len-nb_token, dtype=torch.long)
-                    input_ids = torch.cat((input_ids, padding))
-
-                input_ids_list.append(input_ids)
-                attention_mask_list.append(attention_mask)
-                target_list.append(target)
-
-        return({
-            # input_ids_list [tensor seg1, tensor seg2, tensor seg3, ...]
-            # torch.tensor(ids, dtype=torch.long)
-            'input_ids': input_ids_list,  
-            'attention_mask': attention_mask_list,
-            # [tensor seg1, tensor seg2, tensor seg3,...]
-            'targets': target_list,
-            'len': [torch.tensor(len(target_list), dtype=torch.long)]
-        })
-
-
-# In[ ]:
-
-
-def my_collate1(batches):
-    # return batches
-    # avoid shape error
-    return [{key: torch.stack(value) for key, value in batch.items()} for batch in batches]
-
+        return {
+          'news_text': doc,
+          'input_ids': encoding['input_ids'].flatten(),
+          'attention_mask': encoding['attention_mask'].flatten(),
+          'targets': torch.tensor(target, dtype=torch.long)
+        }
 
 # In[ ]:
 
 
 def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
-    ds = LongNewsDataset(
+    ds = newsDataset(
         docs=newsgroups['data'],
         #docs=newsgroups.data,
         targets=newsgroups['target'],
@@ -280,7 +194,6 @@ def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
     return DataLoader(
         ds,
         batch_size=batch_size,
-        collate_fn=my_collate1
       )
 
 
@@ -297,37 +210,28 @@ val_data_loader = create_data_loader(val_ng, tokenizer, MAX_LEN, BATCH_SIZE)
 
 # In[ ]:
 
-
-class RoBERT_Model(nn.Module):
+class BERT_Classification_Model(nn.Module):
+    
     def __init__(self, n_classes):
-        super(RoBERT_Model, self).__init__()
-        self.bert = BertModel.from_pretrained(BERTMODEL) #bert model from huggingface
-        self.lstm = nn.LSTM(768, 100, num_layers=1, bidirectional=False)
-        self.out = nn.Linear(100, n_classes)
-    def forward(self, input_ids, attention_mask, lengt):
-        _, pooled_output = self.bert(input_ids=input_ids, attention_mask=attention_mask, return_dict=False)
-        chunks_emb = pooled_output.split_with_sizes(lengt)
+        super(BERT_Classification_Model, self).__init__()
+        self.bert = BertModel.from_pretrained(BERTMODEL)
+        self.drop = nn.Dropout(p=0.3)
+        self.out = nn.Linear(self.bert.config.hidden_size, n_classes)
 
-        seq_lengths = torch.LongTensor([x for x in map(len, chunks_emb)])
-
-        batch_emb_pad = nn.utils.rnn.pad_sequence(chunks_emb, padding_value=-2, batch_first=True)
-        batch_emb = batch_emb_pad.transpose(0, 1)  
-        lstm_input = nn.utils.rnn.pack_padded_sequence(
-            batch_emb, seq_lengths.cpu().numpy(), batch_first=False, enforce_sorted=False)
-
-        packed_output, (h_t, h_c) = self.lstm(lstm_input, )  
-
-        h_t = h_t.view(-1, 100)
-        
-        output = self.out(h_t)
-
+    def forward(self, input_ids, attention_mask):
+        _, pooled_output = self.bert(
+            input_ids = input_ids,
+            attention_mask = attention_mask,
+            return_dict=False
+        )
+        output = self.out(self.drop(pooled_output))
         return F.softmax(output, dim=1)
 
 # In[ ]:
 
 
-model = RoBERT_Model(len(set(train_ng['target'])))
-#model =  RoBERT_Model(len(train_ng.target_names))
+model = BERT_Classification_Model(len(set(train_ng['target'])))
+#model =  BERT_Classification_Model(len(train_ng.target_names))
 model = model.to(device)
 
 
@@ -335,10 +239,10 @@ model = model.to(device)
 
 
 # Hyperparameters
-EPOCHS = 20
+EPOCHS = 40
 #EPOCHS = 2
 
-optimizer = AdamW(model.parameters(), lr=5e-5)
+optimizer = AdamW(model.parameters(), lr=2e-5)
 #optimizer = AdamW(model.parameters(), lr=0.1)
 total_steps = len(train_data_loader) * EPOCHS
 
@@ -362,40 +266,15 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     
     t0 = time.time()
 
-    for batch_idx, batch in enumerate(data_loader):
+    for batch in data_loader:
         
-        # for example, when batch_size=4, four document, doc 1, doc 2, doc 4 are less than 512 tokens, doc 3 about 4*512 tokens
-        # the input_ids would be:
-        # [tensor([[doc1 input_ids]]),tensor([[doc2 segment1 input_ids], [doc2 seg2], [doc2 seg3],[doc2 seg4]]), tensor([[doc3]]), tensor([[doc4]])]
-        input_ids = [data["input_ids"] for data in batch]
-        # similar to input_ids
-        attention_mask = [data["attention_mask"] for data in batch]
-        # [tensor(target), tensor(target), tensor(target), tensor(target)]  
-        # here [0] to reduce the dimension
-        targets = [data["targets"][0] for data in batch]
-        # get the number of segments for each document 
-        # [tensor([1]), tensor([1]), tensor([4]), tensor([1])]
-        lengt = [data['len'] for data in batch]
-        
-        # change the shape as input to Bert Model
-        # tensor([[ doc 1], [doc 2], [doc 3 seg 1], [ doc 3 seg 2], [doc 3 seg 3], [doc 3 seg 4], [doc 4]])
-        input_ids = torch.cat(input_ids)
-        attention_mask = torch.cat(attention_mask)
-        # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
-        targets = torch.stack(targets)
-        # [doc1 num of segments, doc2 num of segments,... ]
-        # [1, 1, 4, 1]
-        lengt = [x.item() for x in lengt]
-        
-        input_ids = input_ids.to(device, dtype=torch.long)
-        attention_mask = attention_mask.to(device, dtype=torch.long)
-        targets = targets.to(device, dtype=torch.long)
-        optimizer.zero_grad()
+        input_ids = batch['input_ids'].to(device)
+        attention_mask = batch['attention_mask'].to(device)
+        targets = batch['targets'].to(device) 
         
         outputs = model(
           input_ids=input_ids,
-          attention_mask=attention_mask,
-          lengt=lengt
+          attention_mask=attention_mask
         )
         
         
@@ -416,7 +295,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     print(f"time = {time.time()-t0:.2f} secondes")
     t0 = time.time()
         
-    return np.mean(losses), correct_predictions/n_examples#float(correct_predictions / n_examples)
+    return np.mean(losses), float(correct_predictions / n_examples)
 
 
 # In[ ]:
@@ -429,26 +308,14 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
     correct_predictions = 0
 
     with torch.no_grad():
-        for batch_idx, batch in enumerate(data_loader):
-
-            input_ids = [data["input_ids"] for data in batch]
-            attention_mask = [data["attention_mask"] for data in batch]
-            targets = [data["targets"][0] for data in batch]
-            lengt = [data['len'] for data in batch]
-
-            input_ids = torch.cat(input_ids)
-            attention_mask = torch.cat(attention_mask)
-            targets = torch.stack(targets)
-            lengt = [x.item() for x in lengt]
-
-            input_ids = input_ids.to(device, dtype=torch.long)
-            attention_mask = attention_mask.to(device, dtype=torch.long)
-            targets = targets.to(device, dtype=torch.long)
-
+        for batch in data_loader:
+            input_ids = batch['input_ids'].to(device)
+            attention_mask = batch['attention_mask'].to(device)
+            targets = batch['targets'].to(device) 
+            
             outputs = model(
               input_ids=input_ids,
-              attention_mask=attention_mask,
-              lengt=lengt
+              attention_mask=attention_mask
             )
             _, preds = torch.max(outputs, dim=1)
 
@@ -458,7 +325,7 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
             losses.append(float(loss.item()))
             #losses.append(loss.item())
             torch.cuda.empty_cache()
-    return np.mean(losses), correct_predictions/n_examples#float(correct_predictions / n_examples)
+    return np.mean(losses), float(correct_predictions / n_examples)
 
 
 # In[ ]:
@@ -521,5 +388,5 @@ plt.xlabel('Epoch')
 plt.legend()
 #plt.xlim([0, 20])
 plt.ylim([0, 1])
-plt.savefig('BERT_Hierarchical_Model.png')
+plt.savefig('base.png')
 

@@ -1,46 +1,78 @@
-# Finetune_BERT
-
-The code is trained and evaluated for very small samples of training dataset (**BERT_Hierarchical.py**) and the whole training dataset(**BERT_Hierarchical_Large.py**). 
-
-The code is to fine-tune BERT by computing the pooled result from the output of each segment of the long document. Details see the .ipynb or .py file.
-
-Memory usage problem occurs when using the whole training dataset (**BERT_Hierarchical_Large.py**).
-
 ## File structure
-To run the code from terminal, **.ipynb** file is first converted to **.py** file and then run on GPU.
 
-The results for small samples are in **output_small_sample.txt**.
+**Models**
 
-The accuracy changes for the five epochs of small samples are shown in **BERT_Hierarchical_Model.png**.
-Because of the small samples the accuracy increases very slowly.
+base.py: keep the first 510 tokens of long document
 
-Code to train the large dataset (already modified with possible solutions like set batch_size to 1): **BERT_Hierarchical_large.ipynb**
+mean_pooling.py:  mean-pooled result from the output of each segment of the long document
 
-Details of memory usage problem when using the whole training dataset: **message.txt**
+lstm.py: output of each segment of the long document as input to lstm to get classification
 
-## With very small samples (BERT_Hierarchical.ipynb)
+** Test results lr = 2e-5**
 
-limit the categories of dataset to [ "alt.atheism", "talk.religion.misc", "comp.graphics"]. The size of dataset is:
-![image](https://user-images.githubusercontent.com/49680463/169280045-6a1c16a9-7b35-443a-afe3-605e90d1391a.png)
+base.txt
 
-Use GPU with 85.9G MEM (about 13% shared by other people). The memory usage problem didn't occur. 
-In this case, the usage of GPU MEM is usually 5-30G, maximal about 60G. 
-![image](https://user-images.githubusercontent.com/49680463/169284400-1cd421f2-8440-480a-abd1-f937ba986dc2.png)
+mean_pooling.txt
 
-![image](https://user-images.githubusercontent.com/49680463/169281181-9d26d960-4b16-437a-b237-4dae91d89488.png)
+lstm.txt
 
-## With whole training dataset (BERT_Hierarchical_large.py). Memory usage problems occurs. For more details, see message.txt. 
-![image](https://user-images.githubusercontent.com/49680463/169285661-5a3142aa-e1a5-4f38-a184-b2c8dba3b02d.png)
+**Visualizations**
 
-Several possible solutions have been tried together:
-1. reduce the batch_size to 1
+base.png
 
-3. release GPU memory cache after every epoch
+mean_pooling.png
 
-torch.cuda.empty_cache()
+lstm.png
 
-3. remove differentiable variables. 
+## memory problem solved
 
-In the training and evaluation phase, losses.append(float(loss.item())) instead of loss.item().
+### The reason of too much memory usage:
 
-but the problem still occurs.
+In base model, the input ids and attention mask of BERT are [batch_size, 512] and [batch_size, 512] respectively because only the first 510 tokens of each document is kept.
+
+But after segmentation, the input ids and attention mask of BERT are [number of segments of documents in one batch * 512] and [number of segments of documents in one batch * 512] respectively, then cuda will calculate the output for each segment in parallel. It can lead to too much memory usage.
+
+For example, when the document becomes very large, e.g. if can be divided into 200 segments, the input size of BERT model would be  [200, 512] even when batch_size is set to 1. The output of the 200 segments will be calculated in parallel. This is where the problem occurs.
+
+With experiment, the maximal number of segments as input to BERT when batch_size = 1 is found to be 101 (device cuda with MEM 80G).
+
+### Solutions
+
+Two solutions have been tried.
+
+1. remove the n longest document
+ 
+In the experiment, the 1000 longest documents of 20newsgroups training set and 100 longest documents of 20newsgroups validation set after tokenization have been removed. It successfully solved the problem.
+
+However, the problem would be how to choose the number of removed longest documents.  If batch_size is set to 1, we can choose by the maximal number of segments per document. But computation would be slow for small batch size. If we set batch size higher, the total number of segments for every batch_size need to be pre-computed.
+
+2. for-loop the BERT model
+
+We can split the input the BERT model and then let cuda calculate in sequence.
+
+Code like this:
+
+```
+max_num = 32
+input_ids = torch.split(input_ids, max_num)
+attention_mask = torch.split(attention_mask, max_num)
+pooled_output_list=[]
+for i in range(len(input_ids)):
+    _, pooled_output = self.bert(
+              input_ids = input_ids[i],
+              attention_mask = attention_mask[i],
+              return_dict=False
+            )
+    pooled_output_list.append(pooled_output)
+pooled_output = torch.cat(pooled_output_list)
+```
+
+However, the memory usage problem still occurs. It seems that cuda will calculate in parallel even with for loop? It is a bit confusing for me after several tries.
+
+## Difficulties
+
+I am still confused about how to do the benchmarks more efficiently and record the results more nicely, because there are many hypermeters that can be tried like learning rate, the maximal length of segments, the number of overlapping tokens, window size in sparse attention ... as well as different models. 
+
+In addition, because the GPU is shared by all students, the memory usage problem may occur at some timepoint when other students have shared too much memory at that specific timepoint. Then the training needs to be started from the first epoch. One possible solution is to save the checkpoints of each epoch. Considering the big size of BERT model, I don't know whether it's necessary. 
+
+
