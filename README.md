@@ -69,7 +69,7 @@ pooled_output = torch.cat(pooled_output_list)
 
 However, the memory usage problem still occurs. It seems that cuda will calculate in parallel even with for loop? It is a bit confusing for me after several tries.
 
-## Difficulties
+## Questions
 
 I am still confused about how to do the benchmarks more efficiently and record the results more nicely, because there are many hyperparameters that can be tried like learning rate, the maximal length of segments, the number of overlapping tokens, window size in sparse attention ... as well as different models. 
 
