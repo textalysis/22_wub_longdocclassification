@@ -8,7 +8,7 @@ mean_pooling.py:  mean-pooled result from the output of each segment of the long
 
 lstm.py: output of each segment of the long document as input to lstm to get classification
 
-** Test results lr = 2e-5**
+**Test results lr = 2e-5**
 
 base.txt
 
@@ -44,7 +44,7 @@ Two solutions have been tried.
  
 In the experiment, the 1000 longest documents of 20newsgroups training set and 100 longest documents of 20newsgroups validation set after tokenization have been removed. It successfully solved the problem.
 
-However, the problem would be how to choose the number of removed longest documents.  If batch_size is set to 1, we can choose by the maximal number of segments per document. But computation would be slow for small batch size. If we set batch size higher, the total number of segments for every batch_size need to be pre-computed.
+However, the problem would be how to choose the number of removed longest documents.  If batch_size is set to 1, we can choose by the maximal number of segments per document. But computation would be slow for small batch size. If we set batch size higher, the total number of segments for every batch need to be pre-computed.
 
 2. for-loop the BERT model
 
@@ -71,8 +71,8 @@ However, the memory usage problem still occurs. It seems that cuda will calculat
 
 ## Difficulties
 
-I am still confused about how to do the benchmarks more efficiently and record the results more nicely, because there are many hypermeters that can be tried like learning rate, the maximal length of segments, the number of overlapping tokens, window size in sparse attention ... as well as different models. 
+I am still confused about how to do the benchmarks more efficiently and record the results more nicely, because there are many hyperparameters that can be tried like learning rate, the maximal length of segments, the number of overlapping tokens, window size in sparse attention ... as well as different models. 
 
-In addition, because the GPU is shared by all students, the memory usage problem may occur at some timepoint when other students have shared too much memory at that specific timepoint. Then the training needs to be started from the first epoch. One possible solution is to save the checkpoints of each epoch. Considering the big size of BERT model, I don't know whether it's necessary. 
+In addition, because the GPU is shared by all students, the memory usage problem may occur at some timepoint when other students have shared too much memory at that specific timepoint. Then the training needs to be started from the first epoch. One possible solution is to save the checkpoints of each epoch. Considering the large size of BERT model, I don't know whether it's necessary. 
 
 
