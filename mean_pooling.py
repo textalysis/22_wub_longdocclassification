@@ -537,7 +537,4 @@ plt.xlabel('Epoch')
 plt.legend()
 
 plt.savefig('mean_pooling.png')
-plt.xlim([0, 40])
-plt.ylim([0, 1])
-plt.savefig('mean_pooling.png')
 
