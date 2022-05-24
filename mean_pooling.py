@@ -50,36 +50,63 @@ import os
 # 
 # get the 20newsgroups dataset and then split into training set (90%) and validation set(10%)
 
+print('Initializing BertTokenizer')
+
+BERTMODEL='bert-base-uncased'
+CACHE_DIR='transformers-cache'
+
+tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
+                                          do_lower_case=True)
+
 # In[ ]:
 
 
-categories = [ "alt.atheism", "talk.religion.misc", "comp.graphics",]
+#categories = [ "alt.atheism", "talk.religion.misc", "comp.graphics",]
 
 remove = ("headers", "footers", "quotes")
 
-newsgroups = fetch_20newsgroups(subset='train', categories=categories, shuffle=True, 
-                                        random_state=238, remove=remove)
+# newsgroups = fetch_20newsgroups(subset='train', categories=categories, shuffle=True, 
+#                                        random_state=238, remove=remove)
 # val_ng = fetch_20newsgroups(subset='test',  categories=categories, shuffle=True, 
 #                                        random_state=42, remove=remove)
 
-# newsgroups = fetch_20newsgroups(subset='train', shuffle=True, 
-#                                       random_state=238, remove=remove)
+newsgroups = fetch_20newsgroups(subset='train', shuffle=True, 
+                                       random_state=238, remove=remove)
 # test_ng = fetch_20newsgroups(subset='test', shuffle=True, 
 #                                       random_state=238, remove=remove)
 
 data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
+
+
 label_train = label_train.tolist()
 label_val = label_val.tolist()
+tokenized_data = [tokenizer.tokenize(data) for data in data_train]
+data_length = [len(i) for i in tokenized_data]
+del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-1000:]
+for index in sorted(del_data_index, reverse=True):
+    del data_train[index]
+    del label_train[index]
+
+tokenized_data = [tokenizer.tokenize(data) for data in data_val]
+data_length = [len(i) for i in tokenized_data]
+del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-100:]
+for index in sorted(del_data_index, reverse=True):
+    del data_val[index]
+    del label_val[index]
+
 train_ng = {'data': data_train, 'target': label_train}
 val_ng = {'data': data_val, 'target': label_val}
 
-print("data loaded")
+#data_train = data_train.pop(66)
+#label_train = label_train.tolist().pop(66)
 
 # print('size of training set:', len(train_ng.data))
 # print('size of validation set:', len(val_ng.data))
 # print('classes:', train_ng.target_names)
 print('size of training set:', len(data_train))
+print('size of training set:', len(label_train))
 print('size of validation set:', len(data_val))
+print('size of validation set:', len(label_val))
 print('classes:', newsgroups.target_names)
 
 # data_train = train_ng.data
@@ -324,7 +351,7 @@ model = model.to(device)
 
 
 # Hyperparameters
-EPOCHS = 10
+EPOCHS = 40
 #EPOCHS = 2
 
 optimizer = AdamW(model.parameters(), lr=2e-5)
@@ -497,15 +524,20 @@ for epoch in range(EPOCHS):
 
 # In[ ]:
 
+fig, ax = plt.subplots()
+ax.set_yticks(np.arange(0, 1.1, 0.1))
+ax.set_xticks(np.arange(0, 50, 5))
 
 plt.plot(history['train_acc'], label='train accuracy')
 plt.plot(history['val_acc'], label='validation accuracy')
 
-plt.title('Training history')
+plt.title('mean_pooling')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
-plt.xlim([0, 5])
+
+plt.savefig('mean_pooling.png')
+plt.xlim([0, 40])
 plt.ylim([0, 1])
-plt.savefig('BERT_Hierarchical_Model.png')
+plt.savefig('mean_pooling.png')
 
