@@ -10,11 +10,11 @@ lstm.py: output of each segment of the long document as input to lstm to get cla
 
 **Test results lr = 2e-5**
 
-base.txt
+base.txt  best val_acc = 0.726
 
-mean_pooling.txt
+mean_pooling.txt  best val_acc = 0.755
 
-lstm.txt
+lstm.txt  best val_acc = 0.750
 
 **Visualizations**
 
