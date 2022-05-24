@@ -511,15 +511,17 @@ for epoch in range(EPOCHS):
 
 # In[ ]:
 
+fig, ax = plt.subplots()
+ax.set_yticks(np.arange(0, 1.1, 0.1))
+ax.set_xticks(np.arange(0, 50, 5))
 
 plt.plot(history['train_acc'], label='train accuracy')
 plt.plot(history['val_acc'], label='validation accuracy')
 
-plt.title('Training history')
+plt.title('lstm')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
-#plt.xlim([0, 20])
-plt.ylim([0, 1])
+
 plt.savefig('lstm.png')
 
