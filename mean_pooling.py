@@ -77,7 +77,6 @@ newsgroups = fetch_20newsgroups(subset='train', shuffle=True,
 
 data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
 
-
 label_train = label_train.tolist()
 label_val = label_val.tolist()
 tokenized_data = [tokenizer.tokenize(data) for data in data_train]
@@ -145,7 +144,7 @@ tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:2") # specify  devicethe
+    device = torch.device("cuda:0") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -179,7 +178,7 @@ class LongNewsDataset(torch.utils.data.Dataset):
         encoding = self.tokenizer.encode_plus(
           doc,
           add_special_tokens=True,
-          max_length=self.chunk_len,
+          max_length=self.max_len,
           truncation=True,
           return_token_type_ids=False,
           padding='max_length',
@@ -244,6 +243,9 @@ class LongNewsDataset(torch.utils.data.Dataset):
                 input_ids_list.append(input_ids)
                 attention_mask_list.append(attention_mask)
                 target_list.append(target)
+ 
+        #input_ids_list[:60] if len(input_ids_list) > 60 else input_ids_list
+        #attention_mask_list[:60] if len(attention_mask_list) > 60 else attention_mask_list
 
         return({
             # input_ids_list [tensor seg1, tensor seg2, tensor seg3, ...]
@@ -351,7 +353,7 @@ model = model.to(device)
 
 
 # Hyperparameters
-EPOCHS = 40
+EPOCHS = 80
 #EPOCHS = 2
 
 optimizer = AdamW(model.parameters(), lr=2e-5)

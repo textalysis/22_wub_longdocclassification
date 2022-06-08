@@ -178,7 +178,7 @@ class LongNewsDataset(torch.utils.data.Dataset):
         encoding = self.tokenizer.encode_plus(
           doc,
           add_special_tokens=True,
-          max_length=self.chunk_len,
+          max_length=self.max_len,
           truncation=True,
           return_token_type_ids=False,
           padding='max_length',
