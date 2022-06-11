@@ -53,7 +53,7 @@ import os
 print('Initializing BertTokenizer')
 
 BERTMODEL='bert-base-uncased'
-CACHE_DIR='transformers-cache'
+CACHE_DIR= '../transformers-cache'
 
 tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
                                           do_lower_case=True)
@@ -134,7 +134,7 @@ plt.show()
 print('Initializing BertTokenizer')
 
 BERTMODEL='bert-base-uncased'
-CACHE_DIR='transformers-cache'
+CACHE_DIR= '../transformers-cache'
 
 tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
                                           do_lower_case=True)
@@ -516,12 +516,10 @@ for epoch in range(EPOCHS):
     history['train_loss'].append(train_loss)
     history['val_acc'].append(val_acc)
     history['val_loss'].append(val_loss)
-    
-    #print(history)
-    
-    #if val_acc > best_accuracy:
-        #torch.save(model.state_dict(), 'best_model_state.bin')
-        #best_accuracy = val_acc
+
+    if val_acc > best_accuracy:
+        torch.save(model.state_dict(), 'best_model_state.bin')
+        best_accuracy = val_acc
 
 
 # In[ ]:

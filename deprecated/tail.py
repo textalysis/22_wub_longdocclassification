@@ -38,7 +38,7 @@ import os
 print('Initializing BertTokenizer')
 
 BERTMODEL='bert-base-uncased'
-CACHE_DIR='transformers-cache'
+CACHE_DIR= '../transformers-cache'
 
 tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
                                           do_lower_case=True)
@@ -112,7 +112,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:0") # specify  devicethe
+    device = torch.device("cuda:1") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -153,7 +153,7 @@ class newsDataset(torch.utils.data.Dataset):
           return_tensors='pt',
         )        
     
-        remain = encoding['overflowing_tokens'].flatten() 
+        remain = encoding['overflowing_tokens'].flatten()
         input_ids = encoding['input_ids'].flatten()
 
         if remain.shape[0] != 0:
@@ -162,7 +162,7 @@ class newsDataset(torch.utils.data.Dataset):
             complete_tokens = complete_tokens[complete_tokens!=102]
             start_token = torch.tensor([101], dtype=torch.long)
             end_token = torch.tensor([102], dtype=torch.long)
-            input_ids = torch.cat((start_token,complete_tokens[:int((self.max_len-2)/2)], complete_tokens[-int((self.max_len-2)/2):],end_token))        
+            input_ids = torch.cat((start_token,complete_tokens[-(self.max_len-2):],end_token))
 
         return {
           'news_text': doc,
@@ -378,9 +378,9 @@ ax.set_xticks(np.arange(0, 50, 5))
 plt.plot(history['train_acc'], label='train accuracy')
 plt.plot(history['val_acc'], label='validation accuracy')
 
-plt.title('head_tail')
+plt.title('tail')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
 
-plt.savefig('head_tail.png')
+plt.savefig('tail.png')

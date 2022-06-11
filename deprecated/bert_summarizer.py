@@ -23,7 +23,6 @@ from sklearn.model_selection import train_test_split
 
 from transformers import BertTokenizer, BertModel, get_linear_schedule_with_warmup
 from transformers import pipeline
-from transformers import LongformerForSequenceClassification, LongformerTokenizer, LongformerConfig
 
 from sklearn.feature_extraction.text import TfidfVectorizer,CountVectorizer
 from sklearn.metrics import classification_report
@@ -36,11 +35,16 @@ import os
 # 
 # get the 20newsgroups dataset and then split into training set (90%) and validation set(10%)
 
-print('Tokenizer')
+print('Initializing BertTokenizer')
 
+BERTMODEL='bert-base-uncased'
+CACHE_DIR= '../transformers-cache'
+
+tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
+                                          do_lower_case=True)
 
 # In[ ]:
-tokenizer = LongformerTokenizer.from_pretrained("allenai/longformer-base-4096")
+
 
 #categories = [ "alt.atheism", "talk.religion.misc", "comp.graphics",]
 
@@ -58,23 +62,11 @@ newsgroups = fetch_20newsgroups(subset='train', shuffle=True,
 
 data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
 
-"""
-label_train = label_train.tolist()
-label_val = label_val.tolist()
-tokenized_data = [tokenizer.tokenize(data) for data in data_train]
-data_length = [len(i) for i in tokenized_data]
-del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-1000:]
-for index in sorted(del_data_index, reverse=True):
-    del data_train[index]
-    del label_train[index]
+from summarizer import Summarizer
+bert_summarizer = Summarizer()
+data_train = [bert_summarizer(data) for data in data_train]
+data_val = [bert_summarizer(data) for data in data_val]
 
-tokenized_data = [tokenizer.tokenize(data) for data in data_val]
-data_length = [len(i) for i in tokenized_data]
-del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-100:]
-for index in sorted(del_data_index, reverse=True):
-    del data_val[index]
-    del label_val[index]
-"""
 train_ng = {'data': data_train, 'target': label_train}
 val_ng = {'data': data_val, 'target': label_val}
 
@@ -125,7 +117,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:0") # specify  devicethe
+    device = torch.device("cuda:1") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -135,6 +127,10 @@ else:
 
 
 # In[ ]:
+
+
+# get the input_ids_list, attention_mask_list of the long document. Each element in the list correspondes to a segment.
+# also get target for each segment and the number of segments.
 class newsDataset(torch.utils.data.Dataset):
     
     def __init__(self, docs, targets, tokenizer, max_len):
@@ -150,12 +146,18 @@ class newsDataset(torch.utils.data.Dataset):
         doc = str(self.docs[item])
         target = self.targets[item]
 
-        encoding = tokenizer(
-            doc, 
-            padding = 'max_length', 
-            truncation = True, 
-            max_length = self.max_len,
-            return_tensors="pt")   # return tensor   
+        encoding = self.tokenizer.encode_plus(
+          doc,
+          add_special_tokens=True,
+          max_length=self.max_len,
+          truncation=True,
+          return_token_type_ids=False,
+          padding='max_length',
+          return_overflowing_tokens=False,
+          return_attention_mask=True,
+          return_tensors='pt',
+        )
+        
 
         return {
           'news_text': doc,
@@ -164,8 +166,9 @@ class newsDataset(torch.utils.data.Dataset):
           'targets': torch.tensor(target, dtype=torch.long)
         }
 
-# get the input_ids_list, attention_mask_list of the long document. Each element in the list correspondes to a segment.
-# also get target for each segment and the number of segments.
+# In[ ]:
+
+
 def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
     ds = newsDataset(
         docs=newsgroups['data'],
@@ -185,9 +188,9 @@ def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
 # In[ ]:
 
 
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 #BATCH_SIZE = 83
-MAX_LEN = 1024
+MAX_LEN = 512
 
 train_data_loader = create_data_loader(train_ng, tokenizer, MAX_LEN, BATCH_SIZE)
 val_data_loader = create_data_loader(val_ng, tokenizer, MAX_LEN, BATCH_SIZE)
@@ -195,8 +198,28 @@ val_data_loader = create_data_loader(val_ng, tokenizer, MAX_LEN, BATCH_SIZE)
 
 # In[ ]:
 
-num_labels = len(set(train_ng['target']))
-model = LongformerForSequenceClassification.from_pretrained('allenai/longformer-base-4096',gradient_checkpointing=False,attention_window=512,num_labels=num_labels)
+class BERT_Classification_Model(nn.Module):
+    
+    def __init__(self, n_classes):
+        super(BERT_Classification_Model, self).__init__()
+        self.bert = BertModel.from_pretrained(BERTMODEL)
+        self.drop = nn.Dropout(p=0.3)
+        self.out = nn.Linear(self.bert.config.hidden_size, n_classes)
+
+    def forward(self, input_ids, attention_mask):
+        _, pooled_output = self.bert(
+            input_ids = input_ids,
+            attention_mask = attention_mask,
+            return_dict=False
+        )
+        output = self.out(self.drop(pooled_output))
+        return F.softmax(output, dim=1)
+
+# In[ ]:
+
+
+model = BERT_Classification_Model(len(set(train_ng['target'])))
+#model =  BERT_Classification_Model(len(train_ng.target_names))
 model = model.to(device)
 
 
@@ -242,7 +265,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
           attention_mask=attention_mask
         )
         
-        outputs = F.softmax(outputs.logits, dim=1)
+        
         _, preds = torch.max(outputs, dim=1)
         loss = loss_fn(outputs, targets)
 
@@ -282,7 +305,6 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
               input_ids=input_ids,
               attention_mask=attention_mask
             )
-            outputs = F.softmax(outputs.logits, dim=1)
             _, preds = torch.max(outputs, dim=1)
 
             loss = loss_fn(outputs, targets)
@@ -351,9 +373,9 @@ ax.set_xticks(np.arange(0, 50, 5))
 plt.plot(history['train_acc'], label='train accuracy')
 plt.plot(history['val_acc'], label='validation accuracy')
 
-plt.title('longformer')
+plt.title('bert_summarizer')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
 
-plt.savefig('longformer.png')
+plt.savefig('bert_summarizer.png')

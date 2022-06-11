@@ -38,7 +38,7 @@ import os
 print('Initializing BertTokenizer')
 
 BERTMODEL='bert-base-uncased'
-CACHE_DIR='transformers-cache'
+CACHE_DIR= '../transformers-cache'
 
 tokenizer = BertTokenizer.from_pretrained(BERTMODEL, cache_dir=CACHE_DIR,
                                           do_lower_case=True)
@@ -61,11 +61,6 @@ newsgroups = fetch_20newsgroups(subset='train', shuffle=True,
 #                                       random_state=238, remove=remove)
 
 data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
-
-from summarizer import Summarizer
-bert_summarizer = Summarizer()
-data_train = [bert_summarizer(data) for data in data_train]
-data_val = [bert_summarizer(data) for data in data_val]
 
 train_ng = {'data': data_train, 'target': label_train}
 val_ng = {'data': data_val, 'target': label_val}
@@ -117,7 +112,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:1") # specify  devicethe
+    device = torch.device("cuda:0") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -153,15 +148,25 @@ class newsDataset(torch.utils.data.Dataset):
           truncation=True,
           return_token_type_ids=False,
           padding='max_length',
-          return_overflowing_tokens=False,
+          return_overflowing_tokens=True,
           return_attention_mask=True,
           return_tensors='pt',
-        )
-        
+        )        
+    
+        remain = encoding['overflowing_tokens'].flatten() 
+        input_ids = encoding['input_ids'].flatten()
+
+        if remain.shape[0] != 0:
+            complete_tokens = torch.cat((input_ids, remain))
+            complete_tokens = complete_tokens[complete_tokens!=101]
+            complete_tokens = complete_tokens[complete_tokens!=102]
+            start_token = torch.tensor([101], dtype=torch.long)
+            end_token = torch.tensor([102], dtype=torch.long)
+            input_ids = torch.cat((start_token,complete_tokens[:int((self.max_len-2)/2)], complete_tokens[-int((self.max_len-2)/2):],end_token))        
 
         return {
           'news_text': doc,
-          'input_ids': encoding['input_ids'].flatten(),
+          'input_ids': input_ids,
           'attention_mask': encoding['attention_mask'].flatten(),
           'targets': torch.tensor(target, dtype=torch.long)
         }
@@ -373,9 +378,9 @@ ax.set_xticks(np.arange(0, 50, 5))
 plt.plot(history['train_acc'], label='train accuracy')
 plt.plot(history['val_acc'], label='validation accuracy')
 
-plt.title('bert_summarizer')
+plt.title('head_tail')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend()
 
-plt.savefig('bert_summarizer.png')
+plt.savefig('head_tail.png')
