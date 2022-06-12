@@ -17,7 +17,7 @@ def available_device():
     return device
 
 
-def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
+def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, f):
     model = model.train()
 
     losses = []
@@ -77,8 +77,8 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         scheduler.step()
 
         torch.cuda.empty_cache()
-
-    print(f"time = {time.time() - t0:.2f} secondes")
+    
+    f.write(f"time = {time.time() - t0:.2f} secondes" + "\n")
     t0 = time.time()
 
     predictions = torch.stack(predictions).cpu()
@@ -132,7 +132,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
     return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
-def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
+def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, f):
     model = model.train()
 
     losses = []
@@ -168,8 +168,8 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         scheduler.step()
 
         torch.cuda.empty_cache()
-
-    print(f"time = {time.time() - t0:.2f} secondes")
+    
+    f.write(f"time = {time.time() - t0:.2f} secondes" + "\n")
     t0 = time.time()
 
     predictions = torch.stack(predictions).cpu()

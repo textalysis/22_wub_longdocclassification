@@ -12,19 +12,18 @@ import torch.nn as nn
 import trainer
 
 
-para = {'datasets': ["imdb", "20newsgroups"],
+para = {'datasets': ["imdb"],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
-        'batch_sizes': [4, 8, 16],
+        'batch_sizes': [1, 2, 4, 8, 16],
         'learning_rates': [3e-4, 1e-4, 5e-5],
         'chunk_lens': [512, 256],
         'overlap_lens': [25, 50],
         'total_len': 4096,
         'epochs': 60,
-        'batch_size': [8, 16, 32],
         'lr': [3e-4, 1e-4, 5e-5],
         'max_len': 512,
-        'models': ["PoBERT_mean", "PoBERT_max", "RoBERT", "ToBERT", "Longformer", "Bigbird", "BERT"],
+        'model_names': ["PoBERT_mean", "PoBERT_max", "RoBERT", "ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
         'attention_windows':[256, 512],
         'block_sizes': [64, 128],
@@ -34,7 +33,9 @@ para = {'datasets': ["imdb", "20newsgroups"],
 
 for dataset in para["datasets"]:
     if dataset == "imdb":
+        print("importing dataset imdb")
         data_train, data_val = utils.get_dataset("imdb")
+        print("imdb dataset imported")
     # dataset == "20newsgroups"
     else:
         data_train, data_val = utils.get_dataset("20newsgroups")
@@ -49,23 +50,29 @@ for dataset in para["datasets"]:
         else:
             for batch_size in para['batch_sizes']:
                 for learning_rate in para['learning_rates']:
-                    for model in para['models'][0:4]:
+                    for model_name in para['model_names'][0:4]:
+                        print("get tokenizer"
                         tokenizer = utils.tokenize('BERT')
                         max_len = para['max_len']
                         total_len = para['total_len']
                         for chunk_len in para['chunk_lens']:
                             for overlap_len in para['overlap_lens']:
+                                print("create data loader")
                                 train_data_loader = utils.create_data_loader("long", "bert", data_train, tokenizer, max_len, batch_size,
                                                                              approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                                 val_data_loader = utils.create_data_loader("long", "bert", data_val, tokenizer, max_len, batch_size,
                                                                            approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                                if model == "PoBERT_mean":
+                                if model_name == "PoBERT_mean":
+                                    print("using model PoBERT_mean")
                                     model = PoBERT(len(set(data_train['target'])), pooling_method="mean")
-                                elif model == "PoBERT_max":
+                                elif model_name == "PoBERT_max":
+                                    print("using model PoBERT_max")
                                     model = PoBERT(len(set(data_train['target'])), pooling_method="max")
-                                elif model == "ToBERT":
+                                elif model_name == "ToBERT":
+                                    print("using model ToBERT")
                                     model = ToBERT(len(set(data_train['target'])))
                                 else:
+                                    print("using model RoBERT") 
                                     model = RoBERT(len(set(data_train['target'])))
                                 device = train.available_device()
                                 model = model.to(device)
@@ -77,13 +84,14 @@ for dataset in para["datasets"]:
                                     num_training_steps=total_steps
                                 )
                                 loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}_{}_{}_{}_{}.txt".format(dataset, summarizer, batch_size, learning_rate, model, chunk_len, overlap_len, device)
+                                filename = "{}_{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size, learning_rate, model_name, chunk_len, overlap_len, device)
+                                print("training")
                                 trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename)
 
 
-                    for model in para['models'][4:6]:
+                    for model_name in para['model_names'][4:6]:
                         for spase_max_len in para['sparse_max_lens']:
-                            if model == "Longformer":
+                            if model_name == "Longformer":
                                 for attention_window in para['attention_windows']:
                                     tokenizer = utils.tokenize('longformer')
                                     max_len = spase_max_len
@@ -102,8 +110,8 @@ for dataset in para["datasets"]:
                                         num_training_steps=total_steps
                                     )
                                     loss_fn = nn.CrossEntropyLoss().to(device)
-                                    filename = "{}_{}_{}_{}_{}_{}_{}.txt".format(dataset, summarizer, batch_size,
-                                                                                    learning_rate, model, attention_window, device)
+                                    filename = "{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                                                             learning_rate, model_name, attention_window, device)
                                     trainer.trainer(para['epochs'], model, train_data_loader,
                                                                  val_data_loader, data_train, data_val, loss_fn,
                                                                  optimizer, device, scheduler, filename)
@@ -128,13 +136,13 @@ for dataset in para["datasets"]:
                                         num_training_steps=total_steps
                                         )
                                     loss_fn = nn.CrossEntropyLoss().to(device)
-                                    filename = "{}_{}_{}_{}_{}_{}_{}.txt".format(dataset, summarizer, batch_size,
-                                                                     learning_rate, model, block_size, device)
+                                    filename = "{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                                                     learning_rate, model_name, block_size, device)
                                     trainer.trainer(para['epochs'], model, train_data_loader,
                                         val_data_loader, data_train, data_val, loss_fn,
                                         optimizer, device, scheduler, filename)
 
-                    for model in para['models'][6]:
+                    for model_name in para['model_names'][6]:
                         for truncation in para['truncations']:
                             tokenizer = utils.tokenize('BERT')
                             max_len = para['max_len']
@@ -151,8 +159,8 @@ for dataset in para["datasets"]:
                                     num_warmup_steps=0,
                                     num_training_steps=total_steps)
                                 loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}_{}_{}_{}.txt".format(dataset, summarizer, batch_size,
-                                                                         learning_rate, model, truncation, device)
+                                filename = "{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                                                         learning_rate, model_name, truncation, device)
                                 trainer.trainer(para['epochs'], model, train_data_loader,
                                                 val_data_loader, data_train, data_val, loss_fn,
                                                 optimizer, device, scheduler, filename)
@@ -172,8 +180,8 @@ for dataset in para["datasets"]:
                                     num_warmup_steps=0,
                                     num_training_steps=total_steps)
                                 loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}_{}_{}_{}.txt".format(dataset, summarizer, batch_size,
-                                                                         learning_rate, model, truncation, device)
+                                filename = "{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                                                         learning_rate, model_name, truncation, device)
                                 trainer.trainer_hierarchical(para['epochs'], model, train_data_loader,
                                                 val_data_loader, data_train, data_val, loss_fn,
                                                 optimizer, device, scheduler, filename)

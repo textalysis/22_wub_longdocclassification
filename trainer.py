@@ -12,8 +12,8 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
     best_accuracy = 0
 
     save_path = 'Test_results'
-
-    with open(os.path.join(save_path, "{}.txt".format(filename)), "a") as f:
+    path = os.path.join(save_path, "{}.txt".format(filename))
+    with open(path, "a") as f:
 
         for epoch in range(epochs):
             f.write('-' * 10 + "\n")
@@ -25,8 +25,8 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
                                                 optimizer,
                                                 device,
                                                 scheduler,
-                                                len(data_train['data'])
-                                                )
+                                                len(data_train['data']),
+                                                f)
 
             train_report = classification_report(train_real, train_pred, output_dict=True)
             f.write(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' + "\n")
@@ -48,7 +48,7 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
             history['val_loss'].append(val_loss)
 
             if val_acc > best_accuracy:
-                torch.save(model.state_dict(), os.path.join('best_models', "{}_best_model_state.txt".format(filename)))
+                torch.save(model.state_dict(), os.path.join('best_models', "{}_best.bin".format(filename)))
                 best_accuracy = val_acc
                 # epoch index starting from 0
                 best_epoch = epoch + 1
@@ -77,8 +77,9 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
     best_accuracy = 0
 
     save_path = 'Test_results'
+    path = os.path.join(save_path, "{}.txt".format(filename))
 
-    with open(os.path.join(save_path, "{}.txt".format(filename)), "a") as f:
+    with open(path, "a") as f:
 
         for epoch in range(epochs):
             f.write('-' * 10 + "\n")
@@ -90,8 +91,8 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
                                                 optimizer,
                                                 device,
                                                 scheduler,
-                                                len(data_train['data'])
-                                                )
+                                                len(data_train['data']),
+                                                f)
 
             train_report = classification_report(train_real, train_pred, output_dict=True)
             f.write(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' + "\n")
@@ -113,7 +114,7 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
             history['val_loss'].append(val_loss)
 
             if val_acc > best_accuracy:
-                torch.save(model.state_dict(), os.path.join('best_models', "{}_best_model_state.txt".format(filename)))
+                torch.save(model.state_dict(), os.path.join('best_models', "{}_best.bin".format(filename)))
                 best_accuracy = val_acc
                 # epoch index starting from 0
                 best_epoch = epoch + 1
