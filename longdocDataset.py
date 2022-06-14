@@ -1,8 +1,8 @@
 import torch
-
+from torch.utils.data import Dataset
 
 # chunk_len, overlap_len
-class longdocDataset(torch.utils.data.Dataset):
+class longdocDataset(Dataset):
     def __init__(self, docs, targets, tokenizer, max_len, approach, chunk_len, overlap_len, total_len):
         self.docs = docs
         self.targets = targets

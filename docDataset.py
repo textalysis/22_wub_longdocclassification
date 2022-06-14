@@ -1,7 +1,7 @@
 import torch
+from torch.utils.data import Dataset
 
-
-class docDataset(torch.utils.data.Dataset):
+class docDataset(Dataset):
 
     def __init__(self, docs, targets, tokenizer, max_len, model_type):
         self.docs = docs

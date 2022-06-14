@@ -12,7 +12,7 @@ nltk.download('punkt')
 from docDataset import docDataset
 from longdocDataset import longdocDataset
 from torch.utils.data import (TensorDataset, DataLoader,
-                              RandomSampler, SequentialSampler)
+                              RandomSampler, SequentialSampler, Dataset)
 
 CACHE_DIR = 'transformers-cache'
 
@@ -23,15 +23,15 @@ def get_dataset(dataset):
                                         random_state=238, remove=remove)
         data_1, data_2, label_1, label_2 = train_test_split(newsgroups.data, newsgroups.target,
                                                                         test_size=0.1, random_state=42)
-        data_train = {'data': data_1, 'target': label_1}
-        data_val = {'data': data_2, 'target': label_2}
+        data_train = {'data': data_1[100:200], 'target': label_1[100:200]}
+        data_val = {'data': data_2[100:200], 'target': label_2[100:200]}
 
     if dataset == "imdb":
         # [doc1, doc2,...]
         imdb_train = load_dataset("imdb", split='train')
         imdb_val = load_dataset("imdb", split='test')[0:25000:10]
-        data_train = {'data': imdb_train['text'], 'target': imdb_train['label']}
-        data_val = {'data': imdb_val['text'], 'target': imdb_val['label']}
+        data_train = {'data': imdb_train['text'][0:4], 'target': imdb_train['label'][0:4]}
+        data_val = {'data': imdb_val['text'][0:4], 'target': imdb_val['label'][0:4]}
 
     return data_train, data_val
 
