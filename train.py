@@ -7,7 +7,7 @@ import torch.nn as nn
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -17,7 +17,7 @@ def available_device():
     return device
 
 
-def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, f):
+def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
     model = model.train()
 
     losses = []
@@ -78,7 +78,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         torch.cuda.empty_cache()
     
-    f.write(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
     t0 = time.time()
 
     predictions = torch.stack(predictions).cpu()
@@ -132,7 +132,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
     return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
-def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, f):
+def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
     model = model.train()
 
     losses = []
@@ -169,7 +169,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
 
         torch.cuda.empty_cache()
     
-    f.write(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
     t0 = time.time()
 
     predictions = torch.stack(predictions).cpu()

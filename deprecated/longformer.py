@@ -125,7 +125,7 @@ plt.show()
 
 
 if torch.cuda.is_available():    
-    device = torch.device("cuda:0") # specify  devicethe
+    device = torch.device("cuda:1") # specify  devicethe
     print('There are %d GPU(s) available.' % torch.cuda.device_count())
     print('We will use the GPU:', torch.cuda.get_device_name(0))
 
