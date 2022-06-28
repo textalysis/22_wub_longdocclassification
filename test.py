@@ -1,10 +1,10 @@
 from utils import *
 from models.BERT import BERT
-from models.Bigbird import Bigbird
-from models.Longformer import Longformer
 from models.PoBERT import PoBERT
 from models.RoBERT import RoBERT
 from models.ToBERT import ToBERT
+from models.Bigbird import Bigbird
+from models.Longformer import Longformer
 import train
 from torch.optim import AdamW
 from transformers import get_linear_schedule_with_warmup
@@ -12,16 +12,15 @@ import torch.nn as nn
 import trainer
 
 
-para = {'datasets': ["imdb"],
+para = {'datasets': ["20newsgroups"],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
-        'batch_sizes': [2, 8, 16, 32],
-        'learning_rates': [3e-4, 1e-4, 5e-5],
-        'chunk_lens': [512, 256],
+        'batch_sizes': [8, 16],
+        'learning_rate': 2e-5,
+        'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 60,
-        'lr': [3e-4, 1e-4, 5e-5],
+        'epochs': 40,
         'max_len': 512,
         'model_names': ["PoBERT_mean", "PoBERT_max", "RoBERT", "ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -49,7 +48,8 @@ for dataset in para["datasets"]:
             data_val['data'] = text_rank(data_val['data'])
         else:
             for batch_size in para['batch_sizes']:
-                for learning_rate in para['learning_rates']:
+                #for learning_rate in para['learning_rates']:
+                    learning_rate =  para['learning_rate']
                     for model_name in para['model_names'][0:4]:
                         print("get tokenizer")
                         tokenizer = tokenize('BERT')
@@ -58,9 +58,9 @@ for dataset in para["datasets"]:
                         for chunk_len in para['chunk_lens']:
                             for overlap_len in para['overlap_lens']:
                                 print("create data loader")
-                                train_data_loader = create_data_loader("long", "bert", data_train, tokenizer, max_len, batch_size,
+                                train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
                                                                              approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                                val_data_loader = create_data_loader("long", "bert", data_val, tokenizer, max_len, batch_size,
+                                val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
                                                                            approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                                 if model_name == "PoBERT_mean":
                                     print("using model PoBERT_mean")
@@ -86,8 +86,11 @@ for dataset in para["datasets"]:
                                 loss_fn = nn.CrossEntropyLoss().to(device)
                                 filename = "{}_{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size, learning_rate, model_name, chunk_len, overlap_len)
                                 print("training")
-                                trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename)
-
+                                try:
+                                    trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename)
+                                except Exception as e:
+                                    print("Exception")
+                                    print(e)
 
                     for model_name in para['model_names'][4:6]:
                         for spase_max_len in para['sparse_max_lens']:
@@ -95,9 +98,9 @@ for dataset in para["datasets"]:
                                 for attention_window in para['attention_windows']:
                                     tokenizer = tokenize('longformer')
                                     max_len = spase_max_len
-                                    train_data_loader = create_data_loader("short", "longformer", data_train, tokenizer, max_len,
+                                    train_data_loader = create_data_loader("short", data_train, tokenizer, max_len,
                                                                                  batch_size)
-                                    val_data_loader = create_data_loader("short", "longformer", data_val, tokenizer, max_len,
+                                    val_data_loader = create_data_loader("short", data_val, tokenizer, max_len,
                                                                                batch_size)
                                     model = Longformer(attention_window=attention_window,num_labels=len(set(data_train['target'])))
                                     device = train.available_device()
@@ -112,20 +115,23 @@ for dataset in para["datasets"]:
                                     loss_fn = nn.CrossEntropyLoss().to(device)
                                     filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
                                                                              learning_rate, model_name, attention_window)
-                                    trainer.trainer(para['epochs'], model, train_data_loader,
+                                    try:
+                                        trainer.trainer(para['epochs'], model, train_data_loader,
                                                                  val_data_loader, data_train, data_val, loss_fn,
                                                                  optimizer, device, scheduler, filename)
-
+                                    except Exception as e:
+                                        print("Exception")
+                                        print(e)
+                                       
                             else:
                                 for block_size in para['block_sizes']:
                                     tokenizer = tokenize("bigbird")
                                     max_len = spase_max_len
-                                    train_data_loader = create_data_loader("short", "bigbird", data_train, tokenizer,
+                                    train_data_loader = create_data_loader("short", data_train, tokenizer,
                                                                      max_len, batch_size)
-                                    val_data_loader = create_data_loader("short", "bigbird", data_val, tokenizer,
+                                    val_data_loader = create_data_loader("short", data_val, tokenizer,
                                                                     max_len, batch_size)
-                                    model = Bigbird(block_size=block_size,
-                                                       num_labels=len(set(data_train['target'])))
+                                    model = Bigbird(block_size=block_size,num_labels=len(set(data_train['target'])))         
                                     device = train.available_device()
                                     model = model.to(device)
                                     optimizer = AdamW(model.parameters(), lr=learning_rate)
@@ -138,52 +144,60 @@ for dataset in para["datasets"]:
                                     loss_fn = nn.CrossEntropyLoss().to(device)
                                     filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
                                                                      learning_rate, model_name, block_size)
-                                    trainer.trainer(para['epochs'], model, train_data_loader,
+                                    try:
+                                        trainer.trainer(para['epochs'], model, train_data_loader,
                                         val_data_loader, data_train, data_val, loss_fn,
                                         optimizer, device, scheduler, filename)
+                                    except Exception as e:
+                                        print("Exception")
+                                        print(e)
 
-                    for model_name in para['model_names'][6]:
-                        for truncation in para['truncations']:
-                            tokenizer = tokenize('BERT')
-                            max_len = para['max_len']
-                            if truncation == "head":
-                                train_data_loader = create_data_loader("short", "bert", data_train, tokenizer, max_len, batch_size)
-                                val_data_loader = create_data_loader("short", "bert", data_val, tokenizer, max_len, batch_size)
-                                model = BERT(len(set(data_train['target'])))
-                                device = train.available_device()
-                                model = model.to(device)
-                                optimizer = AdamW(model.parameters(), lr=learning_rate)
-                                total_steps = len(train_data_loader) * para['epochs']
-                                scheduler = get_linear_schedule_with_warmup(
+                    for model_name in para['model_names'][5:7]:
+                        if model_name == "BERT":
+                            for truncation in para['truncations']:
+                                tokenizer = tokenize('BERT')
+                                max_len = para['max_len']
+                                if truncation == "head":
+                                    train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
+                                    val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
+                                    model = BERT(len(set(data_train['target'])))
+                                    device = train.available_device()
+                                    model = model.to(device)
+                                    optimizer = AdamW(model.parameters(), lr=learning_rate)
+                                    total_steps = len(train_data_loader) * para['epochs']
+                                    scheduler = get_linear_schedule_with_warmup(
                                     optimizer,
                                     num_warmup_steps=0,
                                     num_training_steps=total_steps)
-                                loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                    loss_fn = nn.CrossEntropyLoss().to(device)
+                                    filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
                                                       learning_rate, model_name, truncation)
-                                trainer.trainer(para['epochs'], model, train_data_loader,
+                                    trainer.trainer(para['epochs'], model, train_data_loader,
                                                 val_data_loader, data_train, data_val, loss_fn,
                                                 optimizer, device, scheduler, filename)
 
-                            else:
-                                train_data_loader = create_data_loader("long", "bert", data_train, tokenizer,
+                                else:
+                                    train_data_loader = create_data_loader("long", data_train, tokenizer,
                                                                              max_len, batch_size, approach=truncation)
-                                val_data_loader = create_data_loader("long", "bert", data_val, tokenizer,
+                                    val_data_loader = create_data_loader("long", data_val, tokenizer,
                                                                            max_len, batch_size, approach=truncation)
-                                model = BERT(len(set(data_train['target'])))
-                                device = train.available_device()
-                                model = model.to(device)
-                                optimizer = AdamW(model.parameters(), lr=learning_rate)
-                                total_steps = len(train_data_loader) * para['epochs']
-                                scheduler = get_linear_schedule_with_warmup(
+                                    model = BERT(len(set(data_train['target'])))
+                                    device = train.available_device()
+                                    model = model.to(device)
+                                    optimizer = AdamW(model.parameters(), lr=learning_rate)
+                                    total_steps = len(train_data_loader) * para['epochs']
+                                    scheduler = get_linear_schedule_with_warmup(
                                     optimizer,
                                     num_warmup_steps=0,
                                     num_training_steps=total_steps)
-                                loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
+                                    loss_fn = nn.CrossEntropyLoss().to(device)
+                                    filename = "{}_{}_{}_{}_{}_{}".format(dataset, summarizer, batch_size,
                                                            learning_rate, model_name, truncation)
-                                trainer.trainer_hierarchical(para['epochs'], model, train_data_loader,
+                                    try:
+                                        trainer.trainer(para['epochs'], model, train_data_loader,
                                                 val_data_loader, data_train, data_val, loss_fn,
                                                 optimizer, device, scheduler, filename)
-
+                                    except Exception as e:
+                                        print("Exception")
+                                        print(e)
 

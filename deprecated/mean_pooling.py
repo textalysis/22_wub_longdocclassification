@@ -75,8 +75,8 @@ newsgroups = fetch_20newsgroups(subset='train', shuffle=True,
 # test_ng = fetch_20newsgroups(subset='test', shuffle=True, 
 #                                       random_state=238, remove=remove)
 
-data_train, data_val, label_train, label_val = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
-
+data_1, data_2, label_1, label_2 = train_test_split(newsgroups.data, newsgroups.target, test_size=0.1, random_state=42)
+"""
 label_train = label_train.tolist()
 label_val = label_val.tolist()
 tokenized_data = [tokenizer.tokenize(data) for data in data_train]
@@ -92,9 +92,9 @@ del_data_index = sorted(range(len(data_length)), key=lambda x: data_length[x])[-
 for index in sorted(del_data_index, reverse=True):
     del data_val[index]
     del label_val[index]
-
-train_ng = {'data': data_train, 'target': label_train}
-val_ng = {'data': data_val, 'target': label_val}
+"""
+train_ng = {'data': data_1, 'target': label_1}
+val_ng = {'data': data_2, 'target': label_2}
 
 #data_train = data_train.pop(66)
 #label_train = label_train.tolist().pop(66)
@@ -102,11 +102,11 @@ val_ng = {'data': data_val, 'target': label_val}
 # print('size of training set:', len(train_ng.data))
 # print('size of validation set:', len(val_ng.data))
 # print('classes:', train_ng.target_names)
-print('size of training set:', len(data_train))
-print('size of training set:', len(label_train))
-print('size of validation set:', len(data_val))
-print('size of validation set:', len(label_val))
-print('classes:', newsgroups.target_names)
+#print('size of training set:', len(data_train))
+#print('size of training set:', len(label_train))
+#print('size of validation set:', len(data_val))
+#print('size of validation set:', len(label_val))
+#print('classes:', newsgroups.target_names)
 
 # data_train = train_ng.data
 # label_train = train_ng.target
@@ -159,13 +159,14 @@ else:
 # get the input_ids_list, attention_mask_list of the long document. Each element in the list correspondes to a segment.
 # also get target for each segment and the number of segments.
 class LongNewsDataset(torch.utils.data.Dataset):
-    def __init__(self, docs, targets, tokenizer, max_len, chunk_len=512, overlap_len=50):
+    def __init__(self, docs, targets, tokenizer, max_len, chunk_len=512, overlap_len=50, total_len=1024):
         self.docs = docs
         self.targets = targets
         self.tokenizer = tokenizer
         self.max_len = max_len
         self.overlap_len = overlap_len
         self.chunk_len = chunk_len
+        self.total_len = total_len
 
     def __len__(self):
         return len(self.targets)
@@ -187,11 +188,11 @@ class LongNewsDataset(torch.utils.data.Dataset):
           return_tensors='pt',
         )
 
-        long_token = self.long_terms_tokenizer(encoding, target)
+        long_token = self.long_terms_tokenizer(encoding, target,self.total_len)
 
         return long_token
 
-    def long_terms_tokenizer(self, data_tokenize, target):
+    def long_terms_tokenizer(self, data_tokenize, target,total_len):
         long_terms_token = []
         input_ids_list = []
         attention_mask_list = []
@@ -202,6 +203,7 @@ class LongNewsDataset(torch.utils.data.Dataset):
         previous_attention_mask = data_tokenize["attention_mask"].reshape(-1)
         # get the input_ids of overflowing tokens
         remain = data_tokenize['overflowing_tokens'].flatten()
+        remain = remain[0:(total_len-512)]
         target = torch.tensor(target, dtype=torch.int)
 
         input_ids_list.append(previous_input_ids)
@@ -290,7 +292,7 @@ def create_data_loader(newsgroups, tokenizer, max_len, batch_size):
 # In[ ]:
 
 
-BATCH_SIZE = 16
+BATCH_SIZE = 8
 #BATCH_SIZE = 4
 MAX_LEN = 512
 
@@ -356,7 +358,7 @@ model = model.to(device)
 EPOCHS = 80
 #EPOCHS = 2
 
-optimizer = AdamW(model.parameters(), lr=2e-5)
+optimizer = AdamW(model.parameters(), lr=3e-4)
 total_steps = len(train_data_loader) * EPOCHS
 
 scheduler = get_linear_schedule_with_warmup(
@@ -376,7 +378,8 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     
     losses = []
     correct_predictions = 0
-    
+    predictions = []
+    real_values = []
     t0 = time.time()
 
     for batch_idx, batch in enumerate(data_loader):
@@ -418,7 +421,8 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         
         _, preds = torch.max(outputs, dim=1)
         loss = loss_fn(outputs, targets)
-
+        predictions.extend(preds)
+        real_values.extend(targets)        
         correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
         
@@ -428,11 +432,12 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         scheduler.step()  
         
         torch.cuda.empty_cache()
-    
+    predictions = torch.stack(predictions).cpu()
+    real_values = torch.stack(real_values).cpu()
     print(f"time = {time.time()-t0:.2f} secondes")
     t0 = time.time()
         
-    return np.mean(losses), float(correct_predictions / n_examples)
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
 # In[ ]:
@@ -443,7 +448,8 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
 
     losses = []
     correct_predictions = 0
-
+    predictions = []
+    real_values = []
     with torch.no_grad():
         for batch_idx, batch in enumerate(data_loader):
 
@@ -469,15 +475,17 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
             _, preds = torch.max(outputs, dim=1)
 
             loss = loss_fn(outputs, targets)
-
+            predictions.extend(preds)
+            real_values.extend(targets)
             correct_predictions += torch.sum(preds == targets)
             losses.append(float(loss.item()))
-
-    return np.mean(losses), float(correct_predictions / n_examples)
+    predictions = torch.stack(predictions).cpu()
+    real_values = torch.stack(real_values).cpu()
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
 # In[ ]:
-
+from sklearn.metrics import classification_report
 
 history = defaultdict(list)
 best_accuracy = 0
@@ -487,7 +495,7 @@ for epoch in range(EPOCHS):
     print(f'Epoch {epoch + 1}/{EPOCHS}')
     print('-' * 10)
 
-    train_loss, train_acc = train_epoch(model,
+    train_loss, train_acc, train_real, train_pred  = train_epoch(model,
                                         train_data_loader,    
                                         loss_fn, 
                                         optimizer, 
@@ -498,9 +506,11 @@ for epoch in range(EPOCHS):
                                         )
 
     
-    print(f'Train loss {train_loss} accuracy {train_acc}')
-
-    val_loss, val_acc = eval_model(
+    #print(f'Train loss {train_loss} accuracy {train_acc}')
+    train_report = classification_report(train_real, train_pred, output_dict=True)
+            #f.write(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' + "\n")
+    print(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}')
+    val_loss, val_acc, val_real, val_pred = eval_model(
     model,
     val_data_loader,
     loss_fn, 
@@ -509,9 +519,11 @@ for epoch in range(EPOCHS):
     #len(val_ng.data)
     )
 
-    print(f'Val   loss {val_loss} accuracy {val_acc}')
-    print()
-
+    #print(f'Val   loss {val_loss} accuracy {val_acc}')
+    #print()
+    val_report = classification_report(val_real, val_pred, output_dict=True)
+     #f.write(f'Val loss {val_loss} accuracy {val_acc} macro_avg {val_report["macro avg"]} weighted_avg {val_report["weighted avg"]}' + "\n")
+    print(f'Val loss {val_loss} accuracy {val_acc} macro_avg {val_report["macro avg"]} weighted_avg {val_report["weighted avg"]}')
     history['train_acc'].append(train_acc)
     history['train_loss'].append(train_loss)
     history['val_acc'].append(val_acc)

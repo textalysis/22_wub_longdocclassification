@@ -1,14 +1,15 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import BertModel
+from transformers import BertModel, RobertaModel
 
 # pooling_method, dropout
 class PoBERT(nn.Module):
     def __init__(self, n_classes, pooling_method="mean"):
         super(PoBERT, self).__init__()
         self.pooling_method = pooling_method
-        self.bert = BertModel.from_pretrained('bert-base-uncased')  # bert model from huggingface
+        #self.bert = BertModel.from_pretrained('bert-base-uncased')  # bert model from huggingface
+        self.bert = RobertaModel.from_pretrained("roberta-base")
         self.drop = nn.Dropout(p=0.3)  # add dropout of 0.3 on top of bert output
         self.out = nn.Linear(self.bert.config.hidden_size, n_classes)  # Linear layer as a classifier
 

@@ -21,10 +21,11 @@ class longdocDataset(Dataset):
         target = int(self.targets[item])
 
         # get the encoding of the first 512 tokens and the overflowing tokens if the document has more than the defined max length tokens
-        encoding = self.tokenizer.encode_plus(
+        # encoding = self.tokenizer.encode_plus(
+        encoding = self.tokenizer(
             doc,
             add_special_tokens=True,
-            max_length=self.max_len,
+            max_length=self.chunk_len,
             truncation=True,
             return_token_type_ids=False,
             padding='max_length',
@@ -40,10 +41,12 @@ class longdocDataset(Dataset):
             input_ids = encoding['input_ids'].flatten()
             if remain.shape[0] != 0:
                 complete_tokens = torch.cat((input_ids, remain))
-                complete_tokens = complete_tokens[complete_tokens!=101]
-                complete_tokens = complete_tokens[complete_tokens!=102]
-                start_token = torch.tensor([101], dtype=torch.long)
-                end_token = torch.tensor([102], dtype=torch.long)
+                #complete_tokens = complete_tokens[complete_tokens!=101]
+                #complete_tokens = complete_tokens[complete_tokens!=102]
+                complete_tokens = complete_tokens[complete_tokens!=0]
+                complete_tokens = complete_tokens[complete_tokens!=2]
+                start_token = torch.tensor([0], dtype=torch.long)
+                end_token = torch.tensor([2], dtype=torch.long)
                 input_ids = torch.cat((start_token,complete_tokens[:int((self.max_len-2)/2)], complete_tokens[-int((self.max_len-2)/2):],end_token))
 
             long_token = {'input_ids': input_ids,
@@ -57,10 +60,10 @@ class longdocDataset(Dataset):
 
             if remain.shape[0] != 0:
                 complete_tokens = torch.cat((input_ids, remain))
-                complete_tokens = complete_tokens[complete_tokens != 101]
-                complete_tokens = complete_tokens[complete_tokens != 102]
-                start_token = torch.tensor([101], dtype=torch.long)
-                end_token = torch.tensor([102], dtype=torch.long)
+                complete_tokens = complete_tokens[complete_tokens != 0]
+                complete_tokens = complete_tokens[complete_tokens != 2]
+                start_token = torch.tensor([0], dtype=torch.long)
+                end_token = torch.tensor([2], dtype=torch.long)
                 input_ids = torch.cat((start_token, complete_tokens[-(self.max_len - 2):], end_token))
 
             long_token = {'input_ids': input_ids,
@@ -80,7 +83,7 @@ class longdocDataset(Dataset):
         previous_attention_mask = data_tokenize["attention_mask"].reshape(-1)
         # get the input_ids of overflowing tokens
         remain = data_tokenize['overflowing_tokens'].flatten()
-        remain = remain[0: (total_len - 512)]
+        remain = remain[0: (total_len - self.chunk_len)]
         target = torch.tensor(target, dtype=torch.int)
 
         input_ids_list.append(previous_input_ids)
@@ -93,8 +96,8 @@ class longdocDataset(Dataset):
             idxs = range(len(remain) + self.chunk_len)
             idxs = idxs[(self.chunk_len - self.overlap_len - 2)::(self.chunk_len - self.overlap_len - 2)]
             input_ids_first_overlap = previous_input_ids[-(self.overlap_len + 1):-1]
-            start_token = torch.tensor([101], dtype=torch.long)
-            end_token = torch.tensor([102], dtype=torch.long)
+            start_token = torch.tensor([0], dtype=torch.long)
+            end_token = torch.tensor([2], dtype=torch.long)
 
             for i, idx in enumerate(idxs):
                 if i == 0:

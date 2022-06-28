@@ -1,13 +1,14 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import BertModel
+from transformers import BertModel, RobertaModel
 
 
 class RoBERT(nn.Module):
     def __init__(self, n_classes):
         super(RoBERT, self).__init__()
-        self.bert = BertModel.from_pretrained('bert-base-uncased')
+        #self.bert = BertModel.from_pretrained('bert-base-uncased')
+        self.bert = RobertaModel.from_pretrained("roberta-base")
         self.lstm = nn.LSTM(768, 100, num_layers=1, bidirectional=False)
         self.out = nn.Linear(100, n_classes)
 

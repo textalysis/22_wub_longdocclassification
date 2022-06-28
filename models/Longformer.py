@@ -16,4 +16,4 @@ class Longformer(nn.Module):
           attention_mask=attention_mask
         )
 
-        return outputs
+        return outputs.logits
