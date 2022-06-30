@@ -1,4 +1,4 @@
-1. 20newsgroups
+# 20newsgroups
 ## Truncation
 ### head
 
@@ -17,7 +17,7 @@
 
 ## Bigbird
 
-2. Hyperpartisan
+# Hyperpartisan
 ## Truncation
 ### head
 
@@ -36,7 +36,7 @@
 
 ## Bigbird
 
-3. ECTHR
+# ECTHR
 ## Truncation
 ### head
 
