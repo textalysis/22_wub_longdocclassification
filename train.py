@@ -7,7 +7,7 @@ import torch.nn as nn
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -94,7 +94,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
     correct_predictions = 0
     predictions = []
     real_values = []
-
+    t0 = time.time()
     with torch.no_grad():
         for batch_idx, batch in enumerate(data_loader):
             input_ids = [data["input_ids"] for data in batch]
@@ -125,7 +125,10 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
 
             correct_predictions += torch.sum(preds == targets)
             losses.append(float(loss.item()))
-
+    
+    print(" ")    
+    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    t0 = time.time()
     predictions = torch.stack(predictions).cpu()
     real_values = torch.stack(real_values).cpu()
 
@@ -185,7 +188,7 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
     correct_predictions = 0
     predictions = []
     real_values = []
-
+    t0 = time.time()
     with torch.no_grad():
         for batch in data_loader:
             input_ids = batch['input_ids'].to(device)
@@ -207,7 +210,10 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
             losses.append(float(loss.item()))
             # losses.append(loss.item())
             torch.cuda.empty_cache()
-
+    
+    print(" ")
+    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    t0 = time.time()
     predictions = torch.stack(predictions).cpu()
     real_values = torch.stack(real_values).cpu()
 

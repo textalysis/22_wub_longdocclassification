@@ -13,7 +13,10 @@ class ToBERT(nn.Module):
         self.encoder_layer = nn.TransformerEncoderLayer(d_model=self.bert.config.hidden_size, nhead=8)
         self.transformer_encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
         #self.drop = nn.Dropout(p=0.3)  # add dropout of 0.3 on top of bert output
+        self.dense = nn.Linear(self.bert.config.hidden_size, self.bert.config.hidden_size)
+        self.relu = nn.ReLU()
         self.out = nn.Linear(self.bert.config.hidden_size, n_classes)  # Linear layer as a classifier
+
 
     def forward(self, input_ids, attention_mask, lengt):
 
@@ -27,6 +30,7 @@ class ToBERT(nn.Module):
         # input batch, sequence, hidden -- unsqueeze
         hid = [self.transformer_encoder(x.unsqueeze(0)).squeeze(0) for x in chunks_emb]
         f = torch.stack([torch.mean(t, dim=0) for t in hid])
-        output = self.out(f)
+        dense = self.relu(self.dense(f))
+        output = self.out(dense)
 
         return F.softmax(output, dim=1)

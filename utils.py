@@ -20,7 +20,7 @@ def get_dataset(dataset):
     if dataset == "20newsgroups":
         # remove = ("headers", "footers", "quotes") not remove here to keep the document long
         newsgroups = fetch_20newsgroups(subset='train', shuffle=True,
-                                        random_state=238, remove=remove)
+                                        random_state=238)
         data_1, data_2, label_1, label_2 = train_test_split(newsgroups.data, newsgroups.target,
                                                                         test_size=0.1, random_state=42)
         data_train = {'data': data_1, 'target': label_1}

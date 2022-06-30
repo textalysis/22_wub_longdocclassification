@@ -9,7 +9,12 @@ class BERT(nn.Module):
         #self.bert = BertModel.from_pretrained('bert-base-uncased')
         self.bert = RobertaModel.from_pretrained("roberta-base")
         #self.drop = nn.Dropout(p=0.3)
+        #self.out = nn.Linear(self.bert.config.hidden_size, n_classes)
+        self.dense = nn.Linear(self.bert.config.hidden_size, self.bert.config.hidden_size)
+        self.relu = nn.ReLU()
         self.out = nn.Linear(self.bert.config.hidden_size, n_classes)
+
+
 
     def forward(self, input_ids, attention_mask):
         _, pooled_output = self.bert(
@@ -18,5 +23,8 @@ class BERT(nn.Module):
             return_dict=False
         )
         #output = self.out(self.drop(pooled_output))
-        output = self.out(pooled_output)
+        #output = self.out(pooled_output)
+        dense = self.relu(self.dense(pooled_output))
+        output = self.out(dense)
+
         return F.softmax(output, dim=1)
