@@ -25,6 +25,8 @@ def get_dataset(dataset):
                                                                         test_size=0.1, random_state=42)
         data_train = {'data': data_1, 'target': label_1}
         data_val = {'data': data_2, 'target': label_2}
+        data_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=238) #['data] ['target']
+       
 
     if dataset == "imdb":
         # [doc1, doc2,...]
