@@ -32,5 +32,5 @@ class ToBERT(nn.Module):
         f = torch.stack([torch.mean(t, dim=0) for t in hid])
         dense = self.relu(self.dense(f))
         output = self.out(dense)
-
-        return F.softmax(output, dim=1)
+        # F.softmax(output, dim=1) 
+        return output

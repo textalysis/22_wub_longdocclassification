@@ -27,4 +27,4 @@ class BERT(nn.Module):
         dense = self.relu(self.dense(pooled_output))
         output = self.out(dense)
 
-        return F.softmax(output, dim=1)
+        return output

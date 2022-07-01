@@ -1,0 +1,18 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+Traceback (most recent call last):
+  File "test_hierarchial.py", line 40, in <module>
+    data_train, data_val, data_test = get_dataset("ECtHR")
+  File "/vol/fob-vol3/nebenf20/wubingti/data/22_wub_longdocclassification/utils.py", line 39, in get_dataset
+    train = [ast.literal_eval(i) for i in train]  # str -> dict
+  File "/vol/fob-vol3/nebenf20/wubingti/data/22_wub_longdocclassification/utils.py", line 39, in <listcomp>
+    train = [ast.literal_eval(i) for i in train]  # str -> dict
+  File "/usr/lib64/python3.6/ast.py", line 48, in literal_eval
+    node_or_string = parse(node_or_string, mode='eval')
+  File "/usr/lib64/python3.6/ast.py", line 35, in parse
+    return compile(source, filename, mode, PyCF_ONLY_AST)
+  File "<unknown>", line 1
+    version https://git-lfs.github.com/spec/v1
+                ^
+SyntaxError: invalid syntax

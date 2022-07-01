@@ -54,10 +54,24 @@ def get_dataset(dataset):
        data_test = {'data': data_3, 'target': label_3}
 
     if dataset == "Hyperpartisan":
-
-       
-    if dataset == ""    
-
+       train = open("data/Hyperpartisan/train.json", "r")
+       train = train.readlines()
+       train = [ast.literal_eval(i) for i in train]  # str -> dict
+       data_1 =  [i["text"] for i in train]
+       label_1 =  [i["labels"] for i in train]
+       dev = open("data/Hyperpartisan/dev.json", "r")
+       dev = dev.readlines()
+       dev = [ast.literal_eval(i) for i in dev]
+       data_2 = [i["text"] for i in dev]
+       label_2 = [i["labels"] for i in dev]
+       test = open("data/Hyperpartisan/test.json", "r")
+       test = test.readlines()
+       test = [ast.literal_eval(i) for i in test]
+       data_3 =  [i["text"] for i in test]
+       label_3 = [i["labels"] for i in test]
+       data_train = {'data': data_1, 'target': label_1}
+       data_val = {'data': data_2, 'target': label_2}
+       data_test = {'data': data_3, 'target': label_3}
 
     return data_train, data_val, data_test
 

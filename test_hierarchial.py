@@ -12,11 +12,12 @@ import torch.nn as nn
 import trainer
 
 
-para = {'datasets': ["20newsgroups"],
-       #'summarizer': ["none", "bert_summarizer", "text_rank"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
+        'datasets': ["20newsgroup"],
+        'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
-        'batch_sizes': [16],
-        'learning_rate': 2e-5,
+        'batch_size': [16],
+        'learning_rate': [2e-5],
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
@@ -31,19 +32,16 @@ para = {'datasets': ["20newsgroups"],
 
 
 for dataset in para["datasets"]:
-    if dataset == "imdb":
-        print("importing dataset imdb")
-        data_train, data_val = get_dataset("imdb")
-        print("imdb dataset imported")
-    # dataset == "20newsgroups"
+    if dataset == "Hyperpartisan":
+        data_train, data_val, data_test = get_dataset("Hyperpartisan")
+    elif dataset == "20newsgroups":
+        data_train, data_val, data_test = get_dataset("20newsgroups")
     else:
-        data_train, data_val = get_dataset("20newsgroups")
-
+        data_train, data_val, data_test = get_dataset("ECtHR")
+    
     for batch_size in para['batch_sizes']:
-                #for learning_rate in para['learning_rates']:
-                    learning_rate =  para['learning_rate']
+                for learning_rate in para['learning_rates']:
                     for model_name in para['model_names'][0]:
-                        print("get tokenizer")
                         tokenizer = tokenize('BERT')
                         max_len = para['max_len']
                         total_len = para['total_len']
