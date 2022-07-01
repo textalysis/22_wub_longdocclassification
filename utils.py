@@ -13,6 +13,7 @@ from docDataset import docDataset
 from longdocDataset import longdocDataset
 from torch.utils.data import (TensorDataset, DataLoader,
                               RandomSampler, SequentialSampler, Dataset)
+import ast
 
 CACHE_DIR = 'transformers-cache'
 
@@ -27,31 +28,38 @@ def get_dataset(dataset):
         data_val = {'data': data_2, 'target': label_2}
         data_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=238) #['data] ['target']
        
-
-    if dataset == "imdb":
-        # [doc1, doc2,...]
-        imdb_train = load_dataset("imdb", split='train')
-        imdb_val = load_dataset("imdb", split='test')[0:25000:10]
-        data_train = {'data': imdb_train['text'], 'target': imdb_train['label']}
-        data_val = {'data': imdb_val['text'], 'target': imdb_val['label']}
     """
     will not use the dataset from huggingface because need to do preprocessing
     besides there are [] labels
     use the preprocessed data instead
-    if dataset == "ecthr":
-        ecthr_train = load_dataset("ecthr_cases", split='train')
-        ecthr_val = load_dataset("ecthr_cases", split='validation')
-        train = []
-        for fact in ecthr_train['facts']:
-            train.append(" ".join(fact))
-        val = []
-        for fact in ecthr_val['facts']:
-            val.append(" ".join(fact))
-        data_train = {'data': train, 'target': ecthr_train['labels']}
-        data_val = {'data': val, 'target': ecthr_val['labels']}               
     """
+    if dataset == "ECtHR":
+       train = open("data/ECtHR/train.json", "r")
+       train = train.readlines()
+       train = [ast.literal_eval(i) for i in train]  # str -> dict
+       data_1 =  [i["text"] for i in train]
+       label_1 =  [i["labels"] for i in train]
+       dev = open("data/ECtHR/dev.json", "r")
+       dev = dev.readlines()
+       dev = [ast.literal_eval(i) for i in dev]
+       data_2 = [i["text"] for i in dev]
+       label_2 = [i["labels"] for i in dev]
+       test = open("data/ECtHR/test.json", "r")
+       test = test.readlines()
+       test = [ast.literal_eval(i) for i in test]
+       data_3 =  [i["text"] for i in test]
+       label_3 = [i["labels"] for i in test]
+       data_train = {'data': data_1, 'target': label_1}
+       data_val = {'data': data_2, 'target': label_2}
+       data_test = {'data': data_3, 'target': label_3}
 
-    return data_train, data_val
+    if dataset == "Hyperpartisan":
+
+       
+    if dataset == ""    
+
+
+    return data_train, data_val, data_test
 
 
 def bert_summarizer(docs):
