@@ -81,7 +81,10 @@ for seed in para["seeds"]:
                 loss_fn = loss_fn.to(device)
                 filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
                 #try:
-                trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                if class_type == "multi_label":
+                    trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                else:
+                    trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
                 #except Exception as e:
                 #    print("Exception")
                 #    print(e)

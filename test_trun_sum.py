@@ -74,10 +74,12 @@ for seed in para["seeds"]:
                 num_warmup_steps=0,
                 num_training_steps=total_steps)
                 loss_fn = nn.CrossEntropyLoss().to(device)
-                filename = "{}_{}_{}_{}_{}".format(dataset,
-                                  learning_rate, model_name, truncation,seed)
-                trainer.trainer(para['epochs'], model, train_data_loader,
-                            val_data_loader, data_train, data_val, loss_fn,
+                filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, truncation,seed)
+                if class_type == "multi_label":
+                    trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                            optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                else:
+                    trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                             optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
 
             else:
@@ -95,10 +97,14 @@ for seed in para["seeds"]:
                 num_training_steps=total_steps)
                 loss_fn = nn.CrossEntropyLoss().to(device)
                 filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, truncation, seed)
-                try:
+                #try:
+                if class_type == "multi_label":
+                    trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                            optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                else:
                     trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                             optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                except Exception as e:
-                    print("Exception")
-                    print(e)
+                #except Exception as e:
+                #    print("Exception")
+                #    print(e)
 
