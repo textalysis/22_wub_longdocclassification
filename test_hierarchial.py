@@ -1,4 +1,3 @@
-
 from utils import *
 from models.BERT import BERT
 from models.PoBERT import PoBERT
@@ -12,14 +11,14 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'datasets': ["Hyperpartisan"],
+        'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
-        'chunk_lens': [256,512],
+        'chunk_lens': [256, 512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
         'epochs': 5,
@@ -37,51 +36,52 @@ model_name = para["model_names"][0]
 max_len = para["max_len"]
 total_len = para["total_len"]
 
-train.seed_everything(seed=1)
+for seed in para["seeds"]:
+    train.seed_everything(seed)
 
-for dataset in para["datasets"]:
-    if dataset == "Hyperpartisan":
-        data_train, data_val, data_test = get_dataset("Hyperpartisan")
-        loss_fn = nn.CrossEntropyLoss()
-        num_labels = 2
-        class_type = "single_label"
-        print(len(data_train["data"]), len(data_train["target"]))
-    elif dataset == "20newsgroups":
-        data_train, data_val, data_test = get_dataset("20newsgroups")
-        loss_fn = nn.CrossEntropyLoss()
-        num_labels = 20
-        class_type = "single_label"
-    else:
-        data_train, data_val, data_test = get_dataset("ECtHR")
-        loss_fn = nn.BCEWithLogitsLoss()
-        num_labels = 10
-        class_type = "multi_label"
-    print("datasets imported")
+    for dataset in para["datasets"]:
+        if dataset == "Hyperpartisan":
+            data_train, data_val, data_test = get_dataset("Hyperpartisan")
+            loss_fn = nn.CrossEntropyLoss()
+            num_labels = 2
+            class_type = "single_label"
+            print(len(data_train["data"]), len(data_train["target"]))
+        elif dataset == "20newsgroups":
+            data_train, data_val, data_test = get_dataset("20newsgroups")
+            loss_fn = nn.CrossEntropyLoss()
+            num_labels = 20
+            class_type = "single_label"
+        else:
+            data_train, data_val, data_test = get_dataset("ECtHR")
+            loss_fn = nn.BCEWithLogitsLoss()
+            num_labels = 10
+            class_type = "multi_label"
+        print("datasets imported")
 
-    tokenizer = tokenize('BERT')
-    for chunk_len in para['chunk_lens']:
-        for overlap_len in para['overlap_lens']:
-            train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
-                                        approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-            val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
-                                               approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-            test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
-                                               approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-            print("data loaded")
-            model = ToBERT(num_labels)
-            device = train.available_device()
-            model = model.to(device)
-            optimizer = AdamW(model.parameters(), lr=learning_rate)
-            total_steps = len(train_data_loader) * para['epochs']
-            scheduler = get_linear_schedule_with_warmup(
-                                    optimizer,
-                                    num_warmup_steps=0,
-                                    num_training_steps=total_steps
-                                )
-            loss_fn = loss_fn.to(device)
-            filename = "{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len)
-            #try:
-            trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-            #except Exception as e:
-            #    print("Exception")
-            #    print(e)
+        tokenizer = tokenize('BERT')
+        for chunk_len in para['chunk_lens']:
+            for overlap_len in para['overlap_lens']:
+                train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
+                                            approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+                val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
+                                                   approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+                test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
+                                                   approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+                print("data loaded")
+                model = ToBERT(num_labels)
+                device = train.available_device()
+                model = model.to(device)
+                optimizer = AdamW(model.parameters(), lr=learning_rate)
+                total_steps = len(train_data_loader) * para['epochs']
+                scheduler = get_linear_schedule_with_warmup(
+                                        optimizer,
+                                        num_warmup_steps=0,
+                                        num_training_steps=total_steps
+                                    )
+                loss_fn = loss_fn.to(device)
+                filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
+                #try:
+                trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                #except Exception as e:
+                #    print("Exception")
+                #    print(e)
