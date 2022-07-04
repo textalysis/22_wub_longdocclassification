@@ -18,8 +18,8 @@ class longdocDataset(Dataset):
 
     def __getitem__(self, item):
         doc = str(self.docs[item])
-        target = int(self.targets[item])
-
+        #target = int(self.targets[item])
+        target = self.targets[item]
         # get the encoding of the first 512 tokens and the overflowing tokens if the document has more than the defined max length tokens
         # encoding = self.tokenizer.encode_plus(
         encoding = self.tokenizer(
@@ -70,6 +70,7 @@ class longdocDataset(Dataset):
                 'attention_mask': encoding['attention_mask'].flatten(),
                 'targets': torch.tensor(target, dtype=torch.long)
             }
+        #print(long_token['targets'])
 
         return long_token
 

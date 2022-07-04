@@ -7,7 +7,7 @@ import os
 from sklearn.metrics import classification_report
 
 
-def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename):
+def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test):
     history = defaultdict(list)
     best_accuracy = 0
 
@@ -26,7 +26,8 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
                                                 optimizer,
                                                 device,
                                                 scheduler,
-                                                len(data_train['data'])
+                                                len(data_train['data']),
+                                                class_type
                                                 )
 
             train_report = classification_report(train_real, train_pred, output_dict=True)
@@ -37,7 +38,8 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
                 val_data_loader,
                 loss_fn,
                 device,
-                len(data_val['data'])
+                len(data_val['data']),
+                class_type
             )
 
             val_report = classification_report(val_real, val_pred, output_dict=True)
@@ -60,6 +62,19 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
     #f.write(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}' + "\n")
     print('-' * 10)
     print(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}')
+    
+    model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
+    test_loss, test_acc, test_real, test_pred = train.eval_model(
+                model,
+                test_data_loader,
+                loss_fn,
+                device,
+                len(data_test['data']),
+                class_type
+            )
+    test_report = classification_report(test_real, test_pred, output_dict=True)
+    print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}')
+    
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))
@@ -75,7 +90,7 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
     plt.savefig(os.path.join('Visualizations', "{}.png".format(filename)))
 
 
-def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename):
+def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test):
     history = defaultdict(list)
     best_accuracy = 0
 
@@ -96,7 +111,8 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
                                                 optimizer,
                                                 device,
                                                 scheduler,
-                                                len(data_train['data'])
+                                                len(data_train['data']),
+                                                class_type   
                                                 )
 
             train_report = classification_report(train_real, train_pred, output_dict=True)
@@ -107,7 +123,8 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
                 val_data_loader,
                 loss_fn,
                 device,
-                len(data_val['data'])
+                len(data_val['data']),
+                class_type
             )
 
             val_report = classification_report(val_real, val_pred, output_dict=True)
@@ -130,6 +147,19 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
     #f.write(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}' + "\n")
     print('-' * 10 )
     print(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}')
+    
+    model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
+    test_loss, test_acc, test_real, test_pred = train.hierarchical_eval_model(
+                model,
+                test_data_loader,
+                loss_fn,
+                device,
+                len(data_test['data']),
+                class_type
+            )
+    test_report = classification_report(test_real, test_pred, output_dict=True)
+    print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}')
+
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))

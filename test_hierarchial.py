@@ -1,3 +1,4 @@
+
 from utils import *
 from models.BERT import BERT
 from models.PoBERT import PoBERT
@@ -13,11 +14,11 @@ import trainer
 
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["20newsgroup"],
+        'datasets': ["ECtHR"],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
-        'batch_size': [16],
-        'learning_rate': [2e-5],
+        'batch_size': 16,
+        'learning_rate': 2e-5,
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
@@ -30,43 +31,56 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'truncations': ["head_tail", "tail", "head"]
 }
 
+batch_size = para["batch_size"]
+learning_rate = para["learning_rate"]
+model_name = para["model_names"][0]
+max_len = para["max_len"]
+total_len = para["total_len"]
+
 
 for dataset in para["datasets"]:
     if dataset == "Hyperpartisan":
         data_train, data_val, data_test = get_dataset("Hyperpartisan")
+        loss_fn = nn.CrossEntropyLoss()
+        num_labels = 2
+        class_type = "single_label"
+        print(len(data_train["data"]), len(data_train["target"]))
     elif dataset == "20newsgroups":
         data_train, data_val, data_test = get_dataset("20newsgroups")
+        loss_fn = nn.CrossEntropyLoss()
+        num_labels = 20
+        class_type = "single_label"
     else:
         data_train, data_val, data_test = get_dataset("ECtHR")
-    
-    for batch_size in para['batch_sizes']:
-                for learning_rate in para['learning_rates']:
-                    for model_name in para['model_names'][0]:
-                        tokenizer = tokenize('BERT')
-                        max_len = para['max_len']
-                        total_len = para['total_len']
-                        for chunk_len in para['chunk_lens']:
-                            for overlap_len in para['overlap_lens']:
-                                print("create data loader")
-                                train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
-                                                                             approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                                val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
-                                                                           approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                                model = ToBERT(len(set(data_train['target'])))
-                                device = train.available_device()
-                                model = model.to(device)
-                                optimizer = AdamW(model.parameters(), lr=learning_rate)
-                                total_steps = len(train_data_loader) * para['epochs']
-                                scheduler = get_linear_schedule_with_warmup(
+        loss_fn = nn.BCEWithLogitsLoss()
+        num_labels = 10
+        class_type = "multi_label"
+    print("datasets imported")
+
+    tokenizer = tokenize('BERT')
+    for chunk_len in para['chunk_lens']:
+        for overlap_len in para['overlap_lens']:
+            train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
+                                        approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+            val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
+                                               approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+            test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
+                                               approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
+            print("data loaded")
+            model = ToBERT(num_labels)
+            device = train.available_device()
+            model = model.to(device)
+            optimizer = AdamW(model.parameters(), lr=learning_rate)
+            total_steps = len(train_data_loader) * para['epochs']
+            scheduler = get_linear_schedule_with_warmup(
                                     optimizer,
                                     num_warmup_steps=0,
                                     num_training_steps=total_steps
                                 )
-                                loss_fn = nn.CrossEntropyLoss().to(device)
-                                filename = "{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len)
-                                print("training")
-                                try:
-                                    trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename)
-                                except Exception as e:
-                                    print("Exception")
-                                    print(e)
+            loss_fn = loss_fn.to(device)
+            filename = "{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len)
+            #try:
+            trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+            #except Exception as e:
+            #    print("Exception")
+            #    print(e)

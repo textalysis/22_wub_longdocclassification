@@ -3,11 +3,11 @@ import torch
 
 import numpy as np
 import torch.nn as nn
-
+import torch.nn.functional as F
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:1")  # specify  device
+        device = torch.device("cuda:2")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -17,7 +17,7 @@ def available_device():
     return device
 
 
-def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
+def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, class_type):
     model = model.train()
 
     losses = []
@@ -26,7 +26,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
     real_values = []
 
     t0 = time.time()
-
+    #print(data_loader)
     for batch_idx, batch in enumerate(data_loader):
         # for example, when batch_size=4, four document, doc 1, doc 2, doc 4 are less than 512 tokens, doc 3 about 4*512 tokens
         # the input_ids would be:
@@ -35,7 +35,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         # similar to input_ids
         attention_mask = [data["attention_mask"] for data in batch]
         # [tensor(target), tensor(target), tensor(target), tensor(target)]
-        # here [0] to reduce the dimension
+        # here [0] to get the first seg label, the other segs are the same
         targets = [data["targets"][0] for data in batch]
         # get the number of segments for each document
         # [tensor([1]), tensor([1]), tensor([4]), tensor([1])]
@@ -46,14 +46,15 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         input_ids = torch.cat(input_ids)
         attention_mask = torch.cat(attention_mask)
         # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
-        targets = torch.stack(targets)
+        # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
+        # targets = torch.stack(targets)
         # [doc1 num of segments, doc2 num of segments,... ]
         # [1, 1, 4, 1]
         lengt = [x.item() for x in lengt]
 
         input_ids = input_ids.to(device, dtype=torch.long)
         attention_mask = attention_mask.to(device, dtype=torch.long)
-        targets = targets.to(device, dtype=torch.long)
+        #targets = targets.to(device, dtype=torch.long)
         optimizer.zero_grad()
 
         outputs = model(
@@ -62,13 +63,50 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
             lengt=lengt
         )
 
-        _, preds = torch.max(outputs, dim=1)
-        loss = loss_fn(outputs, targets)
+        if class_type == "multi_label":
+            # outputs.shape [batch, n_classes]
+            print(targets)
+            # change to tensor then put to device and split 
+            num_labels =[]
+            for i in targets:
+               num_labels.append(len(i))
 
+            targets = torch.cat(targets)
+            targets = targets.to(device, dtype=torch.long)
+            targets = list(targets.split_with_sizes(num_labels))
+            print(targets)
+            # get prediction, use np round
+
+            preds = []
+            one_hot = torch.round(torch.sigmoid(outputs))  # one hot
+            for i, x in enumerate(one_hot): # change one hot to index
+                #index = torch.argwhere(x==1).squeeze(1)
+                index = (x == 1).nonzero(as_tuple=True)[0]
+                preds.extend(index.unsqueeze(0))
+            print(preds)
+            # iterate the list of tensors, if the multi label equal, plus 1
+            
+
+            for i in range(len(targets)):
+                if torch.equal(targets[i],preds[i]):
+                    correct_predictions = correct_predictions + 1 
+            print(correct_predictions)
+   
+        else:
+            # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
+            # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
+            targets = torch.stack(targets)
+            targets = targets.to(device, dtype=torch.long)
+            # preds tensor([0, 1], device='cuda:2')
+            _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
+            # preds shape [batch_size], predictions shape[number of documents]
+            correct_predictions += torch.sum(preds == targets)
+        
+        loss = loss_fn(outputs, targets)
         predictions.extend(preds)
         real_values.extend(targets)
 
-        correct_predictions += torch.sum(preds == targets)
+        #correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
 
         loss.backward()
@@ -87,7 +125,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
     return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
-def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
+def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  class_type):
     model = model.eval()
 
     losses = []
@@ -116,7 +154,15 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
                 attention_mask=attention_mask,
                 lengt=lengt
             )
-            _, preds = torch.max(outputs, dim=1)
+            
+            if class_type == "multi_label":
+                preds = []
+                one_hot = torch.round(torch.sigmoid(outputs))
+                for i, x in enumerate(one_hot): 
+                    index = torch.argwhere(x==1).squeeze(1)
+                    preds.extend(index.unsqueeze(0))
+            else:
+                _, preds = torch.max(outputs, dim=1)
 
             loss = loss_fn(outputs, targets)
 
@@ -135,7 +181,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples):
     return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
-def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples):
+def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, class_type):
     model = model.train()
 
     losses = []
@@ -154,8 +200,15 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
             input_ids=input_ids,
             attention_mask=attention_mask
         )
-
-        _, preds = torch.max(outputs, dim=1)
+       
+        if class_type == "multi_label":
+            preds = []
+            one_hot = torch.round(torch.sigmoid(outputs))
+            for i, x in enumerate(one_hot): 
+                index = torch.argwhere(x==1).squeeze(1)
+                preds.extend(index.unsqueeze(0))
+        else:
+            _, preds = torch.max(outputs, dim=1)
         loss = loss_fn(outputs, targets)
 
         predictions.extend(preds)
@@ -181,7 +234,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
 
 
-def eval_model(model, data_loader, loss_fn, device, n_examples):
+def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
     model = model.eval()
 
     losses = []
@@ -199,7 +252,14 @@ def eval_model(model, data_loader, loss_fn, device, n_examples):
                 input_ids=input_ids,
                 attention_mask=attention_mask
             )
-            _, preds = torch.max(outputs, dim=1)
+            if class_type == "multi_label":
+                preds = []
+                one_hot = torch.round(torch.sigmoid(outputs))
+                for i, x in enumerate(one_hot): 
+                    index = torch.argwhere(x==1).squeeze(1)
+                    preds.extend(index.unsqueeze(0))
+            else:
+                _, preds = torch.max(outputs, dim=1)
 
             loss = loss_fn(outputs, targets)
 

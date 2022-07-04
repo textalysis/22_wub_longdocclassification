@@ -14,8 +14,41 @@ from longdocDataset import longdocDataset
 from torch.utils.data import (TensorDataset, DataLoader,
                               RandomSampler, SequentialSampler, Dataset)
 import ast
+import os
+#import json
 
 CACHE_DIR = 'transformers-cache'
+
+def map_to_classes(label):
+    for i, x in enumerate(label):
+        for j, a in enumerate(x):
+            if a == 'P1-1':
+                label[i][j] = a.replace('P1-1', '0')
+            if a == '2':
+                label[i][j] = a.replace('2', '1')
+            if  a == '3':
+                label[i][j] = a.replace('3', '2')
+            if a == '5':
+                label[i][j] = a.replace('5', '3')
+            if a == '6':
+                label[i][j] = a.replace('6', '4')
+            if a == '8':
+                label[i][j] = a.replace('8', '5')
+            if a == '9':
+                label[i][j] = a.replace('9', '6')
+            if a == '10':
+                label[i][j] = a.replace('10', '7')
+            if a == '11':
+                label[i][j] = a.replace('11', '8')
+            if a == '14':
+                label[i][j] = a.replace('14', '9')
+
+# multi-label str to int
+def label_to_int(label):
+    for i, x in enumerate(label):
+        for j, a in enumerate(x):
+            label[i][j] = int(label[i][j])
+
 
 def get_dataset(dataset):
     if dataset == "20newsgroups":
@@ -34,41 +67,48 @@ def get_dataset(dataset):
     use the preprocessed data instead
     """
     if dataset == "ECtHR":
-       train = open("data/ECtHR/train.json", "r")
+       train = open(os.path.join("data/ECtHR", "train.txt"), "r")
        train = train.readlines()
        train = [ast.literal_eval(i) for i in train]  # str -> dict
+       print("train")
        data_1 =  [i["text"] for i in train]
        label_1 =  [i["labels"] for i in train]
-       dev = open("data/ECtHR/dev.json", "r")
+       map_to_classes(label_1)
+       label_to_int(label_1)
+       dev = open(os.path.join("data/ECtHR", "dev.txt"), "r")
        dev = dev.readlines()
        dev = [ast.literal_eval(i) for i in dev]
        data_2 = [i["text"] for i in dev]
        label_2 = [i["labels"] for i in dev]
-       test = open("data/ECtHR/test.json", "r")
+       map_to_classes(label_2)
+       label_to_int(label_2)
+       test = open(os.path.join("data/ECtHR", "test.txt"), "r")
        test = test.readlines()
        test = [ast.literal_eval(i) for i in test]
        data_3 =  [i["text"] for i in test]
        label_3 = [i["labels"] for i in test]
+       map_to_classes(label_3)
+       label_to_int(label_3)
        data_train = {'data': data_1, 'target': label_1}
        data_val = {'data': data_2, 'target': label_2}
        data_test = {'data': data_3, 'target': label_3}
 
     if dataset == "Hyperpartisan":
-       train = open("data/Hyperpartisan/train.json", "r")
+       train = open(os.path.join("data/Hyperpartisan", "train.txt"), "r")
        train = train.readlines()
        train = [ast.literal_eval(i) for i in train]  # str -> dict
        data_1 =  [i["text"] for i in train]
-       label_1 =  [i["labels"] for i in train]
-       dev = open("data/Hyperpartisan/dev.json", "r")
+       label_1 =  [i["label"] for i in train]
+       dev = open(os.path.join("data/Hyperpartisan", "dev.txt"), "r")
        dev = dev.readlines()
        dev = [ast.literal_eval(i) for i in dev]
        data_2 = [i["text"] for i in dev]
-       label_2 = [i["labels"] for i in dev]
-       test = open("data/Hyperpartisan/test.json", "r")
+       label_2 = [i["label"] for i in dev]
+       test = open(os.path.join("data/Hyperpartisan", "test.txt"), "r")
        test = test.readlines()
        test = [ast.literal_eval(i) for i in test]
        data_3 =  [i["text"] for i in test]
-       label_3 = [i["labels"] for i in test]
+       label_3 = [i["label"] for i in test]
        data_train = {'data': data_1, 'target': label_1}
        data_val = {'data': data_2, 'target': label_2}
        data_test = {'data': data_3, 'target': label_3}
