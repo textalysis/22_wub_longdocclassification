@@ -11,16 +11,16 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-
-para = {'datasets': ["20newsgroups"],
-       #'summarizer': ["none", "bert_summarizer", "text_rank"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
+        'datasets': ["ECtHR"],
+        'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
-        'batch_sizes': [16],
+        'batch_size': 16,
         'learning_rate': 2e-5,
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 30,
+        'epochs': 5,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -29,20 +29,17 @@ para = {'datasets': ["20newsgroups"],
         'truncations': ["head_tail", "tail", "head"]
 }
 
+batch_size = para["batch_size"]
+learning_rate = para["learning_rate"]
+model_name = para["model_names"][0]
+max_len = para["max_len"]
+total_len = para["total_len"]
 
-for dataset in para["datasets"]:
-    if dataset == "imdb":
-        print("importing dataset imdb")
-        data_train, data_val = get_dataset("imdb")
-        print("imdb dataset imported")
-    # dataset == "20newsgroups"
-    else:
-        data_train, data_val = get_dataset("20newsgroups")
 
-    for batch_size in para['batch_sizes']:
+for batch_size in para['batch_size']:
                 #for learning_rate in para['learning_rates']:
-                    learning_rate =  para['learning_rate']
-                    for model_name in para['model_names'][3:4]:
+                    #learning_rate =  para['learning_rate']
+                    for model_name in para['model_names'][2:4]:
                         if model_name == "BERT":
                             for truncation in para['truncations']:
                                 tokenizer = tokenize('BERT')

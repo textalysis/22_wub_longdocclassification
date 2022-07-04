@@ -1,4 +1,4 @@
-import torch
+import torch 
 from torch.utils.data import Dataset
 
 # chunk_len, overlap_len
@@ -15,6 +15,7 @@ class longdocDataset(Dataset):
 
     def __len__(self):
         return len(self.targets)
+        #return len(self.docs)
 
     def __getitem__(self, item):
         doc = str(self.docs[item])

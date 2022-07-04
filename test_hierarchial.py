@@ -14,7 +14,7 @@ import trainer
 
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["ECtHR"],
+        'datasets': ["Hyperpartisan"],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
@@ -22,7 +22,7 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 40,
+        'epochs': 5,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -37,6 +37,7 @@ model_name = para["model_names"][0]
 max_len = para["max_len"]
 total_len = para["total_len"]
 
+train.seed_everything(seed=1)
 
 for dataset in para["datasets"]:
     if dataset == "Hyperpartisan":

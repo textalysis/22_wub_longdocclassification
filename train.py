@@ -4,10 +4,22 @@ import torch
 import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
+import random 
+import os
+
+def seed_everything(seed=42):
+  random.seed(seed)
+  os.environ['PYTHONHASHSEED'] = str(seed)
+  np.random.seed(seed)
+  torch.manual_seed(seed)
+  torch.backends.cudnn.deterministic = True
+  torch.backends.cudnn.benchmark = False
+
+
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:2")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -65,33 +77,23 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         if class_type == "multi_label":
             # outputs.shape [batch, n_classes]
-            print(targets)
-            # change to tensor then put to device and split 
-            num_labels =[]
-            for i in targets:
-               num_labels.append(len(i))
-
-            targets = torch.cat(targets)
-            targets = targets.to(device, dtype=torch.long)
-            targets = list(targets.split_with_sizes(num_labels))
-            print(targets)
-            # get prediction, use np round
-
-            preds = []
-            one_hot = torch.round(torch.sigmoid(outputs))  # one hot
-            for i, x in enumerate(one_hot): # change one hot to index
-                #index = torch.argwhere(x==1).squeeze(1)
-                index = (x == 1).nonzero(as_tuple=True)[0]
-                preds.extend(index.unsqueeze(0))
-            print(preds)
-            # iterate the list of tensors, if the multi label equal, plus 1
             
-
+            # change multi label to one hot, otherwise shape error, can't concat
+            one_hot_target = []
+            for i in targets: 
+                onehot = F.one_hot(i.to(torch.long), num_classes=10)
+                onehot = onehot.sum(dim=0).float()
+                one_hot_target.append(onehot)
+            targets = torch.stack(one_hot_target)
+            # BCEwithlogitsloss require label be float
+            targets = targets.to(device, dtype=torch.float)
+            preds = torch.round(torch.sigmoid(outputs))  # one hot
+            
+            # iterate the list of tensors, if the multi label equal, plus 1
             for i in range(len(targets)):
                 if torch.equal(targets[i],preds[i]):
                     correct_predictions = correct_predictions + 1 
-            print(correct_predictions)
-   
+               
         else:
             # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
             # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
@@ -102,10 +104,13 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
             # preds shape [batch_size], predictions shape[number of documents]
             correct_predictions += torch.sum(preds == targets)
         
+            # cross entropy expects integer labels        
+        
         loss = loss_fn(outputs, targets)
+
         predictions.extend(preds)
         real_values.extend(targets)
-
+        
         #correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
 
@@ -116,13 +121,14 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         torch.cuda.empty_cache()
     
-    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    train_time = time.time() - t0
+    print(f"time = {train_time:.2f} secondes" + "\n")
     t0 = time.time()
 
-    predictions = torch.stack(predictions).cpu()
-    real_values = torch.stack(real_values).cpu()
-
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
+    predictions = torch.stack(predictions).cpu().detach().numpy()
+    real_values = torch.stack(real_values).cpu().detach().numpy()
+   
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions, train_time
 
 
 def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  class_type):
@@ -142,12 +148,12 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
 
             input_ids = torch.cat(input_ids)
             attention_mask = torch.cat(attention_mask)
-            targets = torch.stack(targets)
+            #targets = torch.stack(targets)
             lengt = [x.item() for x in lengt]
 
             input_ids = input_ids.to(device, dtype=torch.long)
             attention_mask = attention_mask.to(device, dtype=torch.long)
-            targets = targets.to(device, dtype=torch.long)
+            #targets = targets.to(device, dtype=torch.long)
 
             outputs = model(
                 input_ids=input_ids,
@@ -156,29 +162,42 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
             )
             
             if class_type == "multi_label":
-                preds = []
-                one_hot = torch.round(torch.sigmoid(outputs))
-                for i, x in enumerate(one_hot): 
-                    index = torch.argwhere(x==1).squeeze(1)
-                    preds.extend(index.unsqueeze(0))
+                one_hot_target = []
+                for i in targets:
+                    onehot = F.one_hot(i.to(torch.long), num_classes=10)
+                    onehot = onehot.sum(dim=0).float()
+                    one_hot_target.append(onehot)
+                targets = torch.stack(one_hot_target)
+                targets = targets.to(device, dtype=torch.float)
+
+                preds = torch.round(torch.sigmoid(outputs))  # one hot
+
+                for i in range(len(targets)):
+                    if torch.equal(targets[i],preds[i]):
+                        correct_predictions = correct_predictions + 1
+
             else:
-                _, preds = torch.max(outputs, dim=1)
+                targets = torch.stack(targets)
+                targets = targets.to(device, dtype=torch.long)
+                _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
+                correct_predictions += torch.sum(preds == targets)
 
             loss = loss_fn(outputs, targets)
 
             predictions.extend(preds)
             real_values.extend(targets)
 
-            correct_predictions += torch.sum(preds == targets)
+            #correct_predictions += torch.sum(preds == targets)
             losses.append(float(loss.item()))
     
-    print(" ")    
-    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    print(" ")
+    eval_time = time.time() - t0    
+    print(f"time = {eval_time:.2f} secondes" + "\n")
     t0 = time.time()
-    predictions = torch.stack(predictions).cpu()
-    real_values = torch.stack(real_values).cpu()
+    predictions = torch.stack(predictions).cpu().detach().numpy()
+    real_values = torch.stack(real_values).cpu().detach().numpy()
 
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions, eval_time
 
 
 def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, class_type):
@@ -194,7 +213,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     for batch in data_loader:
         input_ids = batch['input_ids'].to(device)
         attention_mask = batch['attention_mask'].to(device)
-        targets = batch['targets'].to(device)
+        #targets = batch['targets'].to(device)
 
         outputs = model(
             input_ids=input_ids,
@@ -202,19 +221,33 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         )
        
         if class_type == "multi_label":
-            preds = []
-            one_hot = torch.round(torch.sigmoid(outputs))
-            for i, x in enumerate(one_hot): 
-                index = torch.argwhere(x==1).squeeze(1)
-                preds.extend(index.unsqueeze(0))
+            one_hot_target = []
+            for i in batch['targets']:
+                onehot = F.one_hot(i.to(torch.long), num_classes=10)
+                onehot = onehot.sum(dim=0).float()
+                one_hot_target.append(onehot)
+            targets = torch.stack(one_hot_target)
+            # BCEwithlogitsloss require label be float
+            targets = targets.to(device, dtype=torch.float)
+
+            preds = torch.round(torch.sigmoid(outputs))  # one hot
+            # iterate the list of tensors, if the multi label equal, plus 1
+
+            for i in range(len(targets)):
+                if torch.equal(targets[i],preds[i]):
+                    correct_predictions = correct_predictions + 1
+
         else:
+            targets = batch['targets'].to(device)
             _, preds = torch.max(outputs, dim=1)
+            correct_predictions += torch.sum(preds == targets)
+        
         loss = loss_fn(outputs, targets)
 
         predictions.extend(preds)
         real_values.extend(targets)
 
-        correct_predictions += torch.sum(preds == targets)
+        #correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
         # losses.append(loss.item())
 
@@ -224,14 +257,15 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         scheduler.step()
 
         torch.cuda.empty_cache()
-    
-    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+
+    train_time = time.time() - t0    
+    print(f"time = {train_time:.2f} secondes" + "\n")
     t0 = time.time()
 
-    predictions = torch.stack(predictions).cpu()
-    real_values = torch.stack(real_values).cpu()
+    predictions = torch.stack(predictions).cpu().detach().numpy()
+    real_values = torch.stack(real_values).cpu().detach().numpy()
 
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions,train_time
 
 
 def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
@@ -246,35 +280,49 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
         for batch in data_loader:
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
-            targets = batch['targets'].to(device)
+            #targets = batch['targets'].to(device)
 
             outputs = model(
                 input_ids=input_ids,
                 attention_mask=attention_mask
             )
             if class_type == "multi_label":
-                preds = []
-                one_hot = torch.round(torch.sigmoid(outputs))
-                for i, x in enumerate(one_hot): 
-                    index = torch.argwhere(x==1).squeeze(1)
-                    preds.extend(index.unsqueeze(0))
+                one_hot_target = []
+                for i in batch['targets']:
+                    onehot = F.one_hot(i.to(torch.long), num_classes=10)
+                    onehot = onehot.sum(dim=0).float()
+                    one_hot_target.append(onehot)
+                targets = torch.stack(one_hot_target)
+                # BCEwithlogitsloss require label be float
+                targets = targets.to(device, dtype=torch.float)
+
+                preds = torch.round(torch.sigmoid(outputs))  # one hot
+                # iterate the list of tensors, if the multi label equal, plus 1
+
+                for i in range(len(targets)):
+                    if torch.equal(targets[i],preds[i]):
+                        correct_predictions = correct_predictions + 1
+
             else:
+                targets = batch['targets'].to(device)
                 _, preds = torch.max(outputs, dim=1)
+                correct_predictions += torch.sum(preds == targets)
 
             loss = loss_fn(outputs, targets)
 
             predictions.extend(preds)
             real_values.extend(targets)
 
-            correct_predictions += torch.sum(preds == targets)
+            # correct_predictions += torch.sum(preds == targets)
             losses.append(float(loss.item()))
             # losses.append(loss.item())
             torch.cuda.empty_cache()
     
     print(" ")
-    print(f"time = {time.time() - t0:.2f} secondes" + "\n")
+    eval_time = time.time() - t0
+    print(f"time = {eval_time:.2f} secondes" + "\n")
     t0 = time.time()
-    predictions = torch.stack(predictions).cpu()
-    real_values = torch.stack(real_values).cpu()
+    predictions = torch.stack(predictions).cpu().detach().numpy()
+    real_values = torch.stack(real_values).cpu().detach().numpy()
 
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions,eval_time
