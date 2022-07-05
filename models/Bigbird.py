@@ -6,6 +6,7 @@ from transformers import BigBirdForSequenceClassification
 class Bigbird(nn.Module):
     def __init__(self, num_labels, block_size):
         super(Bigbird, self).__init__()
+        # Bigbid classification model classifier uses two FCs with activation
         self.bigbird = BigBirdForSequenceClassification.from_pretrained\
         ('google/bigbird-roberta-base', gradient_checkpointing=False, block_size = block_size, num_labels=num_labels)
 

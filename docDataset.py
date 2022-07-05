@@ -1,8 +1,8 @@
 import torch
 from torch.utils.data import Dataset
 
-class docDataset(Dataset):
 
+class docDataset(Dataset):
     def __init__(self, docs, targets, tokenizer, max_len):
         self.docs = docs
         self.targets = targets
@@ -17,6 +17,7 @@ class docDataset(Dataset):
         doc = str(self.docs[item])
         target = self.targets[item]
 
+        # roberta, longformer, bigbird tokenizer all have tokernizer() method
         encoding = self.tokenizer(
                 doc,
                 add_special_tokens=True,

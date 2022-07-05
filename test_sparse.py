@@ -12,8 +12,8 @@ import torch.nn as nn
 import trainer
 
 
-para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["ECtHR"],
+para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+        #'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -33,8 +33,6 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
 
 batch_size = para["batch_size"]
 learning_rate = para["learning_rate"]
-model_name = para["model_names"][0]
-#max_len = para["max_len"]
 total_len = para["total_len"]
 
 for seed in para["seeds"]:
@@ -59,7 +57,6 @@ for seed in para["seeds"]:
             class_type = "multi_label"
         print("datasets imported")
 
-
         for model_name in para['model_names'][1:3]:
             for spase_max_len in para['sparse_max_lens']:
                 if model_name == "Longformer":
@@ -69,7 +66,7 @@ for seed in para["seeds"]:
                         train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                         val_data_loader = create_data_loader("short", data_val, tokenizer, max_len, batch_size)
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
-                        model = Longformer(attention_window=attention_window,num_labels=num_labels)
+                        model = Longformer(attention_window=attention_window, num_labels=num_labels)
                         device = train.available_device()
                         model = model.to(device)
                         optimizer = AdamW(model.parameters(), lr=learning_rate)
@@ -80,7 +77,7 @@ for seed in para["seeds"]:
                             num_training_steps=total_steps
                         )
                         loss_fn = loss_fn.to(device)
-                        filename = "{}_{}_{}_{}_{}".format(dataset,learning_rate, model_name, attention_window, seed)
+                        filename = "{}_{}_{}_{}_{}".format(dataset, model_name, spase_max_len, attention_window, seed)
                         if class_type == "multi_label":
                             trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
                                                         data_train, data_val, loss_fn,
@@ -111,7 +108,7 @@ for seed in para["seeds"]:
                             num_training_steps=total_steps
                             )
                         loss_fn = loss_fn.to(device)
-                        filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, block_size, seed)
+                        filename = "{}_{}_{}_{}_{}".format(dataset, model_name, spase_max_len, block_size, seed)
                         if class_type == "multi_label":
                             trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
                                                         data_train, data_val, loss_fn,
@@ -122,4 +119,4 @@ for seed in para["seeds"]:
                                             data_val, loss_fn,
                                             optimizer, device, scheduler, filename, class_type, test_data_loader,
                                             data_test)
-                        #
+                        

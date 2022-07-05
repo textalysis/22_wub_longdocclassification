@@ -11,8 +11,8 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["ECtHR"],
+para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+        #'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -32,7 +32,7 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
 
 batch_size = para["batch_size"]
 learning_rate = para["learning_rate"]
-model_name = para["model_names"][0]
+model_name = para["model_names"][3]
 max_len = para["max_len"]
 total_len = para["total_len"]
 
@@ -70,11 +70,11 @@ for seed in para["seeds"]:
                 optimizer = AdamW(model.parameters(), lr=learning_rate)
                 total_steps = len(train_data_loader) * para['epochs']
                 scheduler = get_linear_schedule_with_warmup(
-                optimizer,
-                num_warmup_steps=0,
-                num_training_steps=total_steps)
+                    optimizer,
+                    num_warmup_steps=0,
+                    num_training_steps=total_steps)
                 loss_fn = loss_fn.to(device)
-                filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, truncation,seed)
+                filename = "{}_{}_{}_{}".format(dataset, model_name, truncation, seed)
                 if class_type == "multi_label":
                     trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                             optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
@@ -92,11 +92,11 @@ for seed in para["seeds"]:
                 optimizer = AdamW(model.parameters(), lr=learning_rate)
                 total_steps = len(train_data_loader) * para['epochs']
                 scheduler = get_linear_schedule_with_warmup(
-                optimizer,
-                num_warmup_steps=0,
-                num_training_steps=total_steps)
+                    optimizer,
+                    num_warmup_steps=0,
+                    num_training_steps=total_steps)
                 loss_fn = loss_fn.to(device)
-                filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, truncation, seed)
+                filename = "{}_{}_{}_{}".format(dataset, model_name, truncation, seed)
                 #try:
                 if class_type == "multi_label":
                     trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,

@@ -22,21 +22,20 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
             print('-' * 10)
             print(f'Epoch {epoch + 1}/{epochs}')
             train_loss, train_acc, train_real, train_pred, train_time = train.train_epoch(model,
-                                                train_data_loader,
-                                                loss_fn,
-                                                optimizer,
-                                                device,
-                                                scheduler,
-                                                len(data_train['data']),
-                                                class_type
-                                                )
+                                                                                          train_data_loader,
+                                                                                          loss_fn,
+                                                                                          optimizer,
+                                                                                          device,
+                                                                                          scheduler,
+                                                                                          len(data_train['data']),
+                                                                                          class_type)
             train_time_list.append(train_time)
             train_report = classification_report(train_real, train_pred, output_dict=True)
             #f.write(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' + "\n")
             print(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}')
             #print(train_report["accuracy"])
 
-            val_loss, val_acc, val_real, val_pred,val_time = train.eval_model(
+            val_loss, val_acc, val_real, val_pred, val_time = train.eval_model(
                 model,
                 val_data_loader,
                 loss_fn,
@@ -184,6 +183,8 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
     plt.savefig(os.path.join('Visualizations', "{}.png".format(filename)))
 
 
+# for multi label use micro f1 as metric
+# for single label use accuracy. For single label, accuracy = micro f1
 def trainer_multi_label(epochs, model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device,
             scheduler, filename, class_type, test_data_loader, data_test):
     history = defaultdict(list)

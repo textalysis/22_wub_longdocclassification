@@ -7,14 +7,15 @@ import torch.nn.functional as F
 import random 
 import os
 
-def seed_everything(seed=42):
-  random.seed(seed)
-  os.environ['PYTHONHASHSEED'] = str(seed)
-  np.random.seed(seed)
-  torch.manual_seed(seed)
-  torch.backends.cudnn.deterministic = True
-  torch.backends.cudnn.benchmark = False
 
+# seed for reproducing the result
+def seed_everything(seed=42):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 
 def available_device():
@@ -38,7 +39,6 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
     real_values = []
 
     t0 = time.time()
-    #print(data_loader)
     for batch_idx, batch in enumerate(data_loader):
         # for example, when batch_size=4, four document, doc 1, doc 2, doc 4 are less than 512 tokens, doc 3 about 4*512 tokens
         # the input_ids would be:
@@ -59,6 +59,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         attention_mask = torch.cat(attention_mask)
         # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
         # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
+        # for multilabel can also stack, because label shape the same (One-hot)
         targets = torch.stack(targets)
         # [doc1 num of segments, doc2 num of segments,... ]
         # [1, 1, 4, 1]
@@ -66,6 +67,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         input_ids = input_ids.to(device, dtype=torch.long)
         attention_mask = attention_mask.to(device, dtype=torch.long)
+        # BCEwithlogitsloss needs label float, for crossentropy long
         #targets = targets.to(device, dtype=torch.long)
         optimizer.zero_grad()
 
@@ -77,18 +79,8 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         if class_type == "multi_label":
             # outputs.shape [batch, n_classes]
-            """
-            # change multi label to one hot, otherwise shape error, can't concat
-            one_hot_target = []
-            for i in targets: 
-                onehot = F.one_hot(i.to(torch.long), num_classes=10)
-                onehot = onehot.sum(dim=0).float()
-                one_hot_target.append(onehot)
-            targets = torch.stack(one_hot_target)
-            """
             # BCEwithlogitsloss require label be float
             targets = targets.to(device, dtype=torch.float)
-           
             preds = torch.round(torch.sigmoid(outputs))  # one hot
             
             # iterate the list of tensors, if the multi label equal, plus 1
@@ -97,22 +89,17 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
                     correct_predictions = correct_predictions + 1 
                
         else:
-            # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
-            # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
-            #targets = torch.stack(targets)
             targets = targets.to(device, dtype=torch.long)
             # preds tensor([0, 1], device='cuda:2')
             _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
             # preds shape [batch_size], predictions shape[number of documents]
             correct_predictions += torch.sum(preds == targets)
-        
-            # cross entropy expects integer labels        
+            # cross entropy expects index labels
         
         loss = loss_fn(outputs, targets)
 
         predictions.extend(preds)
         real_values.extend(targets)
-        
         #correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
 
@@ -125,8 +112,9 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
     
     train_time = time.time() - t0
     print(f"time = {train_time:.2f} secondes" + "\n")
-    t0 = time.time()
+    #t0 = time.time()
 
+    # for multilabel if not detach.numpy, then error because variable with gradient
     predictions = torch.stack(predictions).cpu().detach().numpy()
     real_values = torch.stack(real_values).cpu().detach().numpy()
    
@@ -164,16 +152,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
             )
             
             if class_type == "multi_label":
-                """
-                one_hot_target = []
-                for i in targets:
-                    onehot = F.one_hot(i.to(torch.long), num_classes=10)
-                    onehot = onehot.sum(dim=0).float()
-                    one_hot_target.append(onehot)
-                targets = torch.stack(one_hot_target)
-                """
                 targets = targets.to(device, dtype=torch.float)
-
                 preds = torch.round(torch.sigmoid(outputs))  # one hot
 
                 for i in range(len(targets)):
@@ -181,9 +160,8 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
                         correct_predictions = correct_predictions + 1
 
             else:
-                #targets = torch.stack(targets)
                 targets = targets.to(device, dtype=torch.long)
-                _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
+                _, preds = torch.max(outputs, dim=1)  # dim=1 to get the index of the maximal value
                 correct_predictions += torch.sum(preds == targets)
 
             loss = loss_fn(outputs, targets)
@@ -197,7 +175,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
     print(" ")
     eval_time = time.time() - t0    
     print(f"time = {eval_time:.2f} secondes" + "\n")
-    t0 = time.time()
+    #t0 = time.time()
     predictions = torch.stack(predictions).cpu().detach().numpy()
     real_values = torch.stack(real_values).cpu().detach().numpy()
 
@@ -215,7 +193,6 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     t0 = time.time()
 
     for batch in data_loader:
-    #for batch_idx, batch in enumerate(data_loader):
         input_ids = batch['input_ids'].to(device, dtype=torch.long)
         attention_mask = batch['attention_mask'].to(device, dtype=torch.long)
         #targets = batch['targets'].to(device)
@@ -226,19 +203,9 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         )
        
         if class_type == "multi_label":
-            """
-            one_hot_target = []
-            for i in batch['targets']:
-                onehot = F.one_hot(i.to(torch.long), num_classes=10)
-                onehot = onehot.sum(dim=0).float()
-                one_hot_target.append(onehot)
-            targets = torch.stack(one_hot_target)
-            """
             # BCEwithlogitsloss require label be float
             targets = batch['targets'].to(device, dtype=torch.float)
-
             preds = torch.round(torch.sigmoid(outputs))  # one hot
-            # iterate the list of tensors, if the multi label equal, plus 1
 
             for i in range(len(targets)):
                 if torch.equal(targets[i],preds[i]):
@@ -254,7 +221,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         predictions.extend(preds)
         real_values.extend(targets)
 
-        #correct_predictions += torch.sum(preds == targets)
+        #  correct_predictions += torch.sum(preds == targets)
         losses.append(float(loss.item()))
         # losses.append(loss.item())
 
@@ -267,12 +234,12 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
 
     train_time = time.time() - t0    
     print(f"time = {train_time:.2f} secondes" + "\n")
-    t0 = time.time()
+    #t0 = time.time()
 
     predictions = torch.stack(predictions).cpu().detach().numpy()
     real_values = torch.stack(real_values).cpu().detach().numpy()
 
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions,train_time
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions, train_time
 
 
 def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
@@ -294,19 +261,9 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
                 attention_mask=attention_mask
             )
             if class_type == "multi_label":
-                """
-                one_hot_target = []
-                for i in batch['targets']:
-                    onehot = F.one_hot(i.to(torch.long), num_classes=10)
-                    onehot = onehot.sum(dim=0).float()
-                    one_hot_target.append(onehot)
-                targets = torch.stack(one_hot_target)
-                """
                 # BCEwithlogitsloss require label be float
                 targets = batch['targets'].to(device, dtype=torch.float)
-
                 preds = torch.round(torch.sigmoid(outputs))  # one hot
-                # iterate the list of tensors, if the multi label equal, plus 1
 
                 for i in range(len(targets)):
                     if torch.equal(targets[i],preds[i]):
@@ -334,4 +291,4 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
     predictions = torch.stack(predictions).cpu().detach().numpy()
     real_values = torch.stack(real_values).cpu().detach().numpy()
 
-    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions,eval_time
+    return np.mean(losses), float(correct_predictions / n_examples), real_values, predictions, eval_time

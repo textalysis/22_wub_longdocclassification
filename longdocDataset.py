@@ -1,6 +1,7 @@
 import torch 
 from torch.utils.data import Dataset
 
+
 # chunk_len, overlap_len
 class longdocDataset(Dataset):
     def __init__(self, docs, targets, tokenizer, max_len, approach, chunk_len, overlap_len, total_len):
@@ -15,14 +16,14 @@ class longdocDataset(Dataset):
 
     def __len__(self):
         return len(self.targets)
-        #return len(self.docs)
 
     def __getitem__(self, item):
         doc = str(self.docs[item])
-        #target = int(self.targets[item])
+        #  target = int(self.targets[item])
         target = self.targets[item]
-        # get the encoding of the first 512 tokens and the overflowing tokens if the document has more than the defined max length tokens
-        # encoding = self.tokenizer.encode_plus(
+        #  get the encoding of the first 512 tokens and the overflowing tokens
+        #  if the document has more than the defined max length tokens
+        #  encoding = self.tokenizer.encode_plus(
         encoding = self.tokenizer(
             doc,
             add_special_tokens=True,
@@ -42,17 +43,18 @@ class longdocDataset(Dataset):
             input_ids = encoding['input_ids'].flatten()
             if remain.shape[0] != 0:
                 complete_tokens = torch.cat((input_ids, remain))
-                #complete_tokens = complete_tokens[complete_tokens!=101]
-                #complete_tokens = complete_tokens[complete_tokens!=102]
-                complete_tokens = complete_tokens[complete_tokens!=0]
-                complete_tokens = complete_tokens[complete_tokens!=2]
+                # complete_tokens = complete_tokens[complete_tokens!=101]
+                # complete_tokens = complete_tokens[complete_tokens!=102]
+                # Roberta ["START"] -> 0, ["SEP"] -> 2
+                complete_tokens = complete_tokens[complete_tokens != 0]
+                complete_tokens = complete_tokens[complete_tokens != 2]
                 start_token = torch.tensor([0], dtype=torch.long)
                 end_token = torch.tensor([2], dtype=torch.long)
                 input_ids = torch.cat((start_token,complete_tokens[:int((self.max_len-2)/2)], complete_tokens[-int((self.max_len-2)/2):],end_token))
 
             long_token = {'input_ids': input_ids,
-                'attention_mask': encoding['attention_mask'].flatten(),
-                'targets': torch.tensor(target, dtype=torch.long)}
+                          'attention_mask': encoding['attention_mask'].flatten(),
+                          'targets': torch.tensor(target, dtype=torch.long)}
 
         # self.approach == "tail"
         else:
@@ -68,9 +70,8 @@ class longdocDataset(Dataset):
                 input_ids = torch.cat((start_token, complete_tokens[-(self.max_len - 2):], end_token))
 
             long_token = {'input_ids': input_ids,
-                'attention_mask': encoding['attention_mask'].flatten(),
-                'targets': torch.tensor(target, dtype=torch.long)
-            }
+                          'attention_mask': encoding['attention_mask'].flatten(),
+                          'targets': torch.tensor(target, dtype=torch.long)}
         #print(long_token['targets'])
 
         return long_token

@@ -11,11 +11,10 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["Hyperpartisan"],
+para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+        #'datasets': ["Hyperpartisan"],
         'seeds': [1, 2, 3, 4, 5],
-        #'summarizer': ["none", "bert_summarizer", "text_rank"],
-        'summarizer': ["bert_summarizer", "text_rank"],
+        'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
@@ -46,7 +45,6 @@ for seed in para["seeds"]:
             loss_fn = nn.CrossEntropyLoss()
             num_labels = 2
             class_type = "single_label"
-            print(len(data_train["data"]), len(data_train["target"]))
         elif dataset == "20newsgroups":
             data_train, data_val, data_test = get_dataset("20newsgroups")
             loss_fn = nn.CrossEntropyLoss()
@@ -68,7 +66,6 @@ for seed in para["seeds"]:
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                 test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                print("data loaded")
                 model = ToBERT(num_labels)
                 device = train.available_device()
                 model = model.to(device)
@@ -81,11 +78,13 @@ for seed in para["seeds"]:
                                     )
                 loss_fn = loss_fn.to(device)
                 filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
+                # try catch: continue next loop when memory not enough
                 #try:
                 if class_type == "multi_label":
+                    # use micro f1 as metric
                     trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
                 else:
                     trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
                 #except Exception as e:
-                #    print("Exception")
-                #    print(e)
+                    #print("Exception")
+                    #print(e)
