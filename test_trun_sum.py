@@ -73,26 +73,36 @@ for seed in para["seeds"]:
         for truncation in para['truncations']:
             tokenizer = tokenize('BERT')
             if truncation == "head":
-                train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
-                val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
-                test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
-                model = BERT(num_labels)
-                device = available_device()
-                model = model.to(device)
-                optimizer = AdamW(model.parameters(), lr=learning_rate)
-                total_steps = len(train_data_loader) * para['epochs']
-                scheduler = get_linear_schedule_with_warmup(
-                    optimizer,
-                    num_warmup_steps=0,
-                    num_training_steps=total_steps)
-                loss_fn = loss_fn.to(device)
-                filename = "{}_{}_{}_{}".format(dataset, model_name, truncation, seed)
-                if class_type == "multi_label":
-                    trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
-                            optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                else:
-                    trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
-                            optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                for summarizer in para["summarizer"]:
+                    if summarizer == "bert_summarizer":
+                        data_train['data'] = bert_summarizer(data_train['data'])
+                        data_val['data'] = bert_summarizer(data_val['data'])
+                        data_test['data'] = bert_summarizer(data_test['data'])
+                    if summarizer == "text_rank":
+                        data_train['data'] = text_rank(data_train['data'])
+                        data_val['data'] = text_rank(data_val['data'])
+                        data_test['data'] = text_rank(data_test['data'])
+
+                    train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
+                    val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
+                    test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
+                    model = BERT(num_labels)
+                    device = available_device()
+                    model = model.to(device)
+                    optimizer = AdamW(model.parameters(), lr=learning_rate)
+                    total_steps = len(train_data_loader) * para['epochs']
+                    scheduler = get_linear_schedule_with_warmup(
+                        optimizer,
+                        num_warmup_steps=0,
+                        num_training_steps=total_steps)
+                    loss_fn = loss_fn.to(device)
+                    filename = "{}_{}_{}_{}_{}".format(dataset, model_name, truncation, summarizer, seed)
+                    if class_type == "multi_label":
+                        trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                                optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                    else:
+                        trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                                optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
 
             else:
                 train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size, approach=truncation)
