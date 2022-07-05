@@ -35,6 +35,18 @@ batch_size = para["batch_size"]
 learning_rate = para["learning_rate"]
 total_len = para["total_len"]
 
+def available_device():
+    if torch.cuda.is_available():
+        device = torch.device("cuda:2")  # specify  device
+        print('There are %d GPU(s) available.' % torch.cuda.device_count())
+        print('We will use the GPU:', torch.cuda.get_device_name(0))
+
+    else:
+        print('No GPU available, using the CPU instead.')
+        device = torch.device("cpu")
+    return device
+
+
 for seed in para["seeds"]:
     train.seed_everything(seed)
 
@@ -119,4 +131,4 @@ for seed in para["seeds"]:
                                             data_val, loss_fn,
                                             optimizer, device, scheduler, filename, class_type, test_data_loader,
                                             data_test)
-                        
+

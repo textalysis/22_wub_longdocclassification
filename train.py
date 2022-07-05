@@ -18,18 +18,6 @@ def seed_everything(seed=42):
     torch.backends.cudnn.benchmark = False
 
 
-def available_device():
-    if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
-        print('There are %d GPU(s) available.' % torch.cuda.device_count())
-        print('We will use the GPU:', torch.cuda.get_device_name(0))
-
-    else:
-        print('No GPU available, using the CPU instead.')
-        device = torch.device("cpu")
-    return device
-
-
 def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_examples, class_type):
     model = model.train()
 
