@@ -11,7 +11,7 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
         #'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -21,7 +21,7 @@ para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 10,
+        'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -97,13 +97,16 @@ for seed in para["seeds"]:
                         num_training_steps=total_steps)
                     loss_fn = loss_fn.to(device)
                     filename = "{}_{}_{}_{}_{}".format(dataset, model_name, truncation, summarizer, seed)
-                    if class_type == "multi_label":
-                        trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                    try:
+                        if class_type == "multi_label":
+                            trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                                 optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                    else:
-                        trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                        else:
+                            trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                                 optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-
+                    except Exception as e:
+                        print("Exception")
+                        print(e)
             else:
                 train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size, approach=truncation)
                 val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size, approach=truncation)
@@ -119,14 +122,14 @@ for seed in para["seeds"]:
                     num_training_steps=total_steps)
                 loss_fn = loss_fn.to(device)
                 filename = "{}_{}_{}_{}".format(dataset, model_name, truncation, seed)
-                #try:
-                if class_type == "multi_label":
-                    trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                try:
+                    if class_type == "multi_label":
+                        trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                             optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                else:
-                    trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
+                    else:
+                        trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn,
                             optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                #except Exception as e:
-                #    print("Exception")
-                #    print(e)
+                except Exception as e:
+                    print("Exception")
+                    print(e)
 

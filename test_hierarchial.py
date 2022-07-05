@@ -11,7 +11,7 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         #'datasets': ["Hyperpartisan"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -21,7 +21,7 @@ para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
         'chunk_lens': [256, 512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 10,
+        'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -92,12 +92,12 @@ for seed in para["seeds"]:
                 loss_fn = loss_fn.to(device)
                 filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
                 # try catch: continue next loop when memory not enough
-                #try:
-                if class_type == "multi_label":
-                    # use micro f1 as metric
-                    trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                else:
-                    trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                #except Exception as e:
-                    #print("Exception")
-                    #print(e)
+                try:
+                    if class_type == "multi_label":
+                        # use micro f1 as metric
+                        trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                    else:
+                        trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+                except Exception as e:
+                    print("Exception")
+                    print(e)

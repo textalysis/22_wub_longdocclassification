@@ -12,7 +12,7 @@ import torch.nn as nn
 import trainer
 
 
-para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
+para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         #'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -22,7 +22,7 @@ para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 10,
+        'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -89,17 +89,20 @@ for seed in para["seeds"]:
                         )
                         loss_fn = loss_fn.to(device)
                         filename = "{}_{}_{}_{}_{}".format(dataset, model_name, spase_max_len, attention_window, seed)
-                        if class_type == "multi_label":
-                            trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
+                        try:
+                            if class_type == "multi_label":
+                                trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
                                                         data_train, data_val, loss_fn,
                                                         optimizer, device, scheduler, filename, class_type,
                                                         test_data_loader, data_test)
-                        else:
-                            trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train,
+                            else:
+                                trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train,
                                             data_val, loss_fn,
                                             optimizer, device, scheduler, filename, class_type, test_data_loader,
                                             data_test)
-
+                        except Exception as e:
+                            print("Exception")
+                            print(e)
 
                 else:
                     for block_size in para['block_sizes']:
@@ -120,14 +123,18 @@ for seed in para["seeds"]:
                             )
                         loss_fn = loss_fn.to(device)
                         filename = "{}_{}_{}_{}_{}".format(dataset, model_name, spase_max_len, block_size, seed)
-                        if class_type == "multi_label":
-                            trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
+                        try:
+                            if class_type == "multi_label":
+                                trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
                                                         data_train, data_val, loss_fn,
                                                         optimizer, device, scheduler, filename, class_type,
                                                         test_data_loader, data_test)
-                        else:
-                            trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train,
+                            else:
+                                trainer.trainer(para['epochs'], model, train_data_loader, val_data_loader, data_train,
                                             data_val, loss_fn,
                                             optimizer, device, scheduler, filename, class_type, test_data_loader,
                                             data_test)
 
+                        except Exception as e:
+                            print("Exception")
+                            print(e)
