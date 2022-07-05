@@ -50,6 +50,16 @@ def label_to_int(label):
             label[i][j] = int(label[i][j])
 
 
+# preprocess to one hot to avoid batch loader error
+def one_hot_labels(integer_encoded):
+    onehot_encoded = []
+    for value in integer_encoded:
+        letter = [0 for _ in range(10)]
+        for i in value:
+            letter[i] = 1    
+        onehot_encoded.append(letter)
+    return onehot_encoded
+
 def get_dataset(dataset):
     if dataset == "20newsgroups":
         # remove = ("headers", "footers", "quotes") not remove here to keep the document long
@@ -75,6 +85,7 @@ def get_dataset(dataset):
        label_1 =  [i["labels"] for i in train]
        map_to_classes(label_1)
        label_to_int(label_1)
+       label_1 = one_hot_labels(label_1)
        dev = open(os.path.join("data/ECtHR", "dev.txt"), "r")
        dev = dev.readlines()
        dev = [ast.literal_eval(i) for i in dev]
@@ -82,6 +93,7 @@ def get_dataset(dataset):
        label_2 = [i["labels"] for i in dev]
        map_to_classes(label_2)
        label_to_int(label_2)
+       label_2 = one_hot_labels(label_2)
        test = open(os.path.join("data/ECtHR", "test.txt"), "r")
        test = test.readlines()
        test = [ast.literal_eval(i) for i in test]
@@ -89,6 +101,7 @@ def get_dataset(dataset):
        label_3 = [i["labels"] for i in test]
        map_to_classes(label_3)
        label_to_int(label_3)
+       label_3 = one_hot_labels(label_3)
        data_train = {'data': data_1, 'target': label_1}
        data_val = {'data': data_2, 'target': label_2}
        data_test = {'data': data_3, 'target': label_3}
@@ -163,7 +176,7 @@ def create_data_loader(toke_type, newsgroups, tokenizer, max_len, batch_size, ap
 
         dataloader = DataLoader(
                 ds,
-                batch_size=batch_size,
+                batch_size=batch_size
             )
 
     else:

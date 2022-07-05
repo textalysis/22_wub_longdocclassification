@@ -1,0 +1,1056 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+train
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+ECtHR_2e-05_ToBERT_head_tail_1
+----------
+Epoch 1/5
+time = 407.80 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.2782995716408566 micro_f1_score 0.5893316765776161 
+ 
+time = 28.20 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.21906395598513181 micro_f1_score 0.6674698795180724
+ 
+----------
+Epoch 2/5
+time = 399.20 secondes
+
+Train loss 0.17413346122044163 micro_f1_score 0.7655345188714116 
+ 
+time = 25.34 secondes
+
+Val loss 0.18514316846601298 micro_f1_score 0.7379636937647988
+ 
+----------
+Epoch 3/5
+time = 388.42 secondes
+
+Train loss 0.1419560242108665 micro_f1_score 0.8149860114341322 
+ 
+time = 26.01 secondes
+
+Val loss 0.17817176927308567 micro_f1_score 0.7454333462883793
+ 
+----------
+Epoch 4/5
+time = 397.43 secondes
+
+Train loss 0.12024531566311379 micro_f1_score 0.8525909237206309 
+ 
+time = 25.59 secondes
+
+Val loss 0.1816561406508821 micro_f1_score 0.745552977571539
+ 
+----------
+Epoch 5/5
+time = 371.43 secondes
+
+Train loss 0.10674368410732027 micro_f1_score 0.8771088190613257 
+ 
+time = 25.05 secondes
+
+Val loss 0.1806980682933917 micro_f1_score 0.7567359507313317
+ 
+----------
+best_f1_socre 0.7567359507313317 best_epoch 5
+
+average train time 392.8585099697113
+
+average val time 26.037813472747803
+ 
+time = 25.08 secondes
+
+test_f1_score 0.7567359507313317
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_tail_1
+----------
+Epoch 1/5
+time = 377.15 secondes
+
+Train loss 0.27097169579015123 micro_f1_score 0.6196868008948546 
+ 
+time = 26.15 secondes
+
+Val loss 0.2220854569898277 micro_f1_score 0.6582995951417003
+ 
+----------
+Epoch 2/5
+time = 374.80 secondes
+
+Train loss 0.173142229920035 micro_f1_score 0.7658425098691045 
+ 
+time = 25.59 secondes
+
+Val loss 0.1953418726315264 micro_f1_score 0.7109712937475422
+ 
+----------
+Epoch 3/5
+time = 382.37 secondes
+
+Train loss 0.14420650519162148 micro_f1_score 0.8132458962975032 
+ 
+time = 26.90 secondes
+
+Val loss 0.18823000923043393 micro_f1_score 0.7382341501361338
+ 
+----------
+Epoch 4/5
+time = 371.97 secondes
+
+Train loss 0.12402946226097442 micro_f1_score 0.8468897590118275 
+ 
+time = 26.67 secondes
+
+Val loss 0.18532684030102903 micro_f1_score 0.7575757575757575
+ 
+----------
+Epoch 5/5
+time = 389.15 secondes
+
+Train loss 0.11011347452866602 micro_f1_score 0.8692468619246861 
+ 
+time = 27.13 secondes
+
+Val loss 0.18828875669201867 micro_f1_score 0.7524752475247526
+ 
+----------
+best_f1_socre 0.7575757575757575 best_epoch 4
+
+average train time 379.08831934928895
+
+average val time 26.48756375312805
+ 
+time = 25.22 secondes
+
+test_f1_score 0.7575757575757575
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_1
+----------
+Epoch 1/5
+time = 388.40 secondes
+
+Train loss 0.27945539772779016 micro_f1_score 0.5803531009506563 
+ 
+time = 27.48 secondes
+
+Val loss 0.23219346316134343 micro_f1_score 0.6358849736735521
+ 
+----------
+Epoch 2/5
+time = 375.42 secondes
+
+Train loss 0.17923728111829307 micro_f1_score 0.7513692043981771 
+ 
+time = 26.68 secondes
+
+Val loss 0.20223905732397174 micro_f1_score 0.7023809523809523
+ 
+----------
+Epoch 3/5
+time = 366.68 secondes
+
+Train loss 0.15114829833912957 micro_f1_score 0.7996063476442367 
+ 
+time = 18.77 secondes
+
+Val loss 0.19528159328171465 micro_f1_score 0.7175513366912051
+ 
+----------
+Epoch 4/5
+time = 355.97 secondes
+
+Train loss 0.132067489068586 micro_f1_score 0.8319095272963958 
+ 
+time = 26.48 secondes
+
+Val loss 0.19794569750789737 micro_f1_score 0.7203094777562863
+ 
+----------
+Epoch 5/5
+time = 376.52 secondes
+
+Train loss 0.12012715003545488 micro_f1_score 0.8511140022767929 
+ 
+time = 26.21 secondes
+
+Val loss 0.19609999949814844 micro_f1_score 0.7344894026974952
+ 
+----------
+best_f1_socre 0.7344894026974952 best_epoch 5
+
+average train time 372.5981219291687
+
+average val time 25.12342586517334
+ 
+time = 29.44 secondes
+
+test_f1_score 0.7140172867343104
+
+----------
+train
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_tail_2
+----------
+Epoch 1/5
+time = 384.42 secondes
+
+Train loss 0.2737867855206803 micro_f1_score 0.5984789835602714 
+ 
+time = 27.85 secondes
+
+Val loss 0.22105412014195178 micro_f1_score 0.6448445171849426
+ 
+----------
+Epoch 2/5
+time = 358.63 secondes
+
+Train loss 0.17302242620504119 micro_f1_score 0.7617128049031304 
+ 
+time = 26.09 secondes
+
+Val loss 0.19386773226691073 micro_f1_score 0.7208843268851165
+ 
+----------
+Epoch 3/5
+time = 325.64 secondes
+
+Train loss 0.1414831826413 micro_f1_score 0.8153440227318856 
+ 
+time = 26.11 secondes
+
+Val loss 0.18448263125830008 micro_f1_score 0.7354988399071927
+ 
+----------
+Epoch 4/5
+time = 319.89 secondes
+
+Train loss 0.11968577962100237 micro_f1_score 0.8513774770420494 
+ 
+time = 26.02 secondes
+
+Val loss 0.18317179662770913 micro_f1_score 0.7512572533849129
+ 
+----------
+Epoch 5/5
+time = 320.08 secondes
+
+Train loss 0.10678768919294214 micro_f1_score 0.8730642702399102 
+ 
+time = 26.59 secondes
+
+Val loss 0.18311910587744634 micro_f1_score 0.7527788424683788
+ 
+----------
+best_f1_socre 0.7527788424683788 best_epoch 5
+
+average train time 341.7316240787506
+
+average val time 26.53155999183655
+ 
+time = 26.46 secondes
+
+test_f1_score 0.7527788424683788
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_tail_2
+----------
+Epoch 1/5
+time = 332.81 secondes
+
+Train loss 0.27100951913240795 micro_f1_score 0.6210181066630723 
+ 
+time = 26.92 secondes
+
+Val loss 0.21629309629807708 micro_f1_score 0.6709316273490604
+ 
+----------
+Epoch 2/5
+time = 324.36 secondes
+
+Train loss 0.1717965683958552 micro_f1_score 0.7653306779520372 
+ 
+time = 26.23 secondes
+
+Val loss 0.19026473017989612 micro_f1_score 0.7168769716088328
+ 
+----------
+Epoch 3/5
+time = 318.63 secondes
+
+Train loss 0.1436202732997166 micro_f1_score 0.8140994295028524 
+ 
+time = 26.08 secondes
+
+Val loss 0.18684280834725644 micro_f1_score 0.7387456714120815
+ 
+----------
+Epoch 4/5
+time = 326.54 secondes
+
+Train loss 0.12350941878483371 micro_f1_score 0.8462876795468339 
+ 
+time = 26.03 secondes
+
+Val loss 0.1844522036978456 micro_f1_score 0.7526964560862865
+ 
+----------
+Epoch 5/5
+time = 321.99 secondes
+
+Train loss 0.10951096707501927 micro_f1_score 0.8696177062374245 
+ 
+time = 25.96 secondes
+
+Val loss 0.1870139152055881 micro_f1_score 0.7580645161290323
+ 
+----------
+best_f1_socre 0.7580645161290323 best_epoch 5
+
+average train time 324.86550030708315
+
+average val time 26.243221378326417
+ 
+time = 25.77 secondes
+
+test_f1_score 0.7580645161290323
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_2
+----------
+Epoch 1/5
+time = 326.36 secondes
+
+Train loss 0.27105580446150923 micro_f1_score 0.6045337819888426 
+ 
+time = 26.52 secondes
+
+Val loss 0.22765414709927606 micro_f1_score 0.6459824980111376
+ 
+----------
+Epoch 2/5
+time = 309.79 secondes
+
+Train loss 0.17696497982351092 micro_f1_score 0.7565819478419504 
+ 
+time = 25.75 secondes
+
+Val loss 0.20050551449177695 micro_f1_score 0.7011857707509881
+ 
+----------
+Epoch 3/5
+time = 315.95 secondes
+
+Train loss 0.149290848140781 micro_f1_score 0.8029262710478994 
+ 
+time = 25.55 secondes
+
+Val loss 0.19091906080969046 micro_f1_score 0.7252918287937744
+ 
+----------
+Epoch 4/5
+time = 315.40 secondes
+
+Train loss 0.13108151496497092 micro_f1_score 0.8332454895601055 
+ 
+time = 25.63 secondes
+
+Val loss 0.19558191617004206 micro_f1_score 0.7277648878576953
+ 
+----------
+Epoch 5/5
+time = 315.39 secondes
+
+Train loss 0.11850581392310224 micro_f1_score 0.8538187125020269 
+ 
+time = 23.41 secondes
+
+Val loss 0.1991077864267787 micro_f1_score 0.7303413885692367
+ 
+----------
+best_f1_socre 0.7303413885692367 best_epoch 5
+
+average train time 316.575514793396
+
+average val time 25.372940492630004
+ 
+time = 27.96 secondes
+
+test_f1_score 0.7150297619047618
+
+----------
+train
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_tail_3
+----------
+Epoch 1/5
+time = 324.92 secondes
+
+Train loss 0.34159411259062655 micro_f1_score 0.4470851799542201 
+ 
+time = 27.17 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.36122464156541667 micro_f1_score 0.0
+ 
+----------
+Epoch 2/5
+time = 318.99 secondes
+
+Train loss 0.3222205499271015 micro_f1_score 0.4532934131736528 
+ 
+time = 26.40 secondes
+
+Val loss 0.3596907013752421 micro_f1_score 0.0014367816091954025
+ 
+----------
+Epoch 3/5
+time = 317.91 secondes
+
+Train loss 0.31316792430641416 micro_f1_score 0.4975317007066112 
+ 
+time = 25.99 secondes
+
+Val loss 0.35911606032340254 micro_f1_score 0.0811554332874828
+ 
+----------
+Epoch 4/5
+time = 312.50 secondes
+
+Train loss 0.27685917614548056 micro_f1_score 0.4875124875124875 
+ 
+time = 26.26 secondes
+
+Val loss 0.31560558398238947 micro_f1_score 0.3324593602517042
+ 
+----------
+Epoch 5/5
+time = 317.95 secondes
+
+Train loss 0.2589734436021195 micro_f1_score 0.5188249896565991 
+ 
+time = 26.06 secondes
+
+Val loss 0.313531760065282 micro_f1_score 0.3664278403275333
+ 
+----------
+best_f1_socre 0.3664278403275333 best_epoch 5
+
+average train time 318.45455675125123
+
+average val time 26.375648069381715
+ 
+time = 25.97 secondes
+
+test_f1_score 0.3664278403275333
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_tail_3
+----------
+Epoch 1/5
+time = 323.03 secondes
+
+Train loss 0.27804523970226985 micro_f1_score 0.6033772104773302 
+ 
+time = 26.52 secondes
+
+Val loss 0.21603918246558454 micro_f1_score 0.6814932486100079
+ 
+----------
+Epoch 2/5
+time = 317.33 secondes
+
+Train loss 0.17211488887399168 micro_f1_score 0.7700658848879128 
+ 
+time = 24.71 secondes
+
+Val loss 0.1961348191147945 micro_f1_score 0.7071911005164879
+ 
+----------
+Epoch 3/5
+time = 318.98 secondes
+
+Train loss 0.14064938087049905 micro_f1_score 0.8189869801232602 
+ 
+time = 26.13 secondes
+
+Val loss 0.19089451969647017 micro_f1_score 0.7339022498060512
+ 
+----------
+Epoch 4/5
+time = 314.91 secondes
+
+Train loss 0.12009299935789795 micro_f1_score 0.8535649363764896 
+ 
+time = 26.19 secondes
+
+Val loss 0.19341934802102262 micro_f1_score 0.7417116422513493
+ 
+----------
+Epoch 5/5
+time = 323.15 secondes
+
+Train loss 0.10606464809226292 micro_f1_score 0.8749749468874013 
+ 
+time = 26.39 secondes
+
+Val loss 0.19241014403886483 micro_f1_score 0.7539468617635735
+ 
+----------
+best_f1_socre 0.7539468617635735 best_epoch 5
+
+average train time 319.48172225952146
+
+average val time 25.98761329650879
+ 
+time = 26.29 secondes
+
+test_f1_score 0.7539468617635735
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_3
+----------
+Epoch 1/5
+time = 322.99 secondes
+
+Train loss 0.27218497070643277 micro_f1_score 0.6138747580245802 
+ 
+time = 26.52 secondes
+
+Val loss 0.23363571406387892 micro_f1_score 0.6282804543674109
+ 
+----------
+Epoch 2/5
+time = 315.50 secondes
+
+Train loss 0.17521509414723327 micro_f1_score 0.7609550213100509 
+ 
+time = 26.41 secondes
+
+Val loss 0.20268188160462458 micro_f1_score 0.6990833001195694
+ 
+----------
+Epoch 3/5
+time = 315.63 secondes
+
+Train loss 0.14730633206934005 micro_f1_score 0.8060459591201409 
+ 
+time = 25.91 secondes
+
+Val loss 0.19630079435520484 micro_f1_score 0.7183930681370618
+ 
+----------
+Epoch 4/5
+time = 304.21 secondes
+
+Train loss 0.1282635151249197 micro_f1_score 0.8379815694393699 
+ 
+time = 17.56 secondes
+
+Val loss 0.19766784960129222 micro_f1_score 0.7223511214230472
+ 
+----------
+Epoch 5/5
+time = 250.64 secondes
+
+Train loss 0.11506185126700648 micro_f1_score 0.8613989637305699 
+ 
+time = 18.36 secondes
+
+Val loss 0.20157322031064112 micro_f1_score 0.7265055619485999
+ 
+----------
+best_f1_socre 0.7265055619485999 best_epoch 5
+
+average train time 301.79409232139585
+
+average val time 22.952765226364136
+ 
+time = 19.47 secondes
+
+test_f1_score 0.7104477611940299
+
+----------
+train
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_tail_4
+----------
+Epoch 1/5
+time = 309.50 secondes
+
+Train loss 0.2780454732276298 micro_f1_score 0.594833355641815 
+ 
+time = 26.88 secondes
+
+Val loss 0.23010675828964983 micro_f1_score 0.6525323910482922
+ 
+----------
+Epoch 2/5
+time = 318.83 secondes
+
+Train loss 0.17464282515349688 micro_f1_score 0.764544073572279 
+ 
+time = 25.91 secondes
+
+Val loss 0.19077723571023003 micro_f1_score 0.7225959635931934
+ 
+----------
+Epoch 3/5
+time = 315.40 secondes
+
+Train loss 0.14396832835701134 micro_f1_score 0.8126593548909303 
+ 
+time = 26.00 secondes
+
+Val loss 0.1780575637201794 micro_f1_score 0.7543307086614174
+ 
+----------
+Epoch 4/5
+time = 300.31 secondes
+
+Train loss 0.1227067895116167 micro_f1_score 0.8492709256424716 
+ 
+time = 16.92 secondes
+
+Val loss 0.179888373149223 micro_f1_score 0.7522089896273532
+ 
+----------
+Epoch 5/5
+time = 286.66 secondes
+
+Train loss 0.10916697402392422 micro_f1_score 0.8715607353117867 
+ 
+time = 25.71 secondes
+
+Val loss 0.18209991775086667 micro_f1_score 0.7535672965676823
+ 
+----------
+best_f1_socre 0.7543307086614174 best_epoch 3
+
+average train time 306.13853187561034
+
+average val time 24.283056688308715
+ 
+time = 25.84 secondes
+
+test_f1_score 0.7543307086614174
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_tail_4
+----------
+Epoch 1/5
+time = 317.00 secondes
+
+Train loss 0.2696406297788427 micro_f1_score 0.6189663472058116 
+ 
+time = 26.82 secondes
+
+Val loss 0.21756004456613884 micro_f1_score 0.6821950256612711
+ 
+----------
+Epoch 2/5
+time = 309.27 secondes
+
+Train loss 0.16908382285755497 micro_f1_score 0.7705831373034543 
+ 
+time = 25.76 secondes
+
+Val loss 0.18688436829652944 micro_f1_score 0.7279752704791345
+ 
+----------
+Epoch 3/5
+time = 306.92 secondes
+
+Train loss 0.1409689944539521 micro_f1_score 0.8195746067965121 
+ 
+time = 17.15 secondes
+
+Val loss 0.17737321787681737 micro_f1_score 0.755984555984556
+ 
+----------
+Epoch 4/5
+time = 303.38 secondes
+
+Train loss 0.12094178876193526 micro_f1_score 0.8508131229571042 
+ 
+time = 26.38 secondes
+
+Val loss 0.17555871587552008 micro_f1_score 0.7627118644067795
+ 
+----------
+Epoch 5/5
+time = 311.62 secondes
+
+Train loss 0.10724055670570952 micro_f1_score 0.8743077293522754 
+ 
+time = 26.31 secondes
+
+Val loss 0.17677376181131504 micro_f1_score 0.7662037037037037
+ 
+----------
+best_f1_socre 0.7662037037037037 best_epoch 5
+
+average train time 309.63874826431277
+
+average val time 24.482204294204713
+ 
+time = 26.32 secondes
+
+test_f1_score 0.7662037037037037
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_4
+----------
+Epoch 1/5
+time = 318.37 secondes
+
+Train loss 0.278474601378312 micro_f1_score 0.5958762886597939 
+ 
+time = 27.04 secondes
+
+Val loss 0.2376044475641407 micro_f1_score 0.6254375729288214
+ 
+----------
+Epoch 2/5
+time = 308.53 secondes
+
+Train loss 0.17882703971956765 micro_f1_score 0.755283741055084 
+ 
+time = 25.04 secondes
+
+Val loss 0.20827398461396576 micro_f1_score 0.6916036609629924
+ 
+----------
+Epoch 3/5
+time = 302.48 secondes
+
+Train loss 0.15160484450894432 micro_f1_score 0.7992604765817584 
+ 
+time = 24.83 secondes
+
+Val loss 0.19969769286327674 micro_f1_score 0.7109375
+ 
+----------
+Epoch 4/5
+time = 301.14 secondes
+
+Train loss 0.13184404015239026 micro_f1_score 0.8323755960386355 
+ 
+time = 24.75 secondes
+
+Val loss 0.196286746590841 micro_f1_score 0.7298136645962733
+ 
+----------
+Epoch 5/5
+time = 301.77 secondes
+
+Train loss 0.11861310243640129 micro_f1_score 0.8563192724615322 
+ 
+time = 25.25 secondes
+
+Val loss 0.1987833752006781 micro_f1_score 0.7345989926385121
+ 
+----------
+best_f1_socre 0.7345989926385121 best_epoch 5
+
+average train time 306.45662889480593
+
+average val time 25.380981922149658
+ 
+time = 27.68 secondes
+
+test_f1_score 0.7136431784107946
+
+----------
+train
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_tail_5
+----------
+Epoch 1/5
+time = 306.52 secondes
+
+Train loss 0.28808427324837393 micro_f1_score 0.5583898900070208 
+ 
+time = 27.05 secondes
+
+Val loss 0.24854039999305225 micro_f1_score 0.6075247524752475
+ 
+----------
+Epoch 2/5
+time = 313.19 secondes
+
+Train loss 0.18664093741828258 micro_f1_score 0.7395695364238412 
+ 
+time = 26.40 secondes
+
+Val loss 0.1975608599967644 micro_f1_score 0.7009569377990431
+ 
+----------
+Epoch 3/5
+time = 312.35 secondes
+
+Train loss 0.15490288000788774 micro_f1_score 0.7925956061838894 
+ 
+time = 26.12 secondes
+
+Val loss 0.18682132087281492 micro_f1_score 0.7294480895407179
+ 
+----------
+Epoch 4/5
+time = 312.63 secondes
+
+Train loss 0.13262935759046593 micro_f1_score 0.8308200951536165 
+ 
+time = 25.49 secondes
+
+Val loss 0.18165454060816374 micro_f1_score 0.7462223944207672
+ 
+----------
+Epoch 5/5
+time = 303.96 secondes
+
+Train loss 0.1186104975875702 micro_f1_score 0.8554922570809597 
+ 
+time = 26.16 secondes
+
+Val loss 0.18266062523986473 micro_f1_score 0.74373795761079
+ 
+----------
+best_f1_socre 0.7462223944207672 best_epoch 4
+
+average train time 309.7310088157654
+
+average val time 26.244007396698
+ 
+time = 26.42 secondes
+
+test_f1_score 0.7462223944207672
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_tail_5
+----------
+Epoch 1/5
+time = 319.47 secondes
+
+Train loss 0.29779678682486216 micro_f1_score 0.5329301075268816 
+ 
+time = 27.46 secondes
+
+Val loss 0.26636373166178096 micro_f1_score 0.5101214574898786
+ 
+----------
+Epoch 2/5
+time = 311.87 secondes
+
+Train loss 0.20779541718798714 micro_f1_score 0.6982233394401601 
+ 
+time = 26.46 secondes
+
+Val loss 0.21954827890044354 micro_f1_score 0.6747181964573269
+ 
+----------
+Epoch 3/5
+time = 307.33 secondes
+
+Train loss 0.16861490474023796 micro_f1_score 0.7729353069723334 
+ 
+time = 26.22 secondes
+
+Val loss 0.20081047848111294 micro_f1_score 0.7121568627450979
+ 
+----------
+Epoch 4/5
+time = 312.81 secondes
+
+Train loss 0.14652971687416236 micro_f1_score 0.8066108957355642 
+ 
+time = 26.26 secondes
+
+Val loss 0.18984845500500475 micro_f1_score 0.7310077519379846
+ 
+----------
+Epoch 5/5
+time = 309.20 secondes
+
+Train loss 0.13138277344405652 micro_f1_score 0.8324060913705584 
+ 
+time = 26.38 secondes
+
+Val loss 0.19147778412357705 micro_f1_score 0.7390800154619249
+ 
+----------
+best_f1_socre 0.7390800154619249 best_epoch 5
+
+average train time 312.1363419055939
+
+average val time 26.557389116287233
+ 
+time = 26.19 secondes
+
+test_f1_score 0.7390800154619249
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_2e-05_ToBERT_head_5
+----------
+Epoch 1/5
+time = 314.09 secondes
+
+Train loss 0.2714492435458007 micro_f1_score 0.5968653766603852 
+ 
+time = 27.08 secondes
+
+Val loss 0.2257826990279995 micro_f1_score 0.6436877076411961
+ 
+----------
+Epoch 2/5
+time = 299.52 secondes
+
+Train loss 0.17705484701840726 micro_f1_score 0.7578063282192008 
+ 
+time = 25.19 secondes
+
+Val loss 0.2024220074297952 micro_f1_score 0.6950636942675159
+ 
+----------
+Epoch 3/5
+time = 301.59 secondes
+
+Train loss 0.1500730279564589 micro_f1_score 0.8015612161051767 
+ 
+time = 25.20 secondes
+
+Val loss 0.19907569469975644 micro_f1_score 0.7170105099260413
+ 
+----------
+Epoch 4/5
+time = 298.01 secondes
+
+Train loss 0.13303962791892324 micro_f1_score 0.8309967897923524 
+ 
+time = 24.81 secondes
+
+Val loss 0.19755448229977343 micro_f1_score 0.7275565964090553
+ 
+----------
+Epoch 5/5
+time = 295.78 secondes
+
+Train loss 0.12026877385639662 micro_f1_score 0.8527943504200657 
+ 
+time = 26.07 secondes
+
+Val loss 0.20560498682201886 micro_f1_score 0.718558282208589
+ 
+----------
+best_f1_socre 0.7275565964090553 best_epoch 4
+
+average train time 301.7956469535828
+
+average val time 25.670029973983766
+ 
+time = 29.03 secondes
+
+test_f1_score 0.7141768292682926
+
+----------

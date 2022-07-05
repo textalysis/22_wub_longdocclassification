@@ -13,7 +13,7 @@ import trainer
 
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["Hyperpartisan"],
+        'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -79,7 +79,7 @@ for seed in para["seeds"]:
                             num_warmup_steps=0,
                             num_training_steps=total_steps
                         )
-                        loss_fn = nn.CrossEntropyLoss().to(device)
+                        loss_fn = loss_fn.to(device)
                         filename = "{}_{}_{}_{}_{}".format(dataset,learning_rate, model_name, attention_window, seed)
                         if class_type == "multi_label":
                             trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
@@ -110,9 +110,8 @@ for seed in para["seeds"]:
                             num_warmup_steps=0,
                             num_training_steps=total_steps
                             )
-                        loss_fn = nn.CrossEntropyLoss().to(device)
-                        filename = "{}_{}_{}_{}_{}".format(dataset,
-                                                         learning_rate, model_name, block_size, seed)
+                        loss_fn = loss_fn.to(device)
+                        filename = "{}_{}_{}_{}_{}".format(dataset, learning_rate, model_name, block_size, seed)
                         if class_type == "multi_label":
                             trainer.trainer_multi_label(para['epochs'], model, train_data_loader, val_data_loader,
                                                         data_train, data_val, loss_fn,

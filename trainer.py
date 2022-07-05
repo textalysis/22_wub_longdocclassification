@@ -66,7 +66,7 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
     print('-' * 10)
     print(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}' + "\n")
     print(f'average train time {np.mean(train_time_list)}'+"\n")
-    print(f'average val time {np.mean(val_time_list)}'+"\n")
+    print(f'average val time {np.mean(val_time_list)}')
 
     model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
     test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
@@ -79,7 +79,7 @@ def trainer(epochs, model, train_data_loader, val_data_loader, data_train, data_
             )
     test_report = classification_report(test_real, test_pred, output_dict=True)
     print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}'+"\n")
-    
+    print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))
@@ -124,7 +124,7 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
             train_report = classification_report(train_real, train_pred, output_dict=True)
             #f.write(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' + "\n")
             print(f'Train loss {train_loss} accuracy {train_acc} macro_avg {train_report["macro avg"]} weighted_avg {train_report["weighted avg"]}' )
-            print(train_report["accuracy"])
+            #print(train_report["accuracy"])
             val_loss, val_acc, val_real, val_pred, val_time = train.hierarchical_eval_model(
                 model,
                 val_data_loader,
@@ -155,7 +155,7 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
     print('-' * 10 )
     print(f'best_accuracy {best_accuracy} best_epoch {best_epoch} macro_avg {best_report["macro avg"]} weighted_avg {best_report["weighted avg"]}'+ "\n")
     print(f'average train time {np.mean(train_time_list)}'+"\n")
-    print(f'average val time {np.mean(val_time_list)}'+"\n")
+    print(f'average val time {np.mean(val_time_list)}')
 
     model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
     test_loss, test_acc, test_real, test_pred, test_time = train.hierarchical_eval_model(
@@ -168,7 +168,7 @@ def trainer_hierarchical(epochs, model, train_data_loader, val_data_loader, data
             )
     test_report = classification_report(test_real, test_pred, output_dict=True)
     print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}'+"\n")
-
+    print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))
@@ -237,7 +237,7 @@ def trainer_multi_label(epochs, model, train_data_loader, val_data_loader, data_
     print('-' * 10)
     print(f'best_f1_socre {best_f1_score} best_epoch {best_epoch}' + "\n")
     print(f'average train time {np.mean(train_time_list)}' + "\n")
-    print(f'average val time {np.mean(val_time_list)}' + "\n")
+    print(f'average val time {np.mean(val_time_list)}')
 
     model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
     test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
@@ -250,7 +250,7 @@ def trainer_multi_label(epochs, model, train_data_loader, val_data_loader, data_
     )
     test_report = classification_report(test_real, test_pred, output_dict=True)
     print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
-
+    print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))
@@ -319,10 +319,10 @@ def trainer_hierarchical_multi_label(epochs, model, train_data_loader, val_data_
     print('-' * 10)
     print(f'best_f1_socre {best_f1_score} best_epoch {best_epoch}' + "\n")
     print(f'average train time {np.mean(train_time_list)}' + "\n")
-    print(f'average val time {np.mean(val_time_list)}' + "\n")
+    print(f'average val time {np.mean(val_time_list)}')
 
     model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
-    test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
+    test_loss, test_acc, test_real, test_pred, test_time = train.hierarchical_eval_model(
         model,
         test_data_loader,
         loss_fn,
@@ -332,7 +332,7 @@ def trainer_hierarchical_multi_label(epochs, model, train_data_loader, val_data_
     )
     test_report = classification_report(test_real, test_pred, output_dict=True)
     print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
-
+    print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
     ax.set_xticks(np.arange(0, epochs, 5))

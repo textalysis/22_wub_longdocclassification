@@ -19,7 +19,7 @@ def seed_everything(seed=42):
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:1")  # specify  device
+        device = torch.device("cuda:0")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -59,7 +59,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         attention_mask = torch.cat(attention_mask)
         # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
         # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
-        # targets = torch.stack(targets)
+        targets = torch.stack(targets)
         # [doc1 num of segments, doc2 num of segments,... ]
         # [1, 1, 4, 1]
         lengt = [x.item() for x in lengt]
@@ -77,7 +77,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
 
         if class_type == "multi_label":
             # outputs.shape [batch, n_classes]
-            
+            """
             # change multi label to one hot, otherwise shape error, can't concat
             one_hot_target = []
             for i in targets: 
@@ -85,8 +85,10 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
                 onehot = onehot.sum(dim=0).float()
                 one_hot_target.append(onehot)
             targets = torch.stack(one_hot_target)
+            """
             # BCEwithlogitsloss require label be float
             targets = targets.to(device, dtype=torch.float)
+           
             preds = torch.round(torch.sigmoid(outputs))  # one hot
             
             # iterate the list of tensors, if the multi label equal, plus 1
@@ -97,7 +99,7 @@ def hierarchical_train_epoch(model, data_loader, loss_fn, optimizer, device, sch
         else:
             # tensor([doc1 target, doc2 target, doc3 target, doc4 target], dtype=torch.int32)
             # change list of tensor to tensor of list    [tensor(0), tensor(1)] -> tensor([0,1])
-            targets = torch.stack(targets)
+            #targets = torch.stack(targets)
             targets = targets.to(device, dtype=torch.long)
             # preds tensor([0, 1], device='cuda:2')
             _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
@@ -148,7 +150,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
 
             input_ids = torch.cat(input_ids)
             attention_mask = torch.cat(attention_mask)
-            #targets = torch.stack(targets)
+            targets = torch.stack(targets)
             lengt = [x.item() for x in lengt]
 
             input_ids = input_ids.to(device, dtype=torch.long)
@@ -162,12 +164,14 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
             )
             
             if class_type == "multi_label":
+                """
                 one_hot_target = []
                 for i in targets:
                     onehot = F.one_hot(i.to(torch.long), num_classes=10)
                     onehot = onehot.sum(dim=0).float()
                     one_hot_target.append(onehot)
                 targets = torch.stack(one_hot_target)
+                """
                 targets = targets.to(device, dtype=torch.float)
 
                 preds = torch.round(torch.sigmoid(outputs))  # one hot
@@ -177,7 +181,7 @@ def hierarchical_eval_model(model, data_loader, loss_fn, device, n_examples,  cl
                         correct_predictions = correct_predictions + 1
 
             else:
-                targets = torch.stack(targets)
+                #targets = torch.stack(targets)
                 targets = targets.to(device, dtype=torch.long)
                 _, preds = torch.max(outputs, dim=1) #dim=1 to get the index of the maximal value
                 correct_predictions += torch.sum(preds == targets)
@@ -211,8 +215,9 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
     t0 = time.time()
 
     for batch in data_loader:
-        input_ids = batch['input_ids'].to(device)
-        attention_mask = batch['attention_mask'].to(device)
+    #for batch_idx, batch in enumerate(data_loader):
+        input_ids = batch['input_ids'].to(device, dtype=torch.long)
+        attention_mask = batch['attention_mask'].to(device, dtype=torch.long)
         #targets = batch['targets'].to(device)
 
         outputs = model(
@@ -221,14 +226,16 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
         )
        
         if class_type == "multi_label":
+            """
             one_hot_target = []
             for i in batch['targets']:
                 onehot = F.one_hot(i.to(torch.long), num_classes=10)
                 onehot = onehot.sum(dim=0).float()
                 one_hot_target.append(onehot)
             targets = torch.stack(one_hot_target)
+            """
             # BCEwithlogitsloss require label be float
-            targets = targets.to(device, dtype=torch.float)
+            targets = batch['targets'].to(device, dtype=torch.float)
 
             preds = torch.round(torch.sigmoid(outputs))  # one hot
             # iterate the list of tensors, if the multi label equal, plus 1
@@ -238,7 +245,7 @@ def train_epoch(model, data_loader, loss_fn, optimizer, device, scheduler, n_exa
                     correct_predictions = correct_predictions + 1
 
         else:
-            targets = batch['targets'].to(device)
+            targets = batch['targets'].to(device, dtype=torch.long)
             _, preds = torch.max(outputs, dim=1)
             correct_predictions += torch.sum(preds == targets)
         
@@ -278,8 +285,8 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
     t0 = time.time()
     with torch.no_grad():
         for batch in data_loader:
-            input_ids = batch['input_ids'].to(device)
-            attention_mask = batch['attention_mask'].to(device)
+            input_ids = batch['input_ids'].to(device, dtype=torch.long)
+            attention_mask = batch['attention_mask'].to(device, dtype=torch.long)
             #targets = batch['targets'].to(device)
 
             outputs = model(
@@ -287,14 +294,16 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
                 attention_mask=attention_mask
             )
             if class_type == "multi_label":
+                """
                 one_hot_target = []
                 for i in batch['targets']:
                     onehot = F.one_hot(i.to(torch.long), num_classes=10)
                     onehot = onehot.sum(dim=0).float()
                     one_hot_target.append(onehot)
                 targets = torch.stack(one_hot_target)
+                """
                 # BCEwithlogitsloss require label be float
-                targets = targets.to(device, dtype=torch.float)
+                targets = batch['targets'].to(device, dtype=torch.float)
 
                 preds = torch.round(torch.sigmoid(outputs))  # one hot
                 # iterate the list of tensors, if the multi label equal, plus 1
@@ -304,7 +313,7 @@ def eval_model(model, data_loader, loss_fn, device, n_examples, class_type):
                         correct_predictions = correct_predictions + 1
 
             else:
-                targets = batch['targets'].to(device)
+                targets = batch['targets'].to(device, dtype=torch.long)
                 _, preds = torch.max(outputs, dim=1)
                 correct_predictions += torch.sum(preds == targets)
 
