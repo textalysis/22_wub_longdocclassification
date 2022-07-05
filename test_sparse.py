@@ -22,7 +22,7 @@ para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
         'chunk_lens': [256,512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 5,
+        'epochs': 10,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -37,7 +37,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:2")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -56,7 +56,6 @@ for seed in para["seeds"]:
             loss_fn = nn.CrossEntropyLoss()
             num_labels = 2
             class_type = "single_label"
-            print(len(data_train["data"]), len(data_train["target"]))
         elif dataset == "20newsgroups":
             data_train, data_val, data_test = get_dataset("20newsgroups")
             loss_fn = nn.CrossEntropyLoss()
@@ -79,7 +78,7 @@ for seed in para["seeds"]:
                         val_data_loader = create_data_loader("short", data_val, tokenizer, max_len, batch_size)
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Longformer(attention_window=attention_window, num_labels=num_labels)
-                        device = train.available_device()
+                        device = available_device()
                         model = model.to(device)
                         optimizer = AdamW(model.parameters(), lr=learning_rate)
                         total_steps = len(train_data_loader) * para['epochs']
@@ -110,7 +109,7 @@ for seed in para["seeds"]:
                         val_data_loader = create_data_loader("short", data_val, tokenizer, max_len, batch_size)
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Bigbird(block_size=block_size,num_labels=len(set(data_train['target'])))
-                        device = train.available_device()
+                        device = available_device()
                         model = model.to(device)
                         optimizer = AdamW(model.parameters(), lr=learning_rate)
                         total_steps = len(train_data_loader) * para['epochs']

@@ -21,7 +21,7 @@ para = {'datasets': ["Hyperpartisan", "ECtHR", "20newsgroups"],
         'chunk_lens': [256, 512],
         'overlap_lens': [25, 50],
         'total_len': 4096,
-        'epochs': 5,
+        'epochs': 10,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
@@ -39,7 +39,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:2")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -80,7 +80,7 @@ for seed in para["seeds"]:
                 test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                 model = ToBERT(num_labels)
-                device = train.available_device()
+                device = available_device()
                 model = model.to(device)
                 optimizer = AdamW(model.parameters(), lr=learning_rate)
                 total_steps = len(train_data_loader) * para['epochs']
