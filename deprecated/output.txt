@@ -1,0 +1,199 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+train
+datasets imported
+data loaded
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.decoder.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+ECtHR_ToBERT_256_25_1
+----------
+Epoch 1/5
+time = 662.59 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.1983620925126849 micro_f1_score 0.734230801794937 
+ 
+time = 32.06 secondes
+
+Val loss 0.16530791291447935 micro_f1_score 0.7628304821150855
+ 
+----------
+Epoch 2/5
+time = 653.54 secondes
+
+Train loss 0.1347575462515558 micro_f1_score 0.8249087221095335 
+ 
+time = 31.35 secondes
+
+Val loss 0.16063637005501105 micro_f1_score 0.7740458015267174
+ 
+----------
+Epoch 3/5
+time = 630.27 secondes
+
+Train loss 0.1170215478116596 micro_f1_score 0.8516434943341638 
+ 
+time = 31.35 secondes
+
+Val loss 0.15597642500136719 micro_f1_score 0.7820173781639591
+ 
+----------
+Epoch 4/5
+time = 625.90 secondes
+
+Train loss 0.10453890701671978 micro_f1_score 0.8725936576403865 
+ 
+time = 31.17 secondes
+
+Val loss 0.15475391419451745 micro_f1_score 0.7896706586826346
+ 
+----------
+Epoch 5/5
+time = 640.67 secondes
+
+Train loss 0.09670731229623696 micro_f1_score 0.8845923858879808 
+ 
+time = 33.04 secondes
+
+Val loss 0.15078920742771665 micro_f1_score 0.7989477639984968
+ 
+----------
+best_f1_socre 0.7989477639984968 best_epoch 5
+
+average train time 642.5917279720306
+
+average val time 31.793552446365357
+ 
+time = 35.95 secondes
+
+test_f1_score 0.796729840208101
+
+----------
+data loaded
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.decoder.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_ToBERT_256_50_1
+----------
+Epoch 1/5
+time = 655.41 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.19928014283781653 micro_f1_score 0.7315339707251038 
+ 
+time = 33.97 secondes
+
+Val loss 0.16652056587035538 micro_f1_score 0.7562960092987214
+ 
+----------
+Epoch 2/5
+time = 654.36 secondes
+
+Train loss 0.1345509935422121 micro_f1_score 0.8237293622531564 
+ 
+time = 33.62 secondes
+
+Val loss 0.1618900790077741 micro_f1_score 0.76840490797546
+ 
+----------
+Epoch 3/5
+time = 630.49 secondes
+
+Train loss 0.11733297786197147 micro_f1_score 0.8537016219688454 
+ 
+time = 25.39 secondes
+
+Val loss 0.15802493764728795 micro_f1_score 0.7815221507004921
+ 
+----------
+Epoch 4/5
+time = 643.37 secondes
+
+Train loss 0.10461687288070853 micro_f1_score 0.8711082690539945 
+ 
+time = 33.28 secondes
+
+Val loss 0.15418215114317957 micro_f1_score 0.7945721824349793
+ 
+----------
+Epoch 5/5
+time = 641.55 secondes
+
+Train loss 0.09655808414424862 micro_f1_score 0.884779743599984 
+ 
+time = 33.32 secondes
+
+Val loss 0.1518850386387012 micro_f1_score 0.7967914438502675
+ 
+----------
+best_f1_socre 0.7967914438502675 best_epoch 5
+
+average train time 645.0345641613006
+
+average val time 31.91834201812744
+ 
+time = 36.15 secondes
+
+test_f1_score 0.7880844645550529
+
+----------
+data loaded
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.decoder.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+ECtHR_ToBERT_512_25_1
+----------
+Epoch 1/5
+Traceback (most recent call last):
+  File "test_hierarchial.py", line 85, in <module>
+    trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
+  File "/vol/fob-vol3/nebenf20/wubingti/data/22_wub_longdocclassification/trainer.py", line 287, in trainer_hierarchical_multi_label
+    class_type
+  File "/vol/fob-vol3/nebenf20/wubingti/data/22_wub_longdocclassification/train.py", line 75, in hierarchical_train_epoch
+    lengt=lengt
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/data/22_wub_longdocclassification/models/ToBERT.py", line 26, in forward
+    return_dict=False
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/models/roberta/modeling_roberta.py", line 861, in forward
+    return_dict=return_dict,
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/models/roberta/modeling_roberta.py", line 534, in forward
+    output_attentions,
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/models/roberta/modeling_roberta.py", line 418, in forward
+    past_key_value=self_attn_past_key_value,
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/models/roberta/modeling_roberta.py", line 347, in forward
+    output_attentions,
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/models/roberta/modeling_roberta.py", line 270, in forward
+    attention_probs = self.dropout(attention_probs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/modules/dropout.py", line 58, in forward
+    return F.dropout(input, self.p, self.training, self.inplace)
+  File "/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/torch/nn/functional.py", line 1076, in dropout
+    return _VF.dropout_(input, p, training) if inplace else _VF.dropout(input, p, training)
+RuntimeError: CUDA out of memory. Tried to allocate 1.18 GiB (GPU 0; 79.20 GiB total capacity; 74.73 GiB already allocated; 343.31 MiB free; 75.05 GiB reserved in total by PyTorch)

@@ -1,0 +1,37 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.bias', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+20newsgroups_BERT_head_none_1
+----------
+Epoch 1/40
+time = 324.73 secondes
+
+Train loss 1.263328872702934 accuracy 0.685523509979248 macro_avg {'precision': 0.7017603057498867, 'recall': 0.6702080576926586, 'f1-score': 0.667996388290267, 'support': 10182} weighted_avg {'precision': 0.7087122297631298, 'recall': 0.6855234727951287, 'f1-score': 0.6820836786233148, 'support': 10182}
+ 
+time = 10.02 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.6117357586471128 accuracy 0.833922266960144 macro_avg {'precision': 0.8075526964716172, 'recall': 0.8275260930245845, 'f1-score': 0.812253921534946, 'support': 1132} weighted_avg {'precision': 0.8194172862521273, 'recall': 0.833922261484099, 'f1-score': 0.8212743361832183, 'support': 1132}
+ 
+----------
+Epoch 2/40
+time = 312.23 secondes
+
+Train loss 0.4386543285399909 accuracy 0.8714398145675659 macro_avg {'precision': 0.8621184933017579, 'recall': 0.8607868295548933, 'f1-score': 0.8595815488949154, 'support': 10182} weighted_avg {'precision': 0.8692875820976627, 'recall': 0.8714397957179336, 'f1-score': 0.8689765431889259, 'support': 10182}
+ 
+time = 9.68 secondes
+
+Val loss 0.5073278901022924 accuracy 0.8586572408676147 macro_avg {'precision': 0.8635517005739002, 'recall': 0.8604647720820278, 'f1-score': 0.8552555924202144, 'support': 1132} weighted_avg {'precision': 0.8703695371925328, 'recall': 0.8586572438162544, 'f1-score': 0.8571153378430973, 'support': 1132}
+ 
+----------
+Epoch 3/40

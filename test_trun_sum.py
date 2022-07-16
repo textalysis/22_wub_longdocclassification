@@ -11,8 +11,8 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        #'datasets': ["ECtHR"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
+        'datasets': ["20newsgroups"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -27,7 +27,7 @@ para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
         'sparse_max_lens': [1024, 2048, 4096],
         'attention_windows': [256, 512],
         'block_sizes': [64, 128],
-        'truncations': ["head_tail", "tail", "head"]
+        'truncations': ["head", "head_tail", "tail"]
 }
 
 batch_size = para["batch_size"]

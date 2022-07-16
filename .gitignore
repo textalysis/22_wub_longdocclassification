@@ -1,5 +1,4 @@
 best_models/
-output.txt
 20newsgroups.txt
 20newsgroups1.txt
 20newsgroups2.txt
@@ -12,4 +11,3 @@ Long-document-dataset/
 data/ECtHR
 data/Hyperpartisan
 transformers-cache/
-output1.txt

@@ -12,8 +12,8 @@ import torch.nn as nn
 import trainer
 
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        #'datasets': ["ECtHR"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
+        'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -111,7 +111,7 @@ for seed in para["seeds"]:
                         train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                         val_data_loader = create_data_loader("short", data_val, tokenizer, max_len, batch_size)
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
-                        model = Bigbird(block_size=block_size,num_labels=len(set(data_train['target'])))
+                        model = Bigbird(block_size=block_size,num_labels=num_labels)))
                         device = available_device()
                         model = model.to(device)
                         optimizer = AdamW(model.parameters(), lr=learning_rate)
