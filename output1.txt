@@ -2,7 +2,94 @@
 [nltk_data]     vol3/nebenf20/wubingti/nltk_data...
 [nltk_data]   Package punkt is already up-to-date!
 datasets imported
-Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.bias', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight']
+Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (16) found smaller than n_clusters (17). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (12) found smaller than n_clusters (13). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (9) found smaller than n_clusters (10). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (26) found smaller than n_clusters (27). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (7) found smaller than n_clusters (9). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (15) found smaller than n_clusters (16). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (6) found smaller than n_clusters (7). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (10) found smaller than n_clusters (11). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (22) found smaller than n_clusters (28). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (7) found smaller than n_clusters (9). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (10) found smaller than n_clusters (12). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (15) found smaller than n_clusters (18). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (21) found smaller than n_clusters (29). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (11) found smaller than n_clusters (21). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (20) found smaller than n_clusters (21). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (6) found smaller than n_clusters (7). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (25) found smaller than n_clusters (27). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (8) found smaller than n_clusters (9). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (17) found smaller than n_clusters (18). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (8) found smaller than n_clusters (13). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (6) found smaller than n_clusters (7). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (14). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (28) found smaller than n_clusters (29). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (21) found smaller than n_clusters (22). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (25) found smaller than n_clusters (26). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (8) found smaller than n_clusters (9). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (21) found smaller than n_clusters (22). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (26) found smaller than n_clusters (27). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (15) found smaller than n_clusters (16). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (22) found smaller than n_clusters (29). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (21) found smaller than n_clusters (22). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (8) found smaller than n_clusters (9). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (22) found smaller than n_clusters (23). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (11) found smaller than n_clusters (12). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (9) found smaller than n_clusters (10). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (15). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (5) found smaller than n_clusters (7). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (4) found smaller than n_clusters (7). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (15) found smaller than n_clusters (16). Possibly due to duplicate points in X.
+  model = self._get_model(k).fit(self.features)
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.layer_norm.weight', 'lm_head.decoder.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.dense.weight']
 - This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
 There are 3 GPU(s) available.
@@ -10,28 +97,98 @@ We will use the GPU: NVIDIA A100 80GB PCIe
 /vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
   FutureWarning,
 ##########
-20newsgroups_BERT_head_none_1
+20newsgroups_BERT_head_bert_summarizer_1
 ----------
 Epoch 1/40
-time = 324.73 secondes
+time = 244.95 secondes
 
-Train loss 1.263328872702934 accuracy 0.685523509979248 macro_avg {'precision': 0.7017603057498867, 'recall': 0.6702080576926586, 'f1-score': 0.667996388290267, 'support': 10182} weighted_avg {'precision': 0.7087122297631298, 'recall': 0.6855234727951287, 'f1-score': 0.6820836786233148, 'support': 10182}
+Train loss 1.2754744588860911 accuracy 0.6783890128135681 macro_avg {'precision': 0.701831888648878, 'recall': 0.6631310265176371, 'f1-score': 0.6556714988901758, 'support': 10180} weighted_avg {'precision': 0.7021710379191725, 'recall': 0.6783889980353635, 'f1-score': 0.6694774040631106, 'support': 10180}
  
-time = 10.02 secondes
+time = 5.44 secondes
 
 /usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
   _warn_prf(average, modifier, msg_start, len(result))
-Val loss 0.6117357586471128 accuracy 0.833922266960144 macro_avg {'precision': 0.8075526964716172, 'recall': 0.8275260930245845, 'f1-score': 0.812253921534946, 'support': 1132} weighted_avg {'precision': 0.8194172862521273, 'recall': 0.833922261484099, 'f1-score': 0.8212743361832183, 'support': 1132}
+Val loss 0.6540595223786125 accuracy 0.8196286559104919 macro_avg {'precision': 0.7949882564702239, 'recall': 0.8123239378445957, 'f1-score': 0.7975679977204734, 'support': 1131} weighted_avg {'precision': 0.8063637400211182, 'recall': 0.8196286472148541, 'f1-score': 0.8070193178037786, 'support': 1131}
  
 ----------
 Epoch 2/40
-time = 312.23 secondes
+time = 241.68 secondes
 
-Train loss 0.4386543285399909 accuracy 0.8714398145675659 macro_avg {'precision': 0.8621184933017579, 'recall': 0.8607868295548933, 'f1-score': 0.8595815488949154, 'support': 10182} weighted_avg {'precision': 0.8692875820976627, 'recall': 0.8714397957179336, 'f1-score': 0.8689765431889259, 'support': 10182}
+Train loss 0.4649639995812528 accuracy 0.8643418550491333 macro_avg {'precision': 0.8558183058680966, 'recall': 0.8533910854778937, 'f1-score': 0.8521519436788239, 'support': 10180} weighted_avg {'precision': 0.8625143041698158, 'recall': 0.8643418467583497, 'f1-score': 0.8615607348951108, 'support': 10180}
  
-time = 9.68 secondes
+time = 5.25 secondes
 
-Val loss 0.5073278901022924 accuracy 0.8586572408676147 macro_avg {'precision': 0.8635517005739002, 'recall': 0.8604647720820278, 'f1-score': 0.8552555924202144, 'support': 1132} weighted_avg {'precision': 0.8703695371925328, 'recall': 0.8586572438162544, 'f1-score': 0.8571153378430973, 'support': 1132}
+Val loss 0.4910782116504622 accuracy 0.8673740029335022 macro_avg {'precision': 0.8638307981720242, 'recall': 0.8626439046827914, 'f1-score': 0.8596931454302978, 'support': 1131} weighted_avg {'precision': 0.871308687893527, 'recall': 0.8673740053050398, 'f1-score': 0.865944120793141, 'support': 1131}
  
 ----------
 Epoch 3/40
+time = 242.49 secondes
+
+Train loss 0.28218848636341715 accuracy 0.9212180972099304 macro_avg {'precision': 0.916672368081802, 'recall': 0.9153017667749884, 'f1-score': 0.9156778795223903, 'support': 10180} weighted_avg {'precision': 0.9211728054230192, 'recall': 0.9212180746561887, 'f1-score': 0.9209356895743103, 'support': 10180}
+ 
+time = 5.22 secondes
+
+Val loss 0.5317556057387675 accuracy 0.8691423535346985 macro_avg {'precision': 0.8763683054713514, 'recall': 0.8701091711957861, 'f1-score': 0.8685482331086772, 'support': 1131} weighted_avg {'precision': 0.8779667557960947, 'recall': 0.8691423519009726, 'f1-score': 0.8681341286629264, 'support': 1131}
+ 
+----------
+Epoch 4/40
+time = 233.28 secondes
+
+Train loss 0.21210408750431703 accuracy 0.9425343871116638 macro_avg {'precision': 0.9395207154244976, 'recall': 0.9386983107232787, 'f1-score': 0.9389846515422547, 'support': 10180} weighted_avg {'precision': 0.9423959910309652, 'recall': 0.9425343811394892, 'f1-score': 0.9423535657893622, 'support': 10180}
+ 
+time = 5.21 secondes
+
+Val loss 0.4916821052943369 accuracy 0.8921308517456055 macro_avg {'precision': 0.8948644783213154, 'recall': 0.8882307149408559, 'f1-score': 0.8883902336313989, 'support': 1131} weighted_avg {'precision': 0.8972361388669531, 'recall': 0.8921308576480991, 'f1-score': 0.8918426776225501, 'support': 1131}
+ 
+----------
+Epoch 5/40
+time = 241.45 secondes
+
+Train loss 0.1699967440232354 accuracy 0.9573674201965332 macro_avg {'precision': 0.9554035625732006, 'recall': 0.9552763949195278, 'f1-score': 0.9552710258300829, 'support': 10180} weighted_avg {'precision': 0.9575352666898409, 'recall': 0.9573673870333989, 'f1-score': 0.9573815884466447, 'support': 10180}
+ 
+time = 5.22 secondes
+
+Val loss 0.7318680806374046 accuracy 0.8656056523323059 macro_avg {'precision': 0.879168753297295, 'recall': 0.872606243777974, 'f1-score': 0.8684757790153016, 'support': 1131} weighted_avg {'precision': 0.8880865381175838, 'recall': 0.865605658709107, 'f1-score': 0.869605571564478, 'support': 1131}
+ 
+----------
+Epoch 6/40
+time = 241.65 secondes
+
+Train loss 0.16014801397043524 accuracy 0.9621807932853699 macro_avg {'precision': 0.9613539716191483, 'recall': 0.9611087609395129, 'f1-score': 0.9611608237472611, 'support': 10180} weighted_avg {'precision': 0.9622626140180315, 'recall': 0.962180746561886, 'f1-score': 0.9621494902354872, 'support': 10180}
+ 
+time = 5.18 secondes
+
+Val loss 0.5683415353865507 accuracy 0.8894783854484558 macro_avg {'precision': 0.8930818464253013, 'recall': 0.8904117992518883, 'f1-score': 0.8894887533745894, 'support': 1131} weighted_avg {'precision': 0.8949500811005436, 'recall': 0.8894783377541998, 'f1-score': 0.8900980453465683, 'support': 1131}
+ 
+----------
+Epoch 7/40
+time = 240.88 secondes
+
+Train loss 0.14736697123385234 accuracy 0.965618908405304 macro_avg {'precision': 0.9643803853974733, 'recall': 0.9642651035727863, 'f1-score': 0.9642807683068153, 'support': 10180} weighted_avg {'precision': 0.9657680449431586, 'recall': 0.9656188605108055, 'f1-score': 0.9656501485948229, 'support': 10180}
+ 
+time = 5.20 secondes
+
+Val loss 0.6968451252963039 accuracy 0.8921308517456055 macro_avg {'precision': 0.9063356426085759, 'recall': 0.8937872470991044, 'f1-score': 0.8941785159595023, 'support': 1131} weighted_avg {'precision': 0.9050582714174104, 'recall': 0.8921308576480991, 'f1-score': 0.8924090392865673, 'support': 1131}
+ 
+----------
+Epoch 8/40
+time = 240.76 secondes
+
+Train loss 0.149434083597179 accuracy 0.9678782224655151 macro_avg {'precision': 0.966407037534658, 'recall': 0.9662779013196555, 'f1-score': 0.9662543204348495, 'support': 10180} weighted_avg {'precision': 0.9680710107746947, 'recall': 0.9678781925343811, 'f1-score': 0.9678924182298309, 'support': 10180}
+ 
+time = 5.20 secondes
+
+Val loss 0.690487482419408 accuracy 0.8912467360496521 macro_avg {'precision': 0.8935376720260338, 'recall': 0.8917592254472702, 'f1-score': 0.8893270631436223, 'support': 1131} weighted_avg {'precision': 0.8967139918551417, 'recall': 0.8912466843501327, 'f1-score': 0.890649100548282, 'support': 1131}
+ 
+----------
+Epoch 9/40
+time = 236.63 secondes
+
+Train loss 0.1305105469352328 accuracy 0.9694499373435974 macro_avg {'precision': 0.9684114293144042, 'recall': 0.9683969323748114, 'f1-score': 0.9683363516156712, 'support': 10180} weighted_avg {'precision': 0.9696923620931471, 'recall': 0.9694499017681729, 'f1-score': 0.9695074270832026, 'support': 10180}
+ 
+time = 5.81 secondes
+
+Val loss 0.6587127394048647 accuracy 0.8983200788497925 macro_avg {'precision': 0.9027547626076584, 'recall': 0.8973897386957432, 'f1-score': 0.897430440845185, 'support': 1131} weighted_avg {'precision': 0.9026821868605123, 'recall': 0.8983200707338639, 'f1-score': 0.8980069402790262, 'support': 1131}
+ 
+----------
+Epoch 10/40

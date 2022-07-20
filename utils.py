@@ -135,6 +135,17 @@ def get_dataset(dataset):
 def bert_summarizer(docs):
     bert_summarizer = Summarizer()
     summarized_docs = [bert_summarizer(doc, num_sentences=30) for doc in docs]
+    #summarized_docs = [bert_summarizer(doc) for doc in docs]
+    """
+    i = 0
+    for doc in docs:
+        print("len",len(doc.split(" ")))
+        print("summa",len(bert_summarizer(doc).split(" ")))
+        print(i)
+        print("-----")
+        i = i + 1
+    #print(len(summarized_docs))
+    """
     return summarized_docs
 
 

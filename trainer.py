@@ -257,7 +257,7 @@ def trainer_multi_label(epochs, model, train_data_loader, val_data_loader, data_
     ax.set_xticks(np.arange(0, epochs, 5))
 
     plt.plot(history['train_f1_score'], label='train f1 score')
-    plt.plot(history['val f1 score'], label='val f1 score')
+    plt.plot(history['val_f1_score'], label='val f1 score')
 
     plt.title(filename)
     plt.ylabel('f1 score')
@@ -339,7 +339,7 @@ def trainer_hierarchical_multi_label(epochs, model, train_data_loader, val_data_
     ax.set_xticks(np.arange(0, epochs, 5))
 
     plt.plot(history['train_f1_score'], label='train f1 score')
-    plt.plot(history['val f1 score'], label='val f1 score')
+    plt.plot(history['val_f1_score'], label='val f1 score')
 
     plt.title(filename)
     plt.ylabel('f1 score')

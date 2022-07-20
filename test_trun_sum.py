@@ -12,9 +12,10 @@ import torch.nn as nn
 import trainer
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        'datasets': ["20newsgroups"],
+        'datasets': ["20newsgroups","ECtHR","Hyperpartisan"],
         'seeds': [1, 2, 3, 4, 5],
-        'summarizer': ["none", "bert_summarizer", "text_rank"],
+        #'summarizer': ["none", "bert_summarizer", "text_rank"],
+        'summarizer': ["bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
@@ -38,7 +39,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:2")  # specify  device
+        device = torch.device("cuda:0")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -60,6 +61,13 @@ for seed in para["seeds"]:
             print(len(data_train["data"]), len(data_train["target"]))
         elif dataset == "20newsgroups":
             data_train, data_val, data_test = get_dataset("20newsgroups")
+            data_train['data'] = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
+            data_train['target'] = [x for i,x in enumerate(data_train['target']) if i not in [606, 4130]]
+            data_val['data'] = [x for i,x in enumerate(data_val['data']) if i!=1039]
+            data_val['target'] = [x for i,x in enumerate(data_val['target']) if i!=1039]
+            data_test['data'] = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
+            data_test['target'] = [x for i,x in enumerate(data_test['target']) if i not in [4392,6229]]
+            #document coding problem garbled
             loss_fn = nn.CrossEntropyLoss()
             num_labels = 20
             class_type = "single_label"
@@ -75,6 +83,11 @@ for seed in para["seeds"]:
             if truncation == "head":
                 for summarizer in para["summarizer"]:
                     if summarizer == "bert_summarizer":
+                        #print(data_train['data'][0])
+                        #data_train['data'] = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
+                        #data_val['data'] = [x for i,x in enumerate(data_val['data']) if i!=1039]
+                        #data_test['data'] = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
+                        #document coding problem garbled 
                         data_train['data'] = bert_summarizer(data_train['data'])
                         data_val['data'] = bert_summarizer(data_val['data'])
                         data_test['data'] = bert_summarizer(data_test['data'])
@@ -110,7 +123,7 @@ for seed in para["seeds"]:
             else:
                 train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size, approach=truncation)
                 val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size, approach=truncation)
-                test_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size, approach=truncation)
+                test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size, approach=truncation)
                 model = BERT(num_labels)
                 device = available_device()
                 model = model.to(device)

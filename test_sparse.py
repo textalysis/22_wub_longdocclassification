@@ -24,7 +24,8 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'total_len': 4096,
         'epochs': 40,
         'max_len': 512,
-        'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
+        #'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
+       'model_names': ["ToBERT","Bigbird", "Longformer", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
         'attention_windows': [256, 512],
         'block_sizes': [64, 128],
@@ -111,7 +112,7 @@ for seed in para["seeds"]:
                         train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                         val_data_loader = create_data_loader("short", data_val, tokenizer, max_len, batch_size)
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
-                        model = Bigbird(block_size=block_size,num_labels=num_labels)))
+                        model = Bigbird(block_size=block_size,num_labels=num_labels)
                         device = available_device()
                         model = model.to(device)
                         optimizer = AdamW(model.parameters(), lr=learning_rate)
