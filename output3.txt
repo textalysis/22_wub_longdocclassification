@@ -1,0 +1,55 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+20newsgroups_ToBERT_1024_256_25_1
+----------
+Epoch 1/40
+time = 321.74 secondes
+
+Train loss 1.1278423667187967 accuracy 0.6850324273109436 macro_avg {'precision': 0.6862912830743303, 'recall': 0.6713675781521944, 'f1-score': 0.6694721912246921, 'support': 10182} weighted_avg {'precision': 0.6933389733819632, 'recall': 0.6850324101355333, 'f1-score': 0.6814073707918317, 'support': 10182}
+ 
+time = 7.08 secondes
+
+Val loss 0.619510051545123 accuracy 0.8136042356491089 macro_avg {'precision': 0.8174209979088399, 'recall': 0.8076546391187766, 'f1-score': 0.7984248943783885, 'support': 1132} weighted_avg {'precision': 0.8221297347611694, 'recall': 0.8136042402826855, 'f1-score': 0.8063577582088549, 'support': 1132}
+ 
+----------
+Epoch 2/40
+time = 320.14 secondes
+
+Train loss 0.4310798642534055 accuracy 0.8768414855003357 macro_avg {'precision': 0.8690298582773062, 'recall': 0.8668170481239302, 'f1-score': 0.8663818924748711, 'support': 10182} weighted_avg {'precision': 0.8755224212368424, 'recall': 0.8768414849734826, 'f1-score': 0.8750361964495136, 'support': 10182}
+ 
+time = 6.76 secondes
+
+Val loss 0.5282895195652062 accuracy 0.8498233556747437 macro_avg {'precision': 0.8577951501091903, 'recall': 0.8518401718592182, 'f1-score': 0.8455560199400847, 'support': 1132} weighted_avg {'precision': 0.8632555139150864, 'recall': 0.8498233215547704, 'f1-score': 0.846237636840439, 'support': 1132}
+ 
+----------
+Epoch 3/40
+time = 321.76 secondes
+
+Train loss 0.25229525280051995 accuracy 0.9291887879371643 macro_avg {'precision': 0.9247246839997285, 'recall': 0.9238374360336865, 'f1-score': 0.9240978542291725, 'support': 10182} weighted_avg {'precision': 0.9289053142808392, 'recall': 0.9291887644863485, 'f1-score': 0.9289001172432947, 'support': 10182}
+ 
+time = 6.74 secondes
+
+Val loss 0.4853645198926015 accuracy 0.8860424160957336 macro_avg {'precision': 0.8869391024474677, 'recall': 0.8846308867076929, 'f1-score': 0.8833320852832923, 'support': 1132} weighted_avg {'precision': 0.8899855590331466, 'recall': 0.8860424028268551, 'f1-score': 0.8856490996587192, 'support': 1132}
+ 
+----------
+Epoch 4/40
+time = 310.46 secondes
+
+Train loss 0.16185465433161114 accuracy 0.9553133249282837 macro_avg {'precision': 0.9528011836430924, 'recall': 0.9524827505374489, 'f1-score': 0.9526190581823603, 'support': 10182} weighted_avg {'precision': 0.9551919941647026, 'recall': 0.9553132979768219, 'f1-score': 0.955232690621826, 'support': 10182}
+ 
+time = 6.72 secondes
+
+Val loss 0.4685629009413467 accuracy 0.8957597017288208 macro_avg {'precision': 0.8995659017534567, 'recall': 0.8930612914353311, 'f1-score': 0.8929944355558748, 'support': 1132} weighted_avg {'precision': 0.8994432340055689, 'recall': 0.8957597173144877, 'f1-score': 0.894522577739957, 'support': 1132}
+ 
+----------
+Epoch 5/40

@@ -11,7 +11,7 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
+para = {'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
         #'datasets': ["Hyperpartisan"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -20,7 +20,8 @@ para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'learning_rate': 2e-5,
         'chunk_lens': [256, 512],
         'overlap_lens': [25, 50],
-        'total_len': 4096,
+        #'total_len': 4096,
+        'total_len':1024,
         'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
@@ -90,7 +91,7 @@ for seed in para["seeds"]:
                                         num_training_steps=total_steps
                                     )
                 loss_fn = loss_fn.to(device)
-                filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
+                filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
                 # try catch: continue next loop when memory not enough
                 try:
                     if class_type == "multi_label":
