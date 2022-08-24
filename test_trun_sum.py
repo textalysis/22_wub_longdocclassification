@@ -14,7 +14,7 @@ import trainer
 para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
         'datasets': ["ECtHR","Hyperpartisan"],
         #'seeds': [1, 2, 3, 4, 5],
-        'seeds': [2],
+        'seeds': [1,3,5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
