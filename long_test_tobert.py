@@ -69,6 +69,7 @@ for seed in para["seeds"]:
         print("datasets imported")
 
         tokenizer = tokenize('BERT')
+        data_test = filter_testset(tokenizer, data_test)
         for chunk_len in para['chunk_lens']:
             for overlap_len in para['overlap_lens']:
                 test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
