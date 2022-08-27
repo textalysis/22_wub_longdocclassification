@@ -1,0 +1,50 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+datasets imported
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.decoder.bias', 'cls.predictions.transform.dense.weight', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.dense.weight', 'classifier.out_proj.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+Hyperpartisan_Bigbird_1024_64_1
+----------
+Epoch 1/40
+time = 51.01 secondes
+
+Train loss 0.6484671542138765 accuracy 0.5988371968269348 macro_avg {'precision': 0.5110780423280423, 'recall': 0.5065341417031028, 'f1-score': 0.48207592457002096, 'support': 516} weighted_avg {'precision': 0.5468878173577786, 'recall': 0.5988372093023255, 'f1-score': 0.5497498120475199, 'support': 516}
+ 
+time = 1.55 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.5683221146464348 accuracy 0.59375 macro_avg {'precision': 0.296875, 'recall': 0.5, 'f1-score': 0.37254901960784315, 'support': 64} weighted_avg {'precision': 0.3525390625, 'recall': 0.59375, 'f1-score': 0.4424019607843137, 'support': 64}
+ 
+----------
+Epoch 2/40
+time = 44.12 secondes
+
+Train loss 0.4316922918413625 accuracy 0.7926356792449951 macro_avg {'precision': 0.7960464015151515, 'recall': 0.743908782081498, 'f1-score': 0.757253338140314, 'support': 516} weighted_avg {'precision': 0.7941244751291989, 'recall': 0.7926356589147286, 'f1-score': 0.7827573460081663, 'support': 516}
+ 
+time = 1.46 secondes
+
+Val loss 0.449489651247859 accuracy 0.828125 macro_avg {'precision': 0.8642052565707135, 'recall': 0.7945344129554657, 'f1-score': 0.8073871409028728, 'support': 64} weighted_avg {'precision': 0.849773153942428, 'recall': 0.828125, 'f1-score': 0.8192373461012312, 'support': 64}
+ 
+----------
+Epoch 3/40
+time = 43.89 secondes
+
+Train loss 0.2424559767047564 accuracy 0.9089147448539734 macro_avg {'precision': 0.9004681950274459, 'recall': 0.903182549615591, 'f1-score': 0.9017879198979488, 'support': 516} weighted_avg {'precision': 0.9092873698728202, 'recall': 0.9089147286821705, 'f1-score': 0.909068544699096, 'support': 516}
+ 
+time = 1.55 secondes
+
+Val loss 0.4411683026701212 accuracy 0.828125 macro_avg {'precision': 0.8355481727574751, 'recall': 0.8066801619433198, 'f1-score': 0.8150774888363541, 'support': 64} weighted_avg {'precision': 0.831499169435216, 'recall': 0.828125, 'f1-score': 0.8242874967165746, 'support': 64}
+ 
+----------
+Epoch 4/40
