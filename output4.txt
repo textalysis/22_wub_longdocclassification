@@ -3953,3 +3953,13 @@ Val loss 0.8152730234924861 accuracy 0.8586572408676147 macro_avg {'precision': 
  
 ----------
 Epoch 8/40
+time = 1921.80 secondes
+
+Train loss 0.11953015721076295 accuracy 0.9719112515449524 macro_avg {'precision': 0.9708811688815364, 'recall': 0.970867716324298, 'f1-score': 0.9708578367637344, 'support': 10182} weighted_avg {'precision': 0.9719537730489218, 'recall': 0.9719112158711452, 'f1-score': 0.9719167378769186, 'support': 10182}
+ 
+time = 47.72 secondes
+
+Val loss 0.723524037891225 accuracy 0.870141327381134 macro_avg {'precision': 0.8746950269223799, 'recall': 0.8721629700856346, 'f1-score': 0.8711095389842092, 'support': 1132} weighted_avg {'precision': 0.8719913764890239, 'recall': 0.8701413427561837, 'f1-score': 0.86854589786337, 'support': 1132}
+ 
+----------
+Epoch 9/40
