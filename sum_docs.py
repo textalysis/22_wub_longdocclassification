@@ -18,15 +18,18 @@ for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
         data_test_sum = data_test_sum[0:4392]+[data_test['data'][4392]]+data_test_sum[4392:6229]+[data_test['data'][6229]]+data_test_sum[6229::]            
         """                  
         
-        with open(os.path.join('data', "data_train.txt"), "a") as f:
+        with open(os.path.join('data', "data_train_sum.txt"), "a") as f:
             for line in data_train_sum:
+                line.replace('\n','')
                 f.write(line+'\n')
 
 
-        with open(os.path.join('data', "data_val.txt"), "a") as f:
+        with open(os.path.join('data', "data_val_sum.txt"), "a") as f:
             for line in data_val_sum:
+                line.replace('\n','')        
                 f.write(line+'\n')
         
-        with open(os.path.join('data', "data_test.txt"), "a") as f:
+        with open(os.path.join('data', "data_test_sum.txt"), "a") as f:
             for line in data_test_sum:
+                line.replace('\n','')
                 f.write(line+'\n')
