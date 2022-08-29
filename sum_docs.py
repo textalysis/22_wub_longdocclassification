@@ -20,16 +20,16 @@ for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
         
         with open(os.path.join('data', "data_train_sum.txt"), "a") as f:
             for line in data_train_sum:
-                line.replace('\n','')
+                line = line.replace('\n','')
                 f.write(line+'\n')
 
 
         with open(os.path.join('data', "data_val_sum.txt"), "a") as f:
             for line in data_val_sum:
-                line.replace('\n','')        
+                line = line.replace('\n','')        
                 f.write(line+'\n')
         
         with open(os.path.join('data', "data_test_sum.txt"), "a") as f:
             for line in data_test_sum:
-                line.replace('\n','')
+                line = line.replace('\n','')
                 f.write(line+'\n')
