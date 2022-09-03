@@ -2,8 +2,8 @@ from utils import *
 
 for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
     if dataset == "Hyperpartisan":
-        data_train, data_val, data_test = get_dataset("Hyperpartisan")
-        
+        data_train, data_val, data_test = get_dataset("20newsgroups")
+        """
         data_train_sum = text_rank(data_train['data'])
         data_val_sum = text_rank(data_val['data'])
         data_test_sum = text_rank(data_test['data'])
@@ -17,7 +17,7 @@ for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
         data_test_sum = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
         data_test_sum = bert_summarizer(data_test_sum)
         data_test_sum = data_test_sum[0:4392]+[data_test['data'][4392]]+data_test_sum[4392:6229]+[data_test['data'][6229]]+data_test_sum[6229::]            
-        """                  
+       
         
         with open(os.path.join('data', "data_train_sum.txt"), "a") as f:
         #with open("data_train_sum.txt", "a") as f:
