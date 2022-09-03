@@ -2,7 +2,7 @@ from utils import *
 
 for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
     if dataset == "Hyperpartisan":
-        data_train, data_val, data_test = get_dataset("ECtHR")
+        data_train, data_val, data_test = get_dataset("Hyperpartisan")
         
         data_train_sum = text_rank(data_train['data'])
         data_val_sum = text_rank(data_val['data'])
