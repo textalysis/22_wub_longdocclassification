@@ -2,11 +2,11 @@ from utils import *
 
 for dataset in ["20newsgroups","ECtHR","Hyperpartisan"]:
     if dataset == "Hyperpartisan":
-        data_train, data_val, data_test = get_dataset("Hyperpartisan")
+        data_train, data_val, data_test = get_dataset("ECtHR")
         
-        data_train_sum = bert_summarizer(data_train['data'])
-        data_val_sum = bert_summarizer(data_val['data'])
-        data_test_sum = bert_summarizer(data_test['data'])
+        data_train_sum = text_rank(data_train['data'])
+        data_val_sum = text_rank(data_val['data'])
+        data_test_sum = text_rank(data_test['data'])
         """
         data_train_sum = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
         data_train_sum = bert_summarizer(data_train_sum)
