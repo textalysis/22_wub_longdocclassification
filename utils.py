@@ -134,7 +134,7 @@ def get_dataset(dataset):
 
 def bert_summarizer(docs):
     bert_summarizer = Summarizer()
-    summarized_docs = [bert_summarizer(doc, num_sentences=20) for doc in docs]
+    summarized_docs = [bert_summarizer(doc, num_sentences=15) for doc in docs]
     #summarized_docs = [bert_summarizer(doc) for doc in docs]
     """
     i = 0
