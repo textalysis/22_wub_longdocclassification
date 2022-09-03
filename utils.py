@@ -154,7 +154,7 @@ def text_rank(docs):
     for doc in docs:
         parser = PlaintextParser.from_string(doc, Tokenizer("english"))
         summarizer = TextRankSummarizer()
-        summary = summarizer(parser.document, 15)
+        summary = summarizer(parser.document, 10)
         text_summary = ""
         for sentence in summary:
             text_summary += str(sentence)
