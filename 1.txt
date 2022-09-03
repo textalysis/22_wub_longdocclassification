@@ -1,34 +1,10 @@
 [nltk_data] Downloading package punkt to /vol/fob-
 [nltk_data]     vol3/nebenf20/wubingti/nltk_data...
 [nltk_data]   Package punkt is already up-to-date!
-Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias']
+Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.weight']
 - This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (14). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (14). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (14). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (13) found smaller than n_clusters (14). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
 /vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (12) found smaller than n_clusters (13). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (7) found smaller than n_clusters (9). Possibly due to duplicate points in X.
   model = self._get_model(k).fit(self.features)
 /vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (9) found smaller than n_clusters (10). Possibly due to duplicate points in X.
   model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (12) found smaller than n_clusters (13). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (10) found smaller than n_clusters (12). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (12) found smaller than n_clusters (14). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/summarizer/cluster_features.py:149: ConvergenceWarning: Number of distinct clusters (10) found smaller than n_clusters (13). Possibly due to duplicate points in X.
-  model = self._get_model(k).fit(self.features)
-Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of the model checkpoint at bert-large-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
