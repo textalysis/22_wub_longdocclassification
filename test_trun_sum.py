@@ -12,10 +12,11 @@ import torch.nn as nn
 import trainer
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        'datasets': ["ECtHR","Hyperpartisan"],
+        'datasets': ["ECtHR"],
         #'seeds': [1, 2, 3, 4, 5],
-        'seeds': [1,3,5],
-        'summarizer': ["none", "bert_summarizer", "text_rank"],
+        'seeds': [5],
+        #'summarizer': ["none", "bert_summarizer", "text_rank"],
+        'summarizer': ["bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
@@ -50,9 +51,10 @@ def available_device():
 
 
 for seed in para["seeds"]:
-    train.seed_everything(seed)
+        train.seed_everything(seed)
 
-    for dataset in para["datasets"]:
+    #for dataset in para["datasets"]:
+        dataset = para["datasets"][0]
         if dataset == "Hyperpartisan":
             data_train, data_val, data_test = get_dataset("Hyperpartisan")
             loss_fn = nn.CrossEntropyLoss()
@@ -61,16 +63,6 @@ for seed in para["seeds"]:
             print(len(data_train["data"]), len(data_train["target"]))
         elif dataset == "20newsgroups":
             data_train, data_val, data_test = get_dataset("20newsgroups")
-            #data_train_sum = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
-            #data_train['data'] = data_train_sum[0:606]+data_train['data'][606]+data_train_sum[606:4130]+data_train['data'][4130]+data_train_sum[4130::] 
-            #data_train['target'] = [x for i,x in enumerate(data_train['target']) if i not in [606, 4130]]
-            #data_val_sum = [x for i,x in enumerate(data_val['data']) if i!=1039]
-            #data_val['data'] = data_val_sum[0:1039]+data_val['data'][1039]+data_val_sum[1039::]
-            #data_val['target'] = [x for i,x in enumerate(data_val['target']) if i!=1039]
-            #data_test_sum = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
-            #data_test['data'] = data_test_sum[0:4392]+data_test['data'][4392]+data_test_sum[4392:6229]+data_test['data'][6229]+data_test_sum[6229::]
-            #data_test['target'] = [x for i,x in enumerate(data_test['target']) if i not in [4392,6229]]
-            #document coding problem garbled
             loss_fn = nn.CrossEntropyLoss()
             num_labels = 20
             class_type = "single_label"
@@ -86,30 +78,15 @@ for seed in para["seeds"]:
             if truncation == "head":
                 #for summarizer in para["summarizer"]:
                     summarizer = para["summarizer"][0]
-                    if summarizer == "bert_summarizer":
-                        #print(data_train['data'][0])
-                        #data_train['data'] = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
-                        #data_val['data'] = [x for i,x in enumerate(data_val['data']) if i!=1039]
-                        #data_test['data'] = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
-                        #document coding problem garbled
-                        if dataset == "20newsgroups":
-                            data_train_sum = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
-                            data_train_sum = bert_summarizer(data_train_sum)
-                            data_train['data'] = data_train_sum[0:606]+data_train['data'][606]+data_train_sum[606:4130]+data_train['data'][4130]+data_train_sum[4130::]  
-                            data_val_sum = [x for i,x in enumerate(data_val['data']) if i!=1039]
-                            data_val_sum = bert_summarizer(data_val_sum)
-                            data_val['data'] = data_val_sum[0:1039]+data_val['data'][1039]+data_val_sum[1039::]
-                            data_test_sum = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
-                            data_test_sum = bert_summarizer(data_test_sum)
-                            data_test['data'] = data_test_sum[0:4392]+data_test['data'][4392]+data_test_sum[4392:6229]+data_test['data'][6229]+data_test_sum[6229::]            
-                        else:
-                            data_train['data'] = bert_summarizer(data_train['data'])
-                            data_val['data'] = bert_summarizer(data_val['data'])
-                            data_test['data'] = bert_summarizer(data_test['data'])
-                    if summarizer == "text_rank":
-                        data_train['data'] = text_rank(data_train['data'])
-                        data_val['data'] = text_rank(data_val['data'])
-                        data_test['data'] = text_rank(data_test['data'])
+                    summarizer_path = os.path.join('data', "{}".format(summarizer), "{}".format(dataset))
+                    with open(os.path.join(summarizer_path, "data_train_sum.txt"),encoding='utf-8') as f:
+                        data_train['data'] = f.readlines()
+                            
+                    with open(os.path.join(summarizer_path, "data_val_sum.txt"),encoding='utf-8') as f:
+                        data_val['data'] = f.readlines()
+                            
+                    with open(os.path.join(summarizer_path, "data_test_sum.txt"),encoding='utf-8') as f:
+                        data_test['data'] = f.readlines()
 
                     train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                     val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
@@ -135,6 +112,7 @@ for seed in para["seeds"]:
                     except Exception as e:
                         print("Exception")
                         print(e)
+            """
             else:
                 train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size, approach=truncation)
                 val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size, approach=truncation)
@@ -160,4 +138,6 @@ for seed in para["seeds"]:
                 except Exception as e:
                     print("Exception")
                     print(e)
+            """
+
 
