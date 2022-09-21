@@ -12,9 +12,9 @@ import torch.nn as nn
 import trainer
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        'datasets': ["ECtHR"],
-        #'seeds': [1, 2, 3, 4, 5],
-        'seeds': [5],
+        'datasets': ["20newsgroups"],
+        'seeds': [1, 2, 3, 4, 5],
+        #'seeds': [5],
         #'summarizer': ["none", "bert_summarizer", "text_rank"],
         'summarizer': ["bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -40,7 +40,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:2")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -50,44 +50,30 @@ def available_device():
     return device
 
 
+dataset = "20newsgroups"
+summarizer = "text_rank"
+data_train, data_val, data_test = get_dataset("20newsgroups")
+loss_fn = nn.CrossEntropyLoss()
+num_labels = 20
+class_type = "single_label"
+data_train_sum = [x for i,x in enumerate(data_train['data']) if i not in [606, 4130]]
+data_train_sum = text_rank(data_train_sum)
+data_train['data'] = data_train_sum[0:606]+[data_train['data'][606]]+data_train_sum[606:4130]+[data_train['data'][4130]]+data_train_sum[4130::]  
+data_val_sum = [x for i,x in enumerate(data_val['data']) if i!=1039]
+data_val_sum = text_rank(data_val_sum)
+data_val['data'] = data_val_sum[0:1039]+[data_val['data'][1039]]+data_val_sum[1039::]
+data_test_sum = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
+data_test_sum = text_rank(data_test_sum)
+data_test['data'] = data_test_sum[0:4392]+[data_test['data'][4392]]+data_test_sum[4392:6229]+[data_test['data'][6229]]+data_test_sum[6229::]   
+
+
 for seed in para["seeds"]:
         train.seed_everything(seed)
-
-    #for dataset in para["datasets"]:
-        dataset = para["datasets"][0]
-        if dataset == "Hyperpartisan":
-            data_train, data_val, data_test = get_dataset("Hyperpartisan")
-            loss_fn = nn.CrossEntropyLoss()
-            num_labels = 2
-            class_type = "single_label"
-            print(len(data_train["data"]), len(data_train["target"]))
-        elif dataset == "20newsgroups":
-            data_train, data_val, data_test = get_dataset("20newsgroups")
-            loss_fn = nn.CrossEntropyLoss()
-            num_labels = 20
-            class_type = "single_label"
-        else:
-            data_train, data_val, data_test = get_dataset("ECtHR")
-            loss_fn = nn.BCEWithLogitsLoss()
-            num_labels = 10
-            class_type = "multi_label"
-        print("datasets imported")
-
         for truncation in para['truncations']:
             tokenizer = tokenize('BERT')
             if truncation == "head":
                 #for summarizer in para["summarizer"]:
-                    summarizer = para["summarizer"][0]
-                    summarizer_path = os.path.join('data', "{}".format(summarizer), "{}".format(dataset))
-                    with open(os.path.join(summarizer_path, "data_train_sum.txt"),encoding='utf-8') as f:
-                        data_train['data'] = f.readlines()
-                            
-                    with open(os.path.join(summarizer_path, "data_val_sum.txt"),encoding='utf-8') as f:
-                        data_val['data'] = f.readlines()
-                            
-                    with open(os.path.join(summarizer_path, "data_test_sum.txt"),encoding='utf-8') as f:
-                        data_test['data'] = f.readlines()
-
+                    
                     train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                     val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
                     test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
@@ -139,5 +125,6 @@ for seed in para["seeds"]:
                     print("Exception")
                     print(e)
             """
+
 
 
