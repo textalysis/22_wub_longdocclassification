@@ -12,7 +12,7 @@ import torch.nn as nn
 import trainer
 
 para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
-        'datasets': ["Hyperpartisan","20newsgroups"],
+        'datasets': ["ECtHR"],
         #'seeds': [1, 2, 3, 4, 5],
         'seeds': [4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -20,7 +20,7 @@ para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
         'batch_size': 16,
         'learning_rate': 2e-5,
         #'chunk_lens': [256, 512],
-        'chunk_lens': [512],
+        'chunk_lens': [256],
         'overlap_lens': [25, 50],
         'total_len': 4096,
         #'total_len':1024,

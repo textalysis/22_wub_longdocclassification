@@ -1,0 +1,849 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+/usr/lib64/python3.6/site-packages/h5py/__init__.py:39: UserWarning: h5py is running against HDF5 1.10.8 when it was built against 1.10.7, this may cause problems
+  '{0}.{1}.{2}'.format(*version.hdf5_built_version_tuple)
+516 516
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.decoder.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight', 'lm_head.layer_norm.bias', 'lm_head.dense.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+Hyperpartisan_BERT_head_bert_summarizer_5
+----------
+Epoch 1/40
+time = 18.02 secondes
+
+Train loss 0.6707593672203295 accuracy 0.6104651093482971 macro_avg {'precision': 0.4954594017094017, 'recall': 0.4983420834484664, 'f1-score': 0.44624255853066014, 'support': 516} weighted_avg {'precision': 0.5343422861591466, 'recall': 0.6104651162790697, 'f1-score': 0.529230470275408, 'support': 516}
+ 
+time = 0.55 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.6581147313117981 accuracy 0.59375 macro_avg {'precision': 0.296875, 'recall': 0.5, 'f1-score': 0.37254901960784315, 'support': 64} weighted_avg {'precision': 0.3525390625, 'recall': 0.59375, 'f1-score': 0.4424019607843137, 'support': 64}
+ 
+----------
+Epoch 2/40
+time = 15.19 secondes
+
+Train loss 0.5595285079695962 accuracy 0.7093023061752319 macro_avg {'precision': 0.727728130121525, 'recall': 0.6197032004291079, 'f1-score': 0.614388202471104, 'support': 516} weighted_avg {'precision': 0.7206566051358537, 'recall': 0.7093023255813954, 'f1-score': 0.6670358801338439, 'support': 516}
+ 
+time = 0.63 secondes
+
+Val loss 0.5057017058134079 accuracy 0.75 macro_avg {'precision': 0.7568627450980392, 'recall': 0.7651821862348178, 'f1-score': 0.7490196078431374, 'support': 64} weighted_avg {'precision': 0.777450980392157, 'recall': 0.75, 'f1-score': 0.7519607843137257, 'support': 64}
+ 
+----------
+Epoch 3/40
+time = 15.54 secondes
+
+Train loss 0.45324749612446985 accuracy 0.7906976938247681 macro_avg {'precision': 0.7734512992696083, 'recall': 0.7793183037238105, 'f1-score': 0.7760416666666667, 'support': 516} weighted_avg {'precision': 0.7935249490331943, 'recall': 0.7906976744186046, 'f1-score': 0.7918079780361758, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 0.551460899412632 accuracy 0.765625 macro_avg {'precision': 0.8006802721088435, 'recall': 0.7236842105263157, 'f1-score': 0.7308662741799832, 'support': 64} weighted_avg {'precision': 0.7883078231292517, 'recall': 0.765625, 'f1-score': 0.7490012615643398, 'support': 64}
+ 
+----------
+Epoch 4/40
+time = 15.32 secondes
+
+Train loss 0.318600388638901 accuracy 0.8837209343910217 macro_avg {'precision': 0.8828131702211623, 'recall': 0.8626529915641306, 'f1-score': 0.8710064496775163, 'support': 516} weighted_avg {'precision': 0.8835214225377459, 'recall': 0.8837209302325582, 'f1-score': 0.8821512412751457, 'support': 516}
+ 
+time = 0.53 secondes
+
+Val loss 0.4769073352217674 accuracy 0.828125 macro_avg {'precision': 0.8473684210526315, 'recall': 0.8006072874493927, 'f1-score': 0.811512717536814, 'support': 64} weighted_avg {'precision': 0.8384868421052631, 'recall': 0.828125, 'f1-score': 0.8220046854082999, 'support': 64}
+ 
+----------
+Epoch 5/40
+time = 16.31 secondes
+
+Train loss 0.18849997561086307 accuracy 0.9360464811325073 macro_avg {'precision': 0.9330953477660064, 'recall': 0.9279212652178861, 'f1-score': 0.9303976750174743, 'support': 516} weighted_avg {'precision': 0.9358523561106769, 'recall': 0.936046511627907, 'f1-score': 0.9358543743282325, 'support': 516}
+ 
+time = 0.56 secondes
+
+Val loss 0.6446425318717957 accuracy 0.8125 macro_avg {'precision': 0.8357487922705313, 'recall': 0.7813765182186234, 'f1-score': 0.7922077922077922, 'support': 64} weighted_avg {'precision': 0.8257850241545894, 'recall': 0.8125, 'f1-score': 0.8043831168831169, 'support': 64}
+ 
+----------
+Epoch 6/40
+time = 15.68 secondes
+
+Train loss 0.2598373522756226 accuracy 0.9282945990562439 macro_avg {'precision': 0.9236838658983761, 'recall': 0.9206881979097248, 'f1-score': 0.9221468737639206, 'support': 516} weighted_avg {'precision': 0.9281076530591528, 'recall': 0.9282945736434108, 'f1-score': 0.9281673798528007, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 0.9574100822210312 accuracy 0.796875 macro_avg {'precision': 0.8442176870748299, 'recall': 0.7560728744939271, 'f1-score': 0.7667507709559854, 'support': 64} weighted_avg {'precision': 0.8275085034013605, 'recall': 0.796875, 'f1-score': 0.7824677600224279, 'support': 64}
+ 
+----------
+Epoch 7/40
+time = 15.74 secondes
+
+Train loss 0.20825898819461916 accuracy 0.9399224519729614 macro_avg {'precision': 0.9363541121005763, 'recall': 0.9332688588007737, 'f1-score': 0.9347717050454469, 'support': 516} weighted_avg {'precision': 0.9397778170315235, 'recall': 0.939922480620155, 'f1-score': 0.9398159128496439, 'support': 516}
+ 
+time = 0.52 secondes
+
+Val loss 1.5457071959972382 accuracy 0.71875 macro_avg {'precision': 0.8392857142857143, 'recall': 0.6538461538461539, 'f1-score': 0.6395494367959951, 'support': 64} weighted_avg {'precision': 0.8091517857142858, 'recall': 0.71875, 'f1-score': 0.671229662077597, 'support': 64}
+ 
+----------
+Epoch 8/40
+time = 15.57 secondes
+
+Train loss 0.3211714247608501 accuracy 0.9186046719551086 macro_avg {'precision': 0.9366415676313163, 'recall': 0.8911626546169725, 'f1-score': 0.9076104564909707, 'support': 516} weighted_avg {'precision': 0.9246731464232292, 'recall': 0.9186046511627907, 'f1-score': 0.9163811061729844, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.2381944507360458 accuracy 0.78125 macro_avg {'precision': 0.7732793522267206, 'recall': 0.7732793522267206, 'f1-score': 0.7732793522267205, 'support': 64} weighted_avg {'precision': 0.78125, 'recall': 0.78125, 'f1-score': 0.7812499999999999, 'support': 64}
+ 
+----------
+Epoch 9/40
+time = 15.35 secondes
+
+Train loss 0.34227448405881383 accuracy 0.9302325248718262 macro_avg {'precision': 0.9212481899336442, 'recall': 0.9302862344163971, 'f1-score': 0.9253472222222223, 'support': 516} weighted_avg {'precision': 0.9317054053864022, 'recall': 0.9302325581395349, 'f1-score': 0.930602659345392, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 1.212390959262848 accuracy 0.796875 macro_avg {'precision': 0.8442176870748299, 'recall': 0.7560728744939271, 'f1-score': 0.7667507709559854, 'support': 64} weighted_avg {'precision': 0.8275085034013605, 'recall': 0.796875, 'f1-score': 0.7824677600224279, 'support': 64}
+ 
+----------
+Epoch 10/40
+time = 15.69 secondes
+
+Train loss 0.46307998624714936 accuracy 0.8992248177528381 macro_avg {'precision': 0.898093058733791, 'recall': 0.8817352859906051, 'f1-score': 0.8887986340201913, 'support': 516} weighted_avg {'precision': 0.8990166687362154, 'recall': 0.8992248062015504, 'f1-score': 0.8981689912971089, 'support': 516}
+ 
+time = 0.58 secondes
+
+Val loss 1.3169483244419098 accuracy 0.734375 macro_avg {'precision': 0.8036020583190394, 'recall': 0.6791497975708503, 'f1-score': 0.6768636768636769, 'support': 64} weighted_avg {'precision': 0.7838228987993139, 'recall': 0.734375, 'f1-score': 0.7024242649242649, 'support': 64}
+ 
+----------
+Epoch 11/40
+time = 15.66 secondes
+
+Train loss 0.3615162670365394 accuracy 0.9205426573753357 macro_avg {'precision': 0.9215116279069767, 'recall': 0.9053768509337972, 'f1-score': 0.9124363118618252, 'support': 516} weighted_avg {'precision': 0.9207116459347395, 'recall': 0.9205426356589147, 'f1-score': 0.919768146124161, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 1.011221781373024 accuracy 0.796875 macro_avg {'precision': 0.800110741971207, 'recall': 0.7742914979757085, 'f1-score': 0.7814552140793275, 'support': 64} weighted_avg {'precision': 0.7983457918050941, 'recall': 0.796875, 'f1-score': 0.792339768846861, 'support': 64}
+ 
+----------
+Epoch 12/40
+time = 15.66 secondes
+
+Train loss 0.17017751061498668 accuracy 0.961240291595459 macro_avg {'precision': 0.9601240584847142, 'recall': 0.9557563837914276, 'f1-score': 0.9578672327917039, 'support': 516} weighted_avg {'precision': 0.9611807766592364, 'recall': 0.9612403100775194, 'f1-score': 0.9611478970011955, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.2686539590358734 accuracy 0.75 macro_avg {'precision': 0.7584541062801933, 'recall': 0.7165991902834008, 'f1-score': 0.722943722943723, 'support': 64} weighted_avg {'precision': 0.7548309178743962, 'recall': 0.75, 'f1-score': 0.7391774891774892, 'support': 64}
+ 
+----------
+Epoch 13/40
+time = 15.51 secondes
+
+Train loss 0.09934179546579605 accuracy 0.9767441749572754 macro_avg {'precision': 0.9738362215426435, 'recall': 0.9759927181704403, 'f1-score': 0.9748962117280747, 'support': 516} weighted_avg {'precision': 0.9768284748727107, 'recall': 0.9767441860465116, 'f1-score': 0.9767705856796322, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 1.2798147648572922 accuracy 0.75 macro_avg {'precision': 0.7445887445887446, 'recall': 0.728744939271255, 'f1-score': 0.7333333333333334, 'support': 64} weighted_avg {'precision': 0.7478354978354977, 'recall': 0.75, 'f1-score': 0.7458333333333333, 'support': 64}
+ 
+----------
+Epoch 14/40
+time = 15.88 secondes
+
+Train loss 0.03818147351160984 accuracy 0.9883720874786377 macro_avg {'precision': 0.989760252055334, 'recall': 0.985111259203875, 'f1-score': 0.9873601698375112, 'support': 516} weighted_avg {'precision': 0.9884461281716332, 'recall': 0.9883720930232558, 'f1-score': 0.9883443691003586, 'support': 516}
+ 
+time = 0.49 secondes
+
+Val loss 0.8623617067933083 accuracy 0.84375 macro_avg {'precision': 0.8484848484848485, 'recall': 0.8259109311740891, 'f1-score': 0.8333333333333333, 'support': 64} weighted_avg {'precision': 0.8456439393939394, 'recall': 0.84375, 'f1-score': 0.8411458333333333, 'support': 64}
+ 
+----------
+Epoch 15/40
+time = 16.58 secondes
+
+Train loss 0.10542590820555095 accuracy 0.9806201457977295 macro_avg {'precision': 0.9780107761759138, 'recall': 0.98018627180079, 'f1-score': 0.9790801764400623, 'support': 516} weighted_avg {'precision': 0.9806957892086973, 'recall': 0.9806201550387597, 'f1-score': 0.9806421547330268, 'support': 516}
+ 
+time = 0.55 secondes
+
+Val loss 1.462873250246048 accuracy 0.78125 macro_avg {'precision': 0.7732793522267206, 'recall': 0.7732793522267206, 'f1-score': 0.7732793522267205, 'support': 64} weighted_avg {'precision': 0.78125, 'recall': 0.78125, 'f1-score': 0.7812499999999999, 'support': 64}
+ 
+----------
+Epoch 16/40
+time = 19.03 secondes
+
+Train loss 0.35922867191292235 accuracy 0.9321705102920532 macro_avg {'precision': 0.9477564102564102, 'recall': 0.9087251922045414, 'f1-score': 0.9235804626640205, 'support': 516} weighted_avg {'precision': 0.9369074239713775, 'recall': 0.9321705426356589, 'f1-score': 0.9306312797505676, 'support': 516}
+ 
+time = 0.56 secondes
+
+Val loss 1.8818303644657135 accuracy 0.703125 macro_avg {'precision': 0.7232232232232232, 'recall': 0.7257085020242915, 'f1-score': 0.703052503052503, 'support': 64} weighted_avg {'precision': 0.7473410910910911, 'recall': 0.703125, 'f1-score': 0.7039224664224664, 'support': 64}
+ 
+----------
+Epoch 17/40
+time = 17.52 secondes
+
+Train loss 0.3396548503995732 accuracy 0.9341084957122803 macro_avg {'precision': 0.9259046249700456, 'recall': 0.9333257480942088, 'f1-score': 0.9293435360451068, 'support': 516} weighted_avg {'precision': 0.9351502924856544, 'recall': 0.9341085271317829, 'f1-score': 0.9343930042115844, 'support': 516}
+ 
+time = 0.57 secondes
+
+Val loss 1.5722415745258331 accuracy 0.734375 macro_avg {'precision': 0.7252252252252251, 'recall': 0.7277327935222673, 'f1-score': 0.7262893081761006, 'support': 64} weighted_avg {'precision': 0.736204954954955, 'recall': 0.734375, 'f1-score': 0.7351100628930818, 'support': 64}
+ 
+----------
+Epoch 18/40
+time = 15.83 secondes
+
+Train loss 0.4033439080160337 accuracy 0.9244186282157898 macro_avg {'precision': 0.9148561082523347, 'recall': 0.9245729239471417, 'f1-score': 0.9192115457957808, 'support': 516} weighted_avg {'precision': 0.926171728990948, 'recall': 0.9244186046511628, 'f1-score': 0.9248558386008514, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.4312893748283386 accuracy 0.765625 macro_avg {'precision': 0.8006802721088435, 'recall': 0.7236842105263157, 'f1-score': 0.7308662741799832, 'support': 64} weighted_avg {'precision': 0.7883078231292517, 'recall': 0.765625, 'f1-score': 0.7490012615643398, 'support': 64}
+ 
+----------
+Epoch 19/40
+time = 15.65 secondes
+
+Train loss 0.03455347013765608 accuracy 0.9903100728988647 macro_avg {'precision': 0.9889724961079398, 'recall': 0.9900931359003949, 'f1-score': 0.9895281582952815, 'support': 516} weighted_avg {'precision': 0.9903291858252575, 'recall': 0.9903100775193798, 'f1-score': 0.9903156230457919, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 0.9328439235687256 accuracy 0.828125 macro_avg {'precision': 0.8355481727574751, 'recall': 0.8066801619433198, 'f1-score': 0.8150774888363541, 'support': 64} weighted_avg {'precision': 0.831499169435216, 'recall': 0.828125, 'f1-score': 0.8242874967165746, 'support': 64}
+ 
+----------
+Epoch 20/40
+time = 15.75 secondes
+
+Train loss 0.17002665141957218 accuracy 0.9670542478561401 macro_avg {'precision': 0.9738372093023255, 'recall': 0.9556994944979926, 'f1-score': 0.9636931049183177, 'support': 516} weighted_avg {'precision': 0.9682373354966649, 'recall': 0.9670542635658915, 'f1-score': 0.9667331337587985, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 1.6297207176685333 accuracy 0.765625 macro_avg {'precision': 0.7725146198830409, 'recall': 0.73582995951417, 'f1-score': 0.7429718875502007, 'support': 64} weighted_avg {'precision': 0.7693347953216374, 'recall': 0.765625, 'f1-score': 0.7572791164658634, 'support': 64}
+ 
+----------
+Epoch 21/40
+time = 16.41 secondes
+
+Train loss 0.18516728747459693 accuracy 0.963178277015686 macro_avg {'precision': 0.9694767441860466, 'recall': 0.951505940867643, 'f1-score': 0.9594217054969434, 'support': 516} weighted_avg {'precision': 0.9642768613665045, 'recall': 0.9631782945736435, 'f1-score': 0.9628193847892454, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 1.79018634557724 accuracy 0.734375 macro_avg {'precision': 0.7760180995475113, 'recall': 0.6852226720647773, 'f1-score': 0.686545664073754, 'support': 64} weighted_avg {'precision': 0.7628676470588236, 'recall': 0.734375, 'f1-score': 0.7095037453183521, 'support': 64}
+ 
+----------
+Epoch 22/40
+time = 15.67 secondes
+
+Train loss 0.09056960051759344 accuracy 0.9767441749572754 macro_avg {'precision': 0.972039974975537, 'recall': 0.9783007980755165, 'f1-score': 0.9750080723280594, 'support': 516} weighted_avg {'precision': 0.9771784209146016, 'recall': 0.9767441860465116, 'f1-score': 0.9768207792987963, 'support': 516}
+ 
+time = 0.58 secondes
+
+Val loss 2.0372022688388824 accuracy 0.734375 macro_avg {'precision': 0.8454545454545455, 'recall': 0.6730769230769231, 'f1-score': 0.6657450076804916, 'support': 64} weighted_avg {'precision': 0.8164772727272727, 'recall': 0.734375, 'f1-score': 0.6941436251920123, 'support': 64}
+ 
+----------
+Epoch 23/40
+time = 17.03 secondes
+
+Train loss 0.16496797528728194 accuracy 0.9709302186965942 macro_avg {'precision': 0.9654383044118588, 'recall': 0.972587487606261, 'f1-score': 0.9687942233027322, 'support': 516} weighted_avg {'precision': 0.9715309121991389, 'recall': 0.9709302325581395, 'f1-score': 0.9710409885936052, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.9445298910140991 accuracy 0.671875 macro_avg {'precision': 0.6911911911911912, 'recall': 0.6933198380566802, 'f1-score': 0.6717948717948717, 'support': 64} weighted_avg {'precision': 0.7143706206206206, 'recall': 0.671875, 'f1-score': 0.6727564102564102, 'support': 64}
+ 
+----------
+Epoch 24/40
+time = 15.87 secondes
+
+Train loss 0.1349556380459531 accuracy 0.9728682041168213 macro_avg {'precision': 0.9687474828836086, 'recall': 0.9729532044926288, 'f1-score': 0.9707781175671084, 'support': 516} weighted_avg {'precision': 0.9731142310346013, 'recall': 0.9728682170542635, 'f1-score': 0.9729287996480942, 'support': 516}
+ 
+time = 0.53 secondes
+
+Val loss 1.6797465085983276 accuracy 0.796875 macro_avg {'precision': 0.8241551939924906, 'recall': 0.7621457489878543, 'f1-score': 0.7723666210670315, 'support': 64} weighted_avg {'precision': 0.8132431163954943, 'recall': 0.796875, 'f1-score': 0.7863714090287277, 'support': 64}
+ 
+----------
+Epoch 25/40
+time = 15.84 secondes
+
+Train loss 0.043340409342569976 accuracy 0.9922480583190918 macro_avg {'precision': 0.9895287958115183, 'recall': 0.993920972644377, 'f1-score': 0.9916508907334596, 'support': 516} weighted_avg {'precision': 0.992410406266488, 'recall': 0.9922480620155039, 'f1-score': 0.9922653713280268, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 1.5567302703857422 accuracy 0.796875 macro_avg {'precision': 0.8241551939924906, 'recall': 0.7621457489878543, 'f1-score': 0.7723666210670315, 'support': 64} weighted_avg {'precision': 0.8132431163954943, 'recall': 0.796875, 'f1-score': 0.7863714090287277, 'support': 64}
+ 
+----------
+Epoch 26/40
+time = 16.19 secondes
+
+Train loss 0.06758136584495801 accuracy 0.9864341020584106 macro_avg {'precision': 0.9882707113246035, 'recall': 0.9824374624124311, 'f1-score': 0.9852358704582521, 'support': 516} weighted_avg {'precision': 0.9865549376585444, 'recall': 0.9864341085271318, 'f1-score': 0.9863933521302312, 'support': 516}
+ 
+time = 0.53 secondes
+
+Val loss 1.5835886001586914 accuracy 0.78125 macro_avg {'precision': 0.776470588235294, 'recall': 0.785425101214575, 'f1-score': 0.7777777777777777, 'support': 64} weighted_avg {'precision': 0.7908088235294117, 'recall': 0.78125, 'f1-score': 0.782986111111111, 'support': 64}
+ 
+----------
+Epoch 27/40
+time = 15.84 secondes
+
+Train loss 0.16229671239015067 accuracy 0.9709302186965942 macro_avg {'precision': 0.9680526725480021, 'recall': 0.9691253677486469, 'f1-score': 0.9685844748858448, 'support': 516} weighted_avg {'precision': 0.9709713405582844, 'recall': 0.9709302325581395, 'f1-score': 0.9709468691373756, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 1.5488273203372955 accuracy 0.8125 macro_avg {'precision': 0.88, 'recall': 0.7692307692307692, 'f1-score': 0.7818181818181819, 'support': 64} weighted_avg {'precision': 0.8574999999999999, 'recall': 0.8125, 'f1-score': 0.797159090909091, 'support': 64}
+ 
+----------
+Epoch 28/40
+time = 15.52 secondes
+
+Train loss 0.07187359627674926 accuracy 0.9903100728988647 macro_avg {'precision': 0.9869791666666667, 'recall': 0.9924012158054711, 'f1-score': 0.9895752100110309, 'support': 516} weighted_avg {'precision': 0.990562419250646, 'recall': 0.9903100775193798, 'f1-score': 0.9903368975014364, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 1.7192142307758331 accuracy 0.796875 macro_avg {'precision': 0.7942326490713587, 'recall': 0.8046558704453441, 'f1-score': 0.7944156165060539, 'support': 64} weighted_avg {'precision': 0.8100867546432062, 'recall': 0.796875, 'f1-score': 0.7986317024956758, 'support': 64}
+ 
+----------
+Epoch 29/40
+time = 15.79 secondes
+
+Train loss 0.031243161828377088 accuracy 0.9883720874786377 macro_avg {'precision': 0.9853725332259364, 'recall': 0.9897274190140273, 'f1-score': 0.9874763361001893, 'support': 516} weighted_avg {'precision': 0.9885511712201107, 'recall': 0.9883720930232558, 'f1-score': 0.9883980569920404, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 1.638807237148285 accuracy 0.78125 macro_avg {'precision': 0.7971014492753623, 'recall': 0.7489878542510121, 'f1-score': 0.7575757575757576, 'support': 64} weighted_avg {'precision': 0.7903079710144928, 'recall': 0.78125, 'f1-score': 0.771780303030303, 'support': 64}
+ 
+----------
+Epoch 30/40
+time = 15.58 secondes
+
+Train loss 0.04840280454575832 accuracy 0.9922480583190918 macro_avg {'precision': 0.9895287958115183, 'recall': 0.993920972644377, 'f1-score': 0.9916508907334596, 'support': 516} weighted_avg {'precision': 0.992410406266488, 'recall': 0.9922480620155039, 'f1-score': 0.9922653713280268, 'support': 516}
+ 
+time = 0.52 secondes
+
+Val loss 1.6357356011867523 accuracy 0.78125 macro_avg {'precision': 0.8125, 'recall': 0.742914979757085, 'f1-score': 0.751937984496124, 'support': 64} weighted_avg {'precision': 0.80078125, 'recall': 0.78125, 'f1-score': 0.7679263565891474, 'support': 64}
+ 
+----------
+Epoch 31/40
+time = 16.97 secondes
+
+Train loss 0.016273876740535452 accuracy 0.998062014579773 macro_avg {'precision': 0.9984848484848485, 'recall': 0.9973262032085561, 'f1-score': 0.997900792084847, 'support': 516} weighted_avg {'precision': 0.9980678881841673, 'recall': 0.998062015503876, 'f1-score': 0.9980608880673791, 'support': 516}
+ 
+time = 0.66 secondes
+
+Val loss 1.8381994664669037 accuracy 0.78125 macro_avg {'precision': 0.7863636363636364, 'recall': 0.7550607287449393, 'f1-score': 0.7624602332979852, 'support': 64} weighted_avg {'precision': 0.7838068181818182, 'recall': 0.78125, 'f1-score': 0.7749867444326617, 'support': 64}
+ 
+----------
+Epoch 32/40
+time = 18.23 secondes
+
+Train loss 0.1255505260350853 accuracy 0.9786821603775024 macro_avg {'precision': 0.9722222222222222, 'recall': 0.9832826747720365, 'f1-score': 0.9772135129167587, 'support': 516} weighted_avg {'precision': 0.9798664944013781, 'recall': 0.9786821705426356, 'f1-score': 0.9788054929387017, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 2.210997998714447 accuracy 0.75 macro_avg {'precision': 0.7416666666666667, 'recall': 0.7348178137651822, 'f1-score': 0.7374358974358974, 'support': 64} weighted_avg {'precision': 0.7479166666666667, 'recall': 0.75, 'f1-score': 0.7482051282051283, 'support': 64}
+ 
+----------
+Epoch 33/40
+time = 15.55 secondes
+
+Train loss 0.010472374377996224 accuracy 0.998062014579773 macro_avg {'precision': 0.9984848484848485, 'recall': 0.9973262032085561, 'f1-score': 0.997900792084847, 'support': 516} weighted_avg {'precision': 0.9980678881841673, 'recall': 0.998062015503876, 'f1-score': 0.9980608880673791, 'support': 516}
+ 
+time = 0.53 secondes
+
+Val loss 2.0544049441814423 accuracy 0.75 macro_avg {'precision': 0.8518518518518519, 'recall': 0.6923076923076923, 'f1-score': 0.6908212560386473, 'support': 64} weighted_avg {'precision': 0.8240740740740741, 'recall': 0.75, 'f1-score': 0.716183574879227, 'support': 64}
+ 
+----------
+Epoch 34/40
+time = 15.29 secondes
+
+Train loss 0.032372592509835325 accuracy 0.9941860437393188 macro_avg {'precision': 0.9954819277108433, 'recall': 0.9919786096256684, 'f1-score': 0.9936875843592369, 'support': 516} weighted_avg {'precision': 0.9942385822359204, 'recall': 0.9941860465116279, 'f1-score': 0.9941757335015786, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 1.3946723490953445 accuracy 0.8125 macro_avg {'precision': 0.8227272727272728, 'recall': 0.7874493927125505, 'f1-score': 0.7963944856839873, 'support': 64} weighted_avg {'precision': 0.8176136363636364, 'recall': 0.8125, 'f1-score': 0.8071314952279958, 'support': 64}
+ 
+----------
+Epoch 35/40
+time = 15.19 secondes
+
+Train loss 0.0004824504624896993 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.44 secondes
+
+Val loss 1.3507078737020493 accuracy 0.8125 macro_avg {'precision': 0.8227272727272728, 'recall': 0.7874493927125505, 'f1-score': 0.7963944856839873, 'support': 64} weighted_avg {'precision': 0.8176136363636364, 'recall': 0.8125, 'f1-score': 0.8071314952279958, 'support': 64}
+ 
+----------
+Epoch 36/40
+time = 15.85 secondes
+
+Train loss 0.00017681480301579347 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.57 secondes
+
+Val loss 1.920468807220459 accuracy 0.75 macro_avg {'precision': 0.8141025641025641, 'recall': 0.6983805668016194, 'f1-score': 0.7005847953216375, 'support': 64} weighted_avg {'precision': 0.7948717948717949, 'recall': 0.75, 'f1-score': 0.7233918128654971, 'support': 64}
+ 
+----------
+Epoch 37/40
+time = 15.78 secondes
+
+Train loss 0.04253322211253831 accuracy 0.9922480583190918 macro_avg {'precision': 0.993993993993994, 'recall': 0.9893048128342246, 'f1-score': 0.9915734465583409, 'support': 516} weighted_avg {'precision': 0.99234117838769, 'recall': 0.9922480620155039, 'f1-score': 0.9922295794002391, 'support': 516}
+ 
+time = 0.51 secondes
+
+Val loss 1.8530605733394623 accuracy 0.765625 macro_avg {'precision': 0.8584905660377358, 'recall': 0.7115384615384616, 'f1-score': 0.7148797148797148, 'support': 64} weighted_avg {'precision': 0.8319575471698113, 'recall': 0.765625, 'f1-score': 0.737433174933175, 'support': 64}
+ 
+----------
+Epoch 38/40
+time = 15.10 secondes
+
+Train loss 0.009949525143989982 accuracy 0.998062014579773 macro_avg {'precision': 0.9984848484848485, 'recall': 0.9973262032085561, 'f1-score': 0.997900792084847, 'support': 516} weighted_avg {'precision': 0.9980678881841673, 'recall': 0.998062015503876, 'f1-score': 0.9980608880673791, 'support': 516}
+ 
+time = 0.51 secondes
+
+Val loss 1.5386394560337067 accuracy 0.765625 macro_avg {'precision': 0.8006802721088435, 'recall': 0.7236842105263157, 'f1-score': 0.7308662741799832, 'support': 64} weighted_avg {'precision': 0.7883078231292517, 'recall': 0.765625, 'f1-score': 0.7490012615643398, 'support': 64}
+ 
+----------
+Epoch 39/40
+time = 16.33 secondes
+
+Train loss 0.0005345335772620853 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.57 secondes
+
+Val loss 1.6289737522602081 accuracy 0.765625 macro_avg {'precision': 0.8006802721088435, 'recall': 0.7236842105263157, 'f1-score': 0.7308662741799832, 'support': 64} weighted_avg {'precision': 0.7883078231292517, 'recall': 0.765625, 'f1-score': 0.7490012615643398, 'support': 64}
+ 
+----------
+Epoch 40/40
+time = 15.68 secondes
+
+Train loss 0.00019329417519849923 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.49 secondes
+
+Val loss 1.670584350824356 accuracy 0.78125 macro_avg {'precision': 0.8125, 'recall': 0.742914979757085, 'f1-score': 0.751937984496124, 'support': 64} weighted_avg {'precision': 0.80078125, 'recall': 0.78125, 'f1-score': 0.7679263565891474, 'support': 64}
+ 
+----------
+best_accuracy 0.84375 best_epoch 14 macro_avg {'precision': 0.8484848484848485, 'recall': 0.8259109311740891, 'f1-score': 0.8333333333333333, 'support': 64} weighted_avg {'precision': 0.8456439393939394, 'recall': 0.84375, 'f1-score': 0.8411458333333333, 'support': 64}
+
+average train time 16.029925149679183
+
+average val time 0.5145953595638275
+ 
+time = 0.56 secondes
+
+test_accuracy 0.9384615421295166 macro_avg {'precision': 0.9523809523809523, 'recall': 0.9259259259259259, 'f1-score': 0.935, 'support': 65} weighted_avg {'precision': 0.9443223443223443, 'recall': 0.9384615384615385, 'f1-score': 0.9375384615384615, 'support': 65}
+
+----------
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.bias', 'lm_head.decoder.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight', 'lm_head.layer_norm.bias', 'lm_head.dense.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+Hyperpartisan_BERT_head_text_rank_5
+----------
+Epoch 1/40
+time = 16.06 secondes
+
+Train loss 0.6515679088505831 accuracy 0.6104651093482971 macro_avg {'precision': 0.4634488650231877, 'recall': 0.4902638037806999, 'f1-score': 0.4213277836981326, 'support': 516} weighted_avg {'precision': 0.5100477660909002, 'recall': 0.6104651162790697, 'f1-score': 0.5123701607370922, 'support': 516}
+ 
+time = 0.55 secondes
+
+Val loss 0.6009268909692764 accuracy 0.59375 macro_avg {'precision': 0.296875, 'recall': 0.5, 'f1-score': 0.37254901960784315, 'support': 64} weighted_avg {'precision': 0.3525390625, 'recall': 0.59375, 'f1-score': 0.4424019607843137, 'support': 64}
+ 
+----------
+Epoch 2/40
+time = 14.96 secondes
+
+Train loss 0.46976986346822797 accuracy 0.7829457521438599 macro_avg {'precision': 0.7698853126156122, 'recall': 0.7490044373648879, 'f1-score': 0.7565176359561165, 'support': 516} weighted_avg {'precision': 0.7792518791925136, 'recall': 0.7829457364341085, 'f1-score': 0.7785928728259687, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 0.46260449290275574 accuracy 0.734375 macro_avg {'precision': 0.7292358803986712, 'recall': 0.7095141700404858, 'f1-score': 0.7142106645652745, 'support': 64} weighted_avg {'precision': 0.7320390365448506, 'recall': 0.734375, 'f1-score': 0.7284443131074336, 'support': 64}
+ 
+----------
+Epoch 3/40
+time = 14.12 secondes
+
+Train loss 0.348778444934975 accuracy 0.8701550364494324 macro_avg {'precision': 0.8574899942824471, 'recall': 0.8658631731222469, 'f1-score': 0.8612095786748029, 'support': 516} weighted_avg {'precision': 0.8724769635805177, 'recall': 0.8701550387596899, 'f1-score': 0.870906184263001, 'support': 516}
+ 
+time = 0.56 secondes
+
+Val loss 0.4379139244556427 accuracy 0.8125 macro_avg {'precision': 0.8541666666666667, 'recall': 0.7753036437246963, 'f1-score': 0.787375415282392, 'support': 64} weighted_avg {'precision': 0.8385416666666667, 'recall': 0.8125, 'f1-score': 0.801079734219269, 'support': 64}
+ 
+----------
+Epoch 4/40
+time = 14.51 secondes
+
+Train loss 0.25604712037426053 accuracy 0.9147287011146545 macro_avg {'precision': 0.9064035440998792, 'recall': 0.9100499000373844, 'f1-score': 0.9081597980680549, 'support': 516} weighted_avg {'precision': 0.9152257053389404, 'recall': 0.9147286821705426, 'f1-score': 0.9149190846082959, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 0.5319399684667587 accuracy 0.78125 macro_avg {'precision': 0.8125, 'recall': 0.742914979757085, 'f1-score': 0.751937984496124, 'support': 64} weighted_avg {'precision': 0.80078125, 'recall': 0.78125, 'f1-score': 0.7679263565891474, 'support': 64}
+ 
+----------
+Epoch 5/40
+time = 14.72 secondes
+
+Train loss 0.17095569385723633 accuracy 0.9573643207550049 macro_avg {'precision': 0.9548460847554503, 'recall': 0.952716870113616, 'f1-score': 0.953763440860215, 'support': 516} weighted_avg {'precision': 0.9572953477611666, 'recall': 0.9573643410852714, 'f1-score': 0.9573143285821456, 'support': 516}
+ 
+time = 0.58 secondes
+
+Val loss 0.7518308609724045 accuracy 0.78125 macro_avg {'precision': 0.8125, 'recall': 0.742914979757085, 'f1-score': 0.751937984496124, 'support': 64} weighted_avg {'precision': 0.80078125, 'recall': 0.78125, 'f1-score': 0.7679263565891474, 'support': 64}
+ 
+----------
+Epoch 6/40
+time = 15.32 secondes
+
+Train loss 0.21301877137386438 accuracy 0.9360464811325073 macro_avg {'precision': 0.9312316715542521, 'recall': 0.9302293451229622, 'f1-score': 0.9307261387999528, 'support': 516} weighted_avg {'precision': 0.9359796388491063, 'recall': 0.936046511627907, 'f1-score': 0.9360093062235157, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 0.8637828454375267 accuracy 0.78125 macro_avg {'precision': 0.8342857142857143, 'recall': 0.736842105263158, 'f1-score': 0.7454545454545455, 'support': 64} weighted_avg {'precision': 0.8166071428571429, 'recall': 0.78125, 'f1-score': 0.7633522727272728, 'support': 64}
+ 
+----------
+Epoch 7/40
+time = 14.78 secondes
+
+Train loss 0.2655745094049383 accuracy 0.9302325248718262 macro_avg {'precision': 0.9330790744978388, 'recall': 0.9152837150334021, 'f1-score': 0.9230144389370556, 'support': 516} weighted_avg {'precision': 0.9307560554008322, 'recall': 0.9302325581395349, 'f1-score': 0.9295016093595372, 'support': 516}
+ 
+time = 0.56 secondes
+
+Val loss 0.8327256441116333 accuracy 0.796875 macro_avg {'precision': 0.7906403940886699, 'recall': 0.798582995951417, 'f1-score': 0.7927770859277709, 'support': 64} weighted_avg {'precision': 0.8031096059113301, 'recall': 0.796875, 'f1-score': 0.7982409713574097, 'support': 64}
+ 
+----------
+Epoch 8/40
+time = 14.96 secondes
+
+Train loss 0.2839490369696057 accuracy 0.9244186282157898 macro_avg {'precision': 0.9148561082523347, 'recall': 0.9245729239471417, 'f1-score': 0.9192115457957808, 'support': 516} weighted_avg {'precision': 0.926171728990948, 'recall': 0.9244186046511628, 'f1-score': 0.9248558386008514, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 1.1153584420681 accuracy 0.78125 macro_avg {'precision': 0.8125, 'recall': 0.742914979757085, 'f1-score': 0.751937984496124, 'support': 64} weighted_avg {'precision': 0.80078125, 'recall': 0.78125, 'f1-score': 0.7679263565891474, 'support': 64}
+ 
+----------
+Epoch 9/40
+time = 14.98 secondes
+
+Train loss 0.12918837785466827 accuracy 0.9728682041168213 macro_avg {'precision': 0.9740249031087655, 'recall': 0.9671830047299383, 'f1-score': 0.9704360921948665, 'support': 516} weighted_avg {'precision': 0.9729583484351338, 'recall': 0.9728682170542635, 'f1-score': 0.9727696173978015, 'support': 516}
+ 
+time = 0.68 secondes
+
+Val loss 0.7960342690348625 accuracy 0.8125 macro_avg {'precision': 0.8227272727272728, 'recall': 0.7874493927125505, 'f1-score': 0.7963944856839873, 'support': 64} weighted_avg {'precision': 0.8176136363636364, 'recall': 0.8125, 'f1-score': 0.8071314952279958, 'support': 64}
+ 
+----------
+Epoch 10/40
+time = 14.95 secondes
+
+Train loss 0.08143494963984597 accuracy 0.9806201457977295 macro_avg {'precision': 0.9812927681780141, 'recall': 0.9767241519431757, 'f1-score': 0.978933616395852, 'support': 516} weighted_avg {'precision': 0.98065602773952, 'recall': 0.9806201550387597, 'f1-score': 0.9805739485005979, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.479804277420044 accuracy 0.671875 macro_avg {'precision': 0.6749755620723363, 'recall': 0.6811740890688258, 'f1-score': 0.6698599852616065, 'support': 64} weighted_avg {'precision': 0.6935789345063539, 'recall': 0.671875, 'f1-score': 0.6746960206337509, 'support': 64}
+ 
+----------
+Epoch 11/40
+time = 15.18 secondes
+
+Train loss 0.2071678037614082 accuracy 0.9534883499145508 macro_avg {'precision': 0.9453101469492573, 'recall': 0.956601596151033, 'f1-score': 0.9503360657052567, 'support': 516} weighted_avg {'precision': 0.9551517399188739, 'recall': 0.9534883720930233, 'f1-score': 0.9537793542211248, 'support': 516}
+ 
+time = 0.58 secondes
+
+Val loss 0.9317537844181061 accuracy 0.8125 macro_avg {'precision': 0.8227272727272728, 'recall': 0.7874493927125505, 'f1-score': 0.7963944856839873, 'support': 64} weighted_avg {'precision': 0.8176136363636364, 'recall': 0.8125, 'f1-score': 0.8071314952279958, 'support': 64}
+ 
+----------
+Epoch 12/40
+time = 15.21 secondes
+
+Train loss 0.22540872770530934 accuracy 0.9341084957122803 macro_avg {'precision': 0.9237236295192535, 'recall': 0.9390959478568991, 'f1-score': 0.9300701530612245, 'support': 516} weighted_avg {'precision': 0.9376354734907553, 'recall': 0.9341085271317829, 'f1-score': 0.9346947427226705, 'support': 516}
+ 
+time = 0.68 secondes
+
+Val loss 1.3560649752616882 accuracy 0.765625 macro_avg {'precision': 0.8006802721088435, 'recall': 0.7236842105263157, 'f1-score': 0.7308662741799832, 'support': 64} weighted_avg {'precision': 0.7883078231292517, 'recall': 0.765625, 'f1-score': 0.7490012615643398, 'support': 64}
+ 
+----------
+Epoch 13/40
+time = 17.34 secondes
+
+Train loss 0.10266123926549246 accuracy 0.9806201457977295 macro_avg {'precision': 0.9801257450804279, 'recall': 0.9778781918957138, 'f1-score': 0.9789833822091887, 'support': 516} weighted_avg {'precision': 0.9806066095604492, 'recall': 0.9806201550387597, 'f1-score': 0.9805974220827934, 'support': 516}
+ 
+time = 0.62 secondes
+
+Val loss 0.8839376606047153 accuracy 0.828125 macro_avg {'precision': 0.823076923076923, 'recall': 0.8188259109311742, 'f1-score': 0.8207282913165266, 'support': 64} weighted_avg {'precision': 0.8274038461538462, 'recall': 0.828125, 'f1-score': 0.8275560224089636, 'support': 64}
+ 
+----------
+Epoch 14/40
+time = 15.27 secondes
+
+Train loss 0.1870894721130643 accuracy 0.9651162624359131 macro_avg {'precision': 0.9581974125996531, 'recall': 0.9680282170895438, 'f1-score': 0.9626736111111112, 'support': 516} weighted_avg {'precision': 0.9662505194747043, 'recall': 0.9651162790697675, 'f1-score': 0.9653013296726961, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 1.4748736917972565 accuracy 0.75 macro_avg {'precision': 0.7708333333333333, 'recall': 0.7105263157894737, 'f1-score': 0.7165005537098561, 'support': 64} weighted_avg {'precision': 0.7630208333333333, 'recall': 0.75, 'f1-score': 0.7347729789590256, 'support': 64}
+ 
+----------
+Epoch 15/40
+time = 14.71 secondes
+
+Train loss 0.27088500930447923 accuracy 0.9515503644943237 macro_avg {'precision': 0.9430063291139241, 'recall': 0.9550818393121272, 'f1-score': 0.9483204134366925, 'support': 516} weighted_avg {'precision': 0.9534654351879109, 'recall': 0.9515503875968992, 'f1-score': 0.951875888868858, 'support': 516}
+ 
+time = 0.49 secondes
+
+Val loss 1.2917189672589302 accuracy 0.78125 macro_avg {'precision': 0.7882352941176471, 'recall': 0.7975708502024291, 'f1-score': 0.780392156862745, 'support': 64} weighted_avg {'precision': 0.8091911764705884, 'recall': 0.78125, 'f1-score': 0.7829656862745098, 'support': 64}
+ 
+----------
+Epoch 16/40
+time = 14.79 secondes
+
+Train loss 0.2891568806918451 accuracy 0.9476743936538696 macro_avg {'precision': 0.9377231443783276, 'recall': 0.9543504055393918, 'f1-score': 0.9445220943984518, 'support': 516} weighted_avg {'precision': 0.9513104611104232, 'recall': 0.9476744186046512, 'f1-score': 0.9481613629942266, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 2.0811550319194794 accuracy 0.65625 macro_avg {'precision': 0.7439613526570048, 'recall': 0.7044534412955465, 'f1-score': 0.6507936507936509, 'support': 64} weighted_avg {'precision': 0.7815519323671497, 'recall': 0.65625, 'f1-score': 0.642609126984127, 'support': 64}
+ 
+----------
+Epoch 17/40
+time = 15.12 secondes
+
+Train loss 0.17009436747651885 accuracy 0.9651162624359131 macro_avg {'precision': 0.9604349577124447, 'recall': 0.9645660972319294, 'f1-score': 0.962429008300568, 'support': 516} weighted_avg {'precision': 0.9653957609418464, 'recall': 0.9651162790697675, 'f1-score': 0.965194170976121, 'support': 516}
+ 
+time = 0.59 secondes
+
+Val loss 0.9596289843320847 accuracy 0.828125 macro_avg {'precision': 0.8473684210526315, 'recall': 0.8006072874493927, 'f1-score': 0.811512717536814, 'support': 64} weighted_avg {'precision': 0.8384868421052631, 'recall': 0.828125, 'f1-score': 0.8220046854082999, 'support': 64}
+ 
+----------
+Epoch 18/40
+time = 14.75 secondes
+
+Train loss 0.18237550051487755 accuracy 0.9554263353347778 macro_avg {'precision': 0.9513168137000518, 'recall': 0.9523511532272484, 'f1-score': 0.9518295281582952, 'support': 516} weighted_avg {'precision': 0.9554850643447058, 'recall': 0.9554263565891473, 'f1-score': 0.9554518660106426, 'support': 516}
+ 
+time = 0.49 secondes
+
+Val loss 1.0078948438167572 accuracy 0.8125 macro_avg {'precision': 0.8541666666666667, 'recall': 0.7753036437246963, 'f1-score': 0.787375415282392, 'support': 64} weighted_avg {'precision': 0.8385416666666667, 'recall': 0.8125, 'f1-score': 0.801079734219269, 'support': 64}
+ 
+----------
+Epoch 19/40
+time = 15.70 secondes
+
+Train loss 0.1313774071979534 accuracy 0.9670542478561401 macro_avg {'precision': 0.9593354430379747, 'recall': 0.9718560538335257, 'f1-score': 0.9648578811369508, 'support': 516} weighted_avg {'precision': 0.9687843440290451, 'recall': 0.9670542635658915, 'f1-score': 0.9672756044308234, 'support': 516}
+ 
+time = 0.55 secondes
+
+Val loss 1.6304235458374023 accuracy 0.734375 macro_avg {'precision': 0.8036020583190394, 'recall': 0.6791497975708503, 'f1-score': 0.6768636768636769, 'support': 64} weighted_avg {'precision': 0.7838228987993139, 'recall': 0.734375, 'f1-score': 0.7024242649242649, 'support': 64}
+ 
+----------
+Epoch 20/40
+time = 14.63 secondes
+
+Train loss 0.05733888848529508 accuracy 0.9883720874786377 macro_avg {'precision': 0.9874193391089512, 'recall': 0.9874193391089512, 'f1-score': 0.9874193391089512, 'support': 516} weighted_avg {'precision': 0.9883720930232558, 'recall': 0.9883720930232558, 'f1-score': 0.9883720930232558, 'support': 516}
+ 
+time = 0.54 secondes
+
+Val loss 1.239334836602211 accuracy 0.8125 macro_avg {'precision': 0.8357487922705313, 'recall': 0.7813765182186234, 'f1-score': 0.7922077922077922, 'support': 64} weighted_avg {'precision': 0.8257850241545894, 'recall': 0.8125, 'f1-score': 0.8043831168831169, 'support': 64}
+ 
+----------
+Epoch 21/40
+time = 14.37 secondes
+
+Train loss 0.07034553950969977 accuracy 0.9844961166381836 macro_avg {'precision': 0.982185330809184, 'recall': 0.9843798254311396, 'f1-score': 0.9832641411520499, 'support': 516} weighted_avg {'precision': 0.9845631035446839, 'recall': 0.9844961240310077, 'f1-score': 0.9845137237864214, 'support': 516}
+ 
+time = 0.54 secondes
+
+Val loss 1.6294215023517609 accuracy 0.75 macro_avg {'precision': 0.7445887445887446, 'recall': 0.728744939271255, 'f1-score': 0.7333333333333334, 'support': 64} weighted_avg {'precision': 0.7478354978354977, 'recall': 0.75, 'f1-score': 0.7458333333333333, 'support': 64}
+ 
+----------
+Epoch 22/40
+time = 14.91 secondes
+
+Train loss 0.527365012140239 accuracy 0.9147287011146545 macro_avg {'precision': 0.9386002416581467, 'recall': 0.8835069811290086, 'f1-score': 0.9023063683304647, 'support': 516} weighted_avg {'precision': 0.9236012972013335, 'recall': 0.9147286821705426, 'f1-score': 0.9118931540113945, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 1.39397431910038 accuracy 0.734375 macro_avg {'precision': 0.7258748674443266, 'recall': 0.715587044534413, 'f1-score': 0.7189356755360372, 'support': 64} weighted_avg {'precision': 0.7315416224814422, 'recall': 0.734375, 'f1-score': 0.7312871351072074, 'support': 64}
+ 
+----------
+Epoch 23/40
+time = 14.72 secondes
+
+Train loss 0.05281120493732901 accuracy 0.9864341020584106 macro_avg {'precision': 0.9858748778103616, 'recall': 0.9847455423175073, 'f1-score': 0.9853055445939294, 'support': 516} weighted_avg {'precision': 0.9864263414338433, 'recall': 0.9864341085271318, 'f1-score': 0.9864262164716547, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.5925537049770355 accuracy 0.734375 macro_avg {'precision': 0.744055068836045, 'recall': 0.6973684210526316, 'f1-score': 0.7023255813953488, 'support': 64} weighted_avg {'precision': 0.740183041301627, 'recall': 0.734375, 'f1-score': 0.7206395348837209, 'support': 64}
+ 
+----------
+Epoch 24/40
+time = 16.91 secondes
+
+Train loss 0.07705397820664626 accuracy 0.9806201457977295 macro_avg {'precision': 0.9746192893401016, 'recall': 0.9848024316109423, 'f1-score': 0.9792631172839505, 'support': 516} weighted_avg {'precision': 0.9816039035139495, 'recall': 0.9806201550387597, 'f1-score': 0.9807229609292756, 'support': 516}
+ 
+time = 0.69 secondes
+
+Val loss 1.6529918611049652 accuracy 0.765625 macro_avg {'precision': 0.8584905660377358, 'recall': 0.7115384615384616, 'f1-score': 0.7148797148797148, 'support': 64} weighted_avg {'precision': 0.8319575471698113, 'recall': 0.765625, 'f1-score': 0.737433174933175, 'support': 64}
+ 
+----------
+Epoch 25/40
+time = 18.80 secondes
+
+Train loss 0.12479436116744623 accuracy 0.9748061895370483 macro_avg {'precision': 0.9809941520467836, 'recall': 0.96524064171123, 'f1-score': 0.9723074255565969, 'support': 516} weighted_avg {'precision': 0.9757638605557822, 'recall': 0.9748062015503876, 'f1-score': 0.9745966267896181, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 1.3937348872423172 accuracy 0.75 macro_avg {'precision': 0.7658730158730158, 'recall': 0.771255060728745, 'f1-score': 0.7497556207233627, 'support': 64} weighted_avg {'precision': 0.7896825396825398, 'recall': 0.75, 'f1-score': 0.7512218963831867, 'support': 64}
+ 
+----------
+Epoch 26/40
+time = 15.22 secondes
+
+Train loss 0.03381461756141631 accuracy 0.9922480583190918 macro_avg {'precision': 0.9927655752429166, 'recall': 0.9904588527867627, 'f1-score': 0.9915933528836756, 'support': 516} weighted_avg {'precision': 0.9922622404600905, 'recall': 0.9922480620155039, 'f1-score': 0.9922389688331174, 'support': 516}
+ 
+time = 0.52 secondes
+
+Val loss 1.499929964542389 accuracy 0.78125 macro_avg {'precision': 0.8342857142857143, 'recall': 0.736842105263158, 'f1-score': 0.7454545454545455, 'support': 64} weighted_avg {'precision': 0.8166071428571429, 'recall': 0.78125, 'f1-score': 0.7633522727272728, 'support': 64}
+ 
+----------
+Epoch 27/40
+time = 14.60 secondes
+
+Train loss 0.011429374857636338 accuracy 0.998062014579773 macro_avg {'precision': 0.9973404255319149, 'recall': 0.9984802431610942, 'f1-score': 0.9979056316590563, 'support': 516} weighted_avg {'precision': 0.9980723239320469, 'recall': 0.998062015503876, 'f1-score': 0.9980631246091585, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 1.9314625561237335 accuracy 0.75 macro_avg {'precision': 0.8141025641025641, 'recall': 0.6983805668016194, 'f1-score': 0.7005847953216375, 'support': 64} weighted_avg {'precision': 0.7948717948717949, 'recall': 0.75, 'f1-score': 0.7233918128654971, 'support': 64}
+ 
+----------
+Epoch 28/40
+time = 14.78 secondes
+
+Train loss 0.04048975540243908 accuracy 0.9941860437393188 macro_avg {'precision': 0.9931564608199274, 'recall': 0.9942866895307446, 'f1-score': 0.9937168949771689, 'support': 516} weighted_avg {'precision': 0.9942007548786522, 'recall': 0.9941860465116279, 'f1-score': 0.9941893738274752, 'support': 516}
+ 
+time = 0.49 secondes
+
+Val loss 2.000729165971279 accuracy 0.71875 macro_avg {'precision': 0.7341269841269842, 'recall': 0.7388663967611335, 'f1-score': 0.718475073313783, 'support': 64} weighted_avg {'precision': 0.7571924603174602, 'recall': 0.71875, 'f1-score': 0.7201246334310851, 'support': 64}
+ 
+----------
+Epoch 29/40
+time = 14.78 secondes
+
+Train loss 0.03865150561217557 accuracy 0.9941860437393188 macro_avg {'precision': 0.9921052631578947, 'recall': 0.9954407294832827, 'f1-score': 0.9937311438232733, 'support': 516} weighted_avg {'precision': 0.9942778457772338, 'recall': 0.9941860465116279, 'f1-score': 0.9941958645552614, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 2.0066334903240204 accuracy 0.75 macro_avg {'precision': 0.8141025641025641, 'recall': 0.6983805668016194, 'f1-score': 0.7005847953216375, 'support': 64} weighted_avg {'precision': 0.7948717948717949, 'recall': 0.75, 'f1-score': 0.7233918128654971, 'support': 64}
+ 
+----------
+Epoch 30/40
+time = 15.15 secondes
+
+Train loss 0.021062839912095416 accuracy 0.9961240291595459 macro_avg {'precision': 0.9947089947089947, 'recall': 0.9969604863221885, 'f1-score': 0.9958160352880125, 'support': 516} weighted_avg {'precision': 0.9961650465526435, 'recall': 0.9961240310077519, 'f1-score': 0.9961284309466054, 'support': 516}
+ 
+time = 0.65 secondes
+
+Val loss 1.4653940349817276 accuracy 0.765625 macro_avg {'precision': 0.7629521016617791, 'recall': 0.7722672064777327, 'f1-score': 0.7627872498146775, 'support': 64} weighted_avg {'precision': 0.7789894916911047, 'recall': 0.765625, 'f1-score': 0.7676519644180875, 'support': 64}
+ 
+----------
+Epoch 31/40
+time = 15.17 secondes
+
+Train loss 0.16462495536181837 accuracy 0.9728682041168213 macro_avg {'precision': 0.9752996369543955, 'recall': 0.9660289647774003, 'f1-score': 0.97036380642938, 'support': 516} weighted_avg {'precision': 0.9731144367909859, 'recall': 0.9728682170542635, 'f1-score': 0.9727346484876029, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 2.3367964327335358 accuracy 0.734375 macro_avg {'precision': 0.8036020583190394, 'recall': 0.6791497975708503, 'f1-score': 0.6768636768636769, 'support': 64} weighted_avg {'precision': 0.7838228987993139, 'recall': 0.734375, 'f1-score': 0.7024242649242649, 'support': 64}
+ 
+----------
+Epoch 32/40
+time = 15.04 secondes
+
+Train loss 0.013633698393911773 accuracy 0.998062014579773 macro_avg {'precision': 0.9973404255319149, 'recall': 0.9984802431610942, 'f1-score': 0.9979056316590563, 'support': 516} weighted_avg {'precision': 0.9980723239320469, 'recall': 0.998062015503876, 'f1-score': 0.9980631246091585, 'support': 516}
+ 
+time = 0.52 secondes
+
+Val loss 2.0596543550491333 accuracy 0.703125 macro_avg {'precision': 0.6931931931931932, 'recall': 0.6953441295546559, 'f1-score': 0.6940880503144654, 'support': 64} weighted_avg {'precision': 0.7051113613613613, 'recall': 0.703125, 'f1-score': 0.7039465408805032, 'support': 64}
+ 
+----------
+Epoch 33/40
+time = 14.72 secondes
+
+Train loss 0.024289692237895604 accuracy 0.9961240291595459 macro_avg {'precision': 0.9947089947089947, 'recall': 0.9969604863221885, 'f1-score': 0.9958160352880125, 'support': 516} weighted_avg {'precision': 0.9961650465526435, 'recall': 0.9961240310077519, 'f1-score': 0.9961284309466054, 'support': 516}
+ 
+time = 0.47 secondes
+
+Val loss 1.9214030504226685 accuracy 0.78125 macro_avg {'precision': 0.8342857142857143, 'recall': 0.736842105263158, 'f1-score': 0.7454545454545455, 'support': 64} weighted_avg {'precision': 0.8166071428571429, 'recall': 0.78125, 'f1-score': 0.7633522727272728, 'support': 64}
+ 
+----------
+Epoch 34/40
+time = 14.76 secondes
+
+Train loss 0.01236514673413088 accuracy 0.998062014579773 macro_avg {'precision': 0.9973404255319149, 'recall': 0.9984802431610942, 'f1-score': 0.9979056316590563, 'support': 516} weighted_avg {'precision': 0.9980723239320469, 'recall': 0.998062015503876, 'f1-score': 0.9980631246091585, 'support': 516}
+ 
+time = 0.46 secondes
+
+Val loss 1.547880232334137 accuracy 0.78125 macro_avg {'precision': 0.7863636363636364, 'recall': 0.7550607287449393, 'f1-score': 0.7624602332979852, 'support': 64} weighted_avg {'precision': 0.7838068181818182, 'recall': 0.78125, 'f1-score': 0.7749867444326617, 'support': 64}
+ 
+----------
+Epoch 35/40
+time = 14.83 secondes
+
+Train loss 0.0013512072654328112 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.44 secondes
+
+Val loss 1.8889741003513336 accuracy 0.734375 macro_avg {'precision': 0.7258748674443266, 'recall': 0.715587044534413, 'f1-score': 0.7189356755360372, 'support': 64} weighted_avg {'precision': 0.7315416224814422, 'recall': 0.734375, 'f1-score': 0.7312871351072074, 'support': 64}
+ 
+----------
+Epoch 36/40
+time = 15.02 secondes
+
+Train loss 0.0004484322712276921 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.48 secondes
+
+Val loss 1.7555285394191742 accuracy 0.8125 macro_avg {'precision': 0.8541666666666667, 'recall': 0.7753036437246963, 'f1-score': 0.787375415282392, 'support': 64} weighted_avg {'precision': 0.8385416666666667, 'recall': 0.8125, 'f1-score': 0.801079734219269, 'support': 64}
+ 
+----------
+Epoch 37/40
+time = 14.91 secondes
+
+Train loss 0.020572165342993245 accuracy 0.9961240291595459 macro_avg {'precision': 0.9969788519637462, 'recall': 0.9946524064171123, 'f1-score': 0.9957966764418378, 'support': 516} weighted_avg {'precision': 0.9961474507599709, 'recall': 0.9961240310077519, 'f1-score': 0.9961194844165587, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 1.8500766456127167 accuracy 0.796875 macro_avg {'precision': 0.8241551939924906, 'recall': 0.7621457489878543, 'f1-score': 0.7723666210670315, 'support': 64} weighted_avg {'precision': 0.8132431163954943, 'recall': 0.796875, 'f1-score': 0.7863714090287277, 'support': 64}
+ 
+----------
+Epoch 38/40
+time = 14.64 secondes
+
+Train loss 0.0001431147931284751 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.93 secondes
+
+Val loss 1.8915316760540009 accuracy 0.75 macro_avg {'precision': 0.7420634920634921, 'recall': 0.7469635627530364, 'f1-score': 0.7437437437437437, 'support': 64} weighted_avg {'precision': 0.753968253968254, 'recall': 0.75, 'f1-score': 0.7512512512512513, 'support': 64}
+ 
+----------
+Epoch 39/40
+time = 15.34 secondes
+
+Train loss 0.02092677579375132 accuracy 0.9961240291595459 macro_avg {'precision': 0.9947089947089947, 'recall': 0.9969604863221885, 'f1-score': 0.9958160352880125, 'support': 516} weighted_avg {'precision': 0.9961650465526435, 'recall': 0.9961240310077519, 'f1-score': 0.9961284309466054, 'support': 516}
+ 
+time = 0.45 secondes
+
+Val loss 1.904617190361023 accuracy 0.75 macro_avg {'precision': 0.7420634920634921, 'recall': 0.7469635627530364, 'f1-score': 0.7437437437437437, 'support': 64} weighted_avg {'precision': 0.753968253968254, 'recall': 0.75, 'f1-score': 0.7512512512512513, 'support': 64}
+ 
+----------
+Epoch 40/40
+time = 14.92 secondes
+
+Train loss 0.000137123501300459 accuracy 1.0 macro_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516} weighted_avg {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 516}
+ 
+time = 0.50 secondes
+
+Val loss 1.9280978441238403 accuracy 0.765625 macro_avg {'precision': 0.7598091198303287, 'recall': 0.7479757085020242, 'f1-score': 0.7520020666494445, 'support': 64} weighted_avg {'precision': 0.7636863732767762, 'recall': 0.765625, 'f1-score': 0.7629004133298889, 'support': 64}
+ 
+----------
+best_accuracy 0.828125 best_epoch 13 macro_avg {'precision': 0.823076923076923, 'recall': 0.8188259109311742, 'f1-score': 0.8207282913165266, 'support': 64} weighted_avg {'precision': 0.8274038461538462, 'recall': 0.828125, 'f1-score': 0.8275560224089636, 'support': 64}
+
+average train time 15.141034638881683
+
+average val time 0.5290969789028168
+ 
+time = 0.49 secondes
+
+test_accuracy 0.9692307710647583 macro_avg {'precision': 0.975, 'recall': 0.962962962962963, 'f1-score': 0.9679487179487178, 'support': 65} weighted_avg {'precision': 0.9707692307692308, 'recall': 0.9692307692307692, 'f1-score': 0.969033530571992, 'support': 65}
+
+----------
