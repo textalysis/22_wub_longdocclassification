@@ -163,7 +163,7 @@ def text_rank(docs):
 
 
 def filter_testset(tokenizer, data_test):
-    tokenizer = tokenize('BERT')
+    #tokenizer = tokenize('BERT')
     long_docs = []
     long_labels = []
     i = 0

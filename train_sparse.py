@@ -13,8 +13,8 @@ import trainer
 
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["Hyperpartisan", "20newsgroups"],
-        'seeds': [1, 2, 3, 4, 5],
+        'datasets': ["ECtHR"],
+        'seeds': [1],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
@@ -25,9 +25,11 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'epochs': 40,
         'max_len': 512,
         #'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
-       'model_names': ["ToBERT","Bigbird", "Longformer", "BERT"],
-        'sparse_max_lens': [1024, 2048, 4096],
-        'attention_windows': [256, 512],
+       'model_names': ["ToBERT","Longformer", "BERT"],
+        #'sparse_max_lens': [1024, 2048, 4096],
+        'sparse_max_lens': [2048],
+        #'attention_windows': [256, 512],
+        'attention_windows': [512],
         'block_sizes': [64, 128],
         'truncations': ["head_tail", "tail", "head"]
 }
