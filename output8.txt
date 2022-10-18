@@ -4,7 +4,7 @@
 /usr/lib64/python3.6/site-packages/h5py/__init__.py:39: UserWarning: h5py is running against HDF5 1.10.8 when it was built against 1.10.7, this may cause problems
   '{0}.{1}.{2}'.format(*version.hdf5_built_version_tuple)
 datasets imported
-Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.decoder.weight']
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.bias', 'lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.dense.weight']
 - This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
 There are 3 GPU(s) available.
@@ -15,201 +15,105 @@ We will use the GPU: NVIDIA A100 80GB PCIe
 ECtHR_ToBERT_256_25_4
 ----------
 Epoch 1/40
-time = 748.84 secondes
+time = 932.52 secondes
 
 /usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
   _warn_prf(average, modifier, msg_start, len(result))
 Train loss 0.20010861498010052 micro_f1_score 0.7304946455889852 
  
-time = 49.33 secondes
+time = 54.12 secondes
 
 Val loss 0.16457779265818048 micro_f1_score 0.7566302652106084
  
 ----------
 Epoch 2/40
-time = 735.01 secondes
+time = 912.72 secondes
 
 Train loss 0.1364933298883943 micro_f1_score 0.8221331064932961 
  
-time = 51.90 secondes
+time = 52.32 secondes
 
 Val loss 0.15628052973112122 micro_f1_score 0.777306059436511
  
 ----------
 Epoch 3/40
-time = 780.68 secondes
+time = 921.18 secondes
 
 Train loss 0.11847368633659842 micro_f1_score 0.8519455487290688 
  
-time = 51.29 secondes
+time = 46.78 secondes
 
 Val loss 0.16438355577773736 micro_f1_score 0.7804143126177026
  
 ----------
 Epoch 4/40
-time = 856.19 secondes
+time = 880.46 secondes
 
 Train loss 0.10575542732200643 micro_f1_score 0.8717376578873969 
  
-time = 49.91 secondes
+time = 52.12 secondes
 
 Val loss 0.15934415753991876 micro_f1_score 0.7867479055597867
  
 ----------
 Epoch 5/40
-time = 775.76 secondes
+time = 741.46 secondes
 
 Train loss 0.09436865880464514 micro_f1_score 0.8873741776967583 
  
-time = 50.61 secondes
+time = 53.14 secondes
 
 Val loss 0.1632078078071602 micro_f1_score 0.7914601601219978
  
 ----------
 Epoch 6/40
-time = 767.95 secondes
+time = 764.35 secondes
 
 Train loss 0.08527079078343672 micro_f1_score 0.9017363851617995 
  
-time = 48.38 secondes
+time = 54.25 secondes
 
 Val loss 0.17744694894454519 micro_f1_score 0.7828677839851025
  
 ----------
 Epoch 7/40
-time = 787.91 secondes
+time = 825.04 secondes
 
 Train loss 0.07575376666536941 micro_f1_score 0.912992125984252 
  
-time = 52.03 secondes
+time = 52.34 secondes
 
 Val loss 0.18107550713371057 micro_f1_score 0.7906976744186046
  
 ----------
 Epoch 8/40
-time = 796.75 secondes
+time = 736.76 secondes
 
 Train loss 0.06831450832604959 micro_f1_score 0.9230347420782578 
  
-time = 51.64 secondes
+time = 52.89 secondes
 
 Val loss 0.1945515655469699 micro_f1_score 0.7836644591611479
  
 ----------
 Epoch 9/40
-time = 817.22 secondes
+time = 726.52 secondes
 
 Train loss 0.06126097197233288 micro_f1_score 0.9321848081440878 
  
-time = 54.45 secondes
+time = 52.76 secondes
 
 Val loss 0.19523186303797316 micro_f1_score 0.7972433804860356
  
 ----------
 Epoch 10/40
-time = 744.21 secondes
+time = 727.45 secondes
 
 Train loss 0.05475427679159586 micro_f1_score 0.9410618986404893 
  
-time = 52.24 secondes
+time = 52.98 secondes
 
 Val loss 0.20649079031875875 micro_f1_score 0.7965367965367965
  
 ----------
 Epoch 11/40
-time = 753.40 secondes
-
-Train loss 0.048270933044579314 micro_f1_score 0.949264391910252 
- 
-time = 51.39 secondes
-
-Val loss 0.21670839379801124 micro_f1_score 0.7878571428571428
- 
-----------
-Epoch 12/40
-time = 698.51 secondes
-
-Train loss 0.043124553397914545 micro_f1_score 0.9548991521814875 
- 
-time = 45.96 secondes
-
-Val loss 0.21778375576021242 micro_f1_score 0.8018498754891499
- 
-----------
-Epoch 13/40
-time = 714.54 secondes
-
-Train loss 0.03615743065890562 micro_f1_score 0.9620214040103543 
- 
-time = 46.21 secondes
-
-Val loss 0.2261857747665194 micro_f1_score 0.8056239015817223
- 
-----------
-Epoch 14/40
-time = 767.57 secondes
-
-Train loss 0.031930604166569405 micro_f1_score 0.9669516986364687 
- 
-time = 50.34 secondes
-
-Val loss 0.2456537271376516 micro_f1_score 0.7925340990667624
- 
-----------
-Epoch 15/40
-time = 906.72 secondes
-
-Train loss 0.02706282820294586 micro_f1_score 0.9724312701581939 
- 
-time = 52.60 secondes
-
-Val loss 0.2687316412930606 micro_f1_score 0.7931769722814499
- 
-----------
-Epoch 16/40
-time = 890.44 secondes
-
-Train loss 0.02323817718508737 micro_f1_score 0.9753304641869044 
- 
-time = 50.68 secondes
-
-Val loss 0.2751807585114338 micro_f1_score 0.7958077340079509
- 
-----------
-Epoch 17/40
-Exception
-CUDA out of memory. Tried to allocate 154.00 MiB (GPU 1; 79.21 GiB total capacity; 55.65 GiB already allocated; 63.62 MiB free; 55.72 GiB reserved in total by PyTorch)
-Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.decoder.weight']
-- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-There are 3 GPU(s) available.
-We will use the GPU: NVIDIA A100 80GB PCIe
-##########
-ECtHR_ToBERT_256_50_4
-----------
-Epoch 1/40
-Exception
-CUDA out of memory. Tried to allocate 610.00 MiB (GPU 1; 79.21 GiB total capacity; 55.07 GiB already allocated; 413.62 MiB free; 55.44 GiB reserved in total by PyTorch)
-datasets imported
-Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.decoder.weight']
-- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-There are 3 GPU(s) available.
-We will use the GPU: NVIDIA A100 80GB PCIe
-##########
-ECtHR_ToBERT_256_25_5
-----------
-Epoch 1/40
-Exception
-CUDA out of memory. Tried to allocate 600.00 MiB (GPU 1; 79.21 GiB total capacity; 53.34 GiB already allocated; 361.62 MiB free; 55.18 GiB reserved in total by PyTorch)
-Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.decoder.weight']
-- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-There are 3 GPU(s) available.
-We will use the GPU: NVIDIA A100 80GB PCIe
-##########
-ECtHR_ToBERT_256_50_5
-----------
-Epoch 1/40
-Exception
-CUDA out of memory. Tried to allocate 154.00 MiB (GPU 1; 79.21 GiB total capacity; 55.10 GiB already allocated; 107.62 MiB free; 55.43 GiB reserved in total by PyTorch)

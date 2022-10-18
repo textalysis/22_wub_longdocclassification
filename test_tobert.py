@@ -12,7 +12,8 @@ import torch.nn as nn
 import trainer
 from sklearn.metrics import classification_report
 
-para = {'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
+para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
+        'datasets': ["20newsgroups", "Hyperpartisan"],
         'seeds': [1, 2, 3, 4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
@@ -20,7 +21,8 @@ para = {'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
         'learning_rate': 2e-5,
         'chunk_lens': [256, 512],
         'overlap_lens': [25, 50],
-        'total_len':1024,
+        #'total_len':1024,
+        'total_len':4096,
         'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
@@ -39,7 +41,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -76,7 +78,8 @@ for seed in para["seeds"]:
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                 model = ToBERT(num_labels)
                 device = available_device()
-                filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
+                #filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
+                filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
                 model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
                 model = model.to(device)
                 loss_fn = loss_fn.to(device)
