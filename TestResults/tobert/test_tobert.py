@@ -13,13 +13,15 @@ import trainer
 from sklearn.metrics import classification_report
 
 para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
-        'datasets': ["20newsgroups", "Hyperpartisan"],
-        'seeds': [1, 2, 3, 4, 5],
+        'datasets': ["ECtHR"],
+        #'seeds': [1, 2, 3, 4, 5],
+        'seeds': [1, 2, 3],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
-        'chunk_lens': [256, 512],
+        #'chunk_lens': [256, 512],
+        'chunk_lens': [256],
         'overlap_lens': [25, 50],
         #'total_len':1024,
         'total_len':4096,
