@@ -329,3 +329,167 @@ There are 3 GPU(s) available.
 We will use the GPU: Tesla V100-PCIE-32GB
 ##########
 20newsgroups_ToBERT_512_25_4
+ 
+time = 89.94 secondes
+
+test_accuracy 0.8809114694595337 macro_avg {'precision': 0.8820793066224789, 'recall': 0.8774376867092188, 'f1-score': 0.8771553944317118, 'support': 2326} weighted_avg {'precision': 0.8870966012942438, 'recall': 0.8809114359415305, 'f1-score': 0.8811329970440218, 'support': 2326}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+20newsgroups_ToBERT_512_50_4
+ 
+time = 88.12 secondes
+
+test_accuracy 0.8791917562484741 macro_avg {'precision': 0.8815903943418009, 'recall': 0.8766438970776956, 'f1-score': 0.876154737706943, 'support': 2326} weighted_avg {'precision': 0.8864248392747901, 'recall': 0.8791917454858126, 'f1-score': 0.8794987087933961, 'support': 2326}
+
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_256_25_4
+ 
+time = 1.41 secondes
+
+test_accuracy 0.7894737124443054 macro_avg {'precision': 0.7983193277310925, 'recall': 0.7983193277310925, 'f1-score': 0.7894736842105262, 'support': 38} weighted_avg {'precision': 0.8071649712516585, 'recall': 0.7894736842105263, 'f1-score': 0.7894736842105262, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_256_50_4
+ 
+time = 1.51 secondes
+
+test_accuracy 0.9210526347160339 macro_avg {'precision': 0.9194444444444444, 'recall': 0.9229691876750701, 'f1-score': 0.9205574912891985, 'support': 38} weighted_avg {'precision': 0.9226608187134503, 'recall': 0.9210526315789473, 'f1-score': 0.9212176783421969, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_512_25_4
+ 
+time = 1.55 secondes
+
+test_accuracy 0.7894737124443054 macro_avg {'precision': 0.7983193277310925, 'recall': 0.7983193277310925, 'f1-score': 0.7894736842105262, 'support': 38} weighted_avg {'precision': 0.8071649712516585, 'recall': 0.7894736842105263, 'f1-score': 0.7894736842105262, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_512_50_4
+ 
+time = 1.37 secondes
+
+test_accuracy 0.9210526347160339 macro_avg {'precision': 0.925, 'recall': 0.9285714285714286, 'f1-score': 0.9209979209979209, 'support': 38} weighted_avg {'precision': 0.9328947368421053, 'recall': 0.9210526315789473, 'f1-score': 0.9212167633220263, 'support': 38}
+
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+20newsgroups_ToBERT_256_25_5
+ 
+time = 75.71 secondes
+
+test_accuracy 0.8632846474647522 macro_avg {'precision': 0.8703369162858383, 'recall': 0.8630511017783393, 'f1-score': 0.8621485982152525, 'support': 2326} weighted_avg {'precision': 0.8752234383659486, 'recall': 0.8632846087704213, 'f1-score': 0.86405389257198, 'support': 2326}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+20newsgroups_ToBERT_256_50_5
+ 
+time = 80.65 secondes
+
+test_accuracy 0.8680137991905212 macro_avg {'precision': 0.8631800298521156, 'recall': 0.8607377258934672, 'f1-score': 0.859727855620114, 'support': 2326} weighted_avg {'precision': 0.8693644475612734, 'recall': 0.8680137575236457, 'f1-score': 0.8661126724398764, 'support': 2326}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+20newsgroups_ToBERT_512_25_5
+ 
+time = 90.11 secondes
+
+test_accuracy 0.8826311826705933 macro_avg {'precision': 0.8835522685495663, 'recall': 0.878183571191045, 'f1-score': 0.8792105597740492, 'support': 2326} weighted_avg {'precision': 0.8855265453244514, 'recall': 0.8826311263972485, 'f1-score': 0.8820523949710843, 'support': 2326}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+20newsgroups_ToBERT_512_50_5
+ 
+time = 90.84 secondes
+
+test_accuracy 0.8839209079742432 macro_avg {'precision': 0.8799194440906419, 'recall': 0.877956080238133, 'f1-score': 0.8771121370660264, 'support': 2326} weighted_avg {'precision': 0.8854245562115122, 'recall': 0.883920894239037, 'f1-score': 0.8824564475378189, 'support': 2326}
+
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_256_25_5
+ 
+time = 1.42 secondes
+
+test_accuracy 0.9473684430122375 macro_avg {'precision': 0.9473684210526316, 'recall': 0.9523809523809523, 'f1-score': 0.9472222222222222, 'support': 38} weighted_avg {'precision': 0.9529085872576177, 'recall': 0.9473684210526315, 'f1-score': 0.9475146198830411, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_256_50_5
+ 
+time = 1.51 secondes
+
+test_accuracy 0.8157894611358643 macro_avg {'precision': 0.8541666666666667, 'recall': 0.8333333333333333, 'f1-score': 0.8146341463414635, 'support': 38} weighted_avg {'precision': 0.8695175438596493, 'recall': 0.8157894736842105, 'f1-score': 0.8130937098844673, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_512_25_5
+ 
+time = 1.57 secondes
+
+test_accuracy 0.8947368264198303 macro_avg {'precision': 0.894736842105263, 'recall': 0.8991596638655461, 'f1-score': 0.8944444444444444, 'support': 38} weighted_avg {'precision': 0.9002770083102493, 'recall': 0.8947368421052632, 'f1-score': 0.895029239766082, 'support': 38}
+
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.layer_norm.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight', 'lm_head.dense.weight', 'lm_head.bias', 'lm_head.dense.bias']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: Tesla V100-PCIE-32GB
+##########
+Hyperpartisan_ToBERT_512_50_5
+ 
+time = 1.61 secondes
+
+test_accuracy 0.9210526347160339 macro_avg {'precision': 0.9194444444444444, 'recall': 0.9229691876750701, 'f1-score': 0.9205574912891985, 'support': 38} weighted_avg {'precision': 0.9226608187134503, 'recall': 0.9210526315789473, 'f1-score': 0.9212176783421969, 'support': 38}
+
