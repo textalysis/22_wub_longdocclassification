@@ -1,0 +1,275 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+/usr/lib64/python3.6/site-packages/h5py/__init__.py:39: UserWarning: h5py is running against HDF5 1.10.8 when it was built against 1.10.7, this may cause problems
+  '{0}.{1}.{2}'.format(*version.hdf5_built_version_tuple)
+datasets imported
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.dense.weight', 'lm_head.bias', 'lm_head.layer_norm.weight', 'lm_head.decoder.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+ECtHR_Longformer_2048_512_1
+----------
+Epoch 1/40
+time = 1632.33 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.21473530058388238 micro_f1_score 0.7095051322707169 
+ 
+time = 52.62 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.19014985089907882 micro_f1_score 0.7373343725643025
+ 
+----------
+Epoch 2/40
+time = 1647.61 secondes
+
+Train loss 0.14768198935298232 micro_f1_score 0.8091306459446334 
+ 
+time = 52.50 secondes
+
+Val loss 0.1819735921797205 micro_f1_score 0.7433155080213905
+ 
+----------
+Epoch 3/40
+time = 1653.26 secondes
+
+Train loss 0.12536426557915972 micro_f1_score 0.8454980079681276 
+ 
+time = 52.12 secondes
+
+Val loss 0.15842032511947585 micro_f1_score 0.7918398186626369
+ 
+----------
+Epoch 4/40
+time = 1631.60 secondes
+
+Train loss 0.1096990004097959 micro_f1_score 0.8691574052179396 
+ 
+time = 52.58 secondes
+
+Val loss 0.16757090853863074 micro_f1_score 0.787856071964018
+ 
+----------
+Epoch 5/40
+time = 1625.34 secondes
+
+Train loss 0.09707183084610077 micro_f1_score 0.8876325088339223 
+ 
+time = 53.00 secondes
+
+Val loss 0.18055992683426278 micro_f1_score 0.7739776951672864
+ 
+----------
+Epoch 6/40
+time = 1660.96 secondes
+
+Train loss 0.08584713590255863 micro_f1_score 0.90372512996912 
+ 
+time = 50.77 secondes
+
+Val loss 0.19214789166313703 micro_f1_score 0.7721335268505081
+ 
+----------
+Epoch 7/40
+time = 1651.47 secondes
+
+Train loss 0.07562785013872493 micro_f1_score 0.9172188011536362 
+ 
+time = 51.83 secondes
+
+Val loss 0.206155604270638 micro_f1_score 0.7751829905890555
+ 
+----------
+Epoch 8/40
+time = 1658.10 secondes
+
+Train loss 0.06631321398591673 micro_f1_score 0.93031912831052 
+ 
+time = 53.71 secondes
+
+Val loss 0.20461472893347504 micro_f1_score 0.7791563275434245
+ 
+----------
+Epoch 9/40
+time = 1662.97 secondes
+
+Train loss 0.05876333988649217 micro_f1_score 0.9407203504826891 
+ 
+time = 55.62 secondes
+
+Val loss 0.21867079874042605 micro_f1_score 0.7789103690685413
+ 
+----------
+Epoch 10/40
+time = 1687.43 secondes
+
+Train loss 0.05257745572483285 micro_f1_score 0.9475474469483205 
+ 
+time = 62.02 secondes
+
+Val loss 0.22667077244793782 micro_f1_score 0.781657848324515
+ 
+----------
+Epoch 11/40
+time = 1705.05 secondes
+
+Train loss 0.04558952973929007 micro_f1_score 0.9543315590526884 
+ 
+time = 48.17 secondes
+
+Val loss 0.23022389576816168 micro_f1_score 0.7868038311457963
+ 
+----------
+Epoch 12/40
+time = 1674.17 secondes
+
+Train loss 0.039632099688153816 micro_f1_score 0.9606802092951678 
+ 
+time = 49.00 secondes
+
+Val loss 0.23814182404856213 micro_f1_score 0.7883263009845288
+ 
+----------
+Epoch 13/40
+time = 1669.75 secondes
+
+Train loss 0.03532822896088767 micro_f1_score 0.9644611605772182 
+ 
+time = 49.26 secondes
+
+Val loss 0.24850780999318497 micro_f1_score 0.7785663591199432
+ 
+----------
+Epoch 14/40
+time = 1668.21 secondes
+
+Train loss 0.030784248046132293 micro_f1_score 0.969541199938622 
+ 
+time = 47.11 secondes
+
+Val loss 0.2513415658938103 micro_f1_score 0.7887021809081158
+ 
+----------
+Epoch 15/40
+time = 1662.47 secondes
+
+Train loss 0.026487199959412285 micro_f1_score 0.9742548463719255 
+ 
+time = 50.57 secondes
+
+Val loss 0.2725991699539247 micro_f1_score 0.7850735557947613
+ 
+----------
+Epoch 16/40
+time = 1688.05 secondes
+
+Train loss 0.02434985696816364 micro_f1_score 0.9761321909424726 
+ 
+time = 65.95 secondes
+
+Val loss 0.26728182304345194 micro_f1_score 0.7902474005019721
+ 
+----------
+Epoch 17/40
+time = 1802.08 secondes
+
+Train loss 0.020420626385938712 micro_f1_score 0.9800787672542347 
+ 
+time = 74.13 secondes
+
+Val loss 0.27816803154886743 micro_f1_score 0.7879646017699116
+ 
+----------
+Epoch 18/40
+time = 1820.80 secondes
+
+Train loss 0.019728483314214795 micro_f1_score 0.9808610612369637 
+ 
+time = 73.73 secondes
+
+Val loss 0.28867540972643213 micro_f1_score 0.7851745232097878
+ 
+----------
+Epoch 19/40
+time = 1745.08 secondes
+
+Train loss 0.018129293222152336 micro_f1_score 0.9810370483421725 
+ 
+time = 54.26 secondes
+
+Val loss 0.2790814458591039 micro_f1_score 0.7962630255120374
+ 
+----------
+Epoch 20/40
+time = 1674.45 secondes
+
+Train loss 0.014833563800664149 micro_f1_score 0.9846600015263681 
+ 
+time = 53.07 secondes
+
+Val loss 0.3018312952557548 micro_f1_score 0.7834167262330237
+ 
+----------
+Epoch 21/40
+time = 1675.94 secondes
+
+Train loss 0.014719523586592898 micro_f1_score 0.9855846235985051 
+ 
+time = 53.72 secondes
+
+Val loss 0.3035574489441074 micro_f1_score 0.786589762076424
+ 
+----------
+Epoch 22/40
+time = 1804.28 secondes
+
+Train loss 0.012483708751398382 micro_f1_score 0.9870822695575963 
+ 
+time = 74.64 secondes
+
+Val loss 0.3008726429743845 micro_f1_score 0.7909729929707732
+ 
+----------
+Epoch 23/40
+time = 1708.19 secondes
+
+Train loss 0.011876183573150302 micro_f1_score 0.9877352022548944 
+ 
+time = 54.06 secondes
+
+Val loss 0.3160175970587574 micro_f1_score 0.7872968980797637
+ 
+----------
+Epoch 24/40
+time = 1673.20 secondes
+
+Train loss 0.011663291702594458 micro_f1_score 0.9885662016922022 
+ 
+time = 51.45 secondes
+
+Val loss 0.3207005203136655 micro_f1_score 0.7936390532544378
+ 
+----------
+Epoch 25/40
+time = 1766.52 secondes
+
+Train loss 0.009866376432694016 micro_f1_score 0.9900711378247804 
+ 
+time = 56.29 secondes
+
+Val loss 0.3316120703200825 micro_f1_score 0.7902933719666788
+ 
+----------
+Epoch 26/40
+Exception
+CUDA out of memory. Tried to allocate 1.13 GiB (GPU 0; 79.21 GiB total capacity; 66.93 GiB already allocated; 187.62 MiB free; 68.58 GiB reserved in total by PyTorch)

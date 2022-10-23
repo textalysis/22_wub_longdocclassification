@@ -1,0 +1,433 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+/usr/lib64/python3.6/site-packages/h5py/__init__.py:39: UserWarning: h5py is running against HDF5 1.10.8 when it was built against 1.10.7, this may cause problems
+  '{0}.{1}.{2}'.format(*version.hdf5_built_version_tuple)
+datasets imported
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.dense.weight', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.dense.bias', 'lm_head.decoder.weight', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+ECtHR_Longformer_1024_512_2
+----------
+Epoch 1/40
+time = 911.81 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.2314113285627451 micro_f1_score 0.6730620985010707 
+ 
+time = 55.66 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.19637128112257504 micro_f1_score 0.7173489278752437
+ 
+----------
+Epoch 2/40
+time = 909.52 secondes
+
+Train loss 0.16146558119101567 micro_f1_score 0.7824269497151757 
+ 
+time = 53.87 secondes
+
+Val loss 0.1897351332619542 micro_f1_score 0.735248447204969
+ 
+----------
+Epoch 3/40
+time = 906.91 secondes
+
+Train loss 0.1393115006252989 micro_f1_score 0.8194371330228792 
+ 
+time = 52.48 secondes
+
+Val loss 0.18486997961509424 micro_f1_score 0.7483672685363042
+ 
+----------
+Epoch 4/40
+time = 906.99 secondes
+
+Train loss 0.12229456256672337 micro_f1_score 0.8478470437017995 
+ 
+time = 53.26 secondes
+
+Val loss 0.183314141557842 micro_f1_score 0.756797583081571
+ 
+----------
+Epoch 5/40
+time = 900.89 secondes
+
+Train loss 0.10926750327989056 micro_f1_score 0.8663554012530429 
+ 
+time = 48.25 secondes
+
+Val loss 0.20223503901821668 micro_f1_score 0.7476085356880058
+ 
+----------
+Epoch 6/40
+time = 850.74 secondes
+
+Train loss 0.096152107375632 micro_f1_score 0.8893908770261166 
+ 
+time = 47.98 secondes
+
+Val loss 0.20311653479689457 micro_f1_score 0.755192878338279
+ 
+----------
+Epoch 7/40
+time = 846.09 secondes
+
+Train loss 0.08485767259723968 micro_f1_score 0.9057762727881246 
+ 
+time = 45.61 secondes
+
+Val loss 0.20871407758505617 micro_f1_score 0.7561064527889172
+ 
+----------
+Epoch 8/40
+time = 845.69 secondes
+
+Train loss 0.07416610790685088 micro_f1_score 0.9198619932564888 
+ 
+time = 46.97 secondes
+
+Val loss 0.21847889328100642 micro_f1_score 0.7560975609756098
+ 
+----------
+Epoch 9/40
+time = 843.12 secondes
+
+Train loss 0.06517588966651945 micro_f1_score 0.9290705390951322 
+ 
+time = 45.75 secondes
+
+Val loss 0.22703080722054497 micro_f1_score 0.7613997879109224
+ 
+----------
+Epoch 10/40
+time = 844.16 secondes
+
+Train loss 0.057759327011031876 micro_f1_score 0.9394965176452278 
+ 
+time = 45.46 secondes
+
+Val loss 0.23879154392930327 micro_f1_score 0.7541456380677721
+ 
+----------
+Epoch 11/40
+time = 844.12 secondes
+
+Train loss 0.05034879692494534 micro_f1_score 0.9476007900546067 
+ 
+time = 45.15 secondes
+
+Val loss 0.24925912617415677 micro_f1_score 0.756640344580043
+ 
+----------
+Epoch 12/40
+time = 845.65 secondes
+
+Train loss 0.045191589870850916 micro_f1_score 0.9554928270368509 
+ 
+time = 45.07 secondes
+
+Val loss 0.26651649720600395 micro_f1_score 0.7567567567567568
+ 
+----------
+Epoch 13/40
+time = 845.21 secondes
+
+Train loss 0.040008357020413825 micro_f1_score 0.9601141799105076 
+ 
+time = 46.21 secondes
+
+Val loss 0.28437895449947137 micro_f1_score 0.752808988764045
+ 
+----------
+Epoch 14/40
+time = 846.70 secondes
+
+Train loss 0.034283057609489104 micro_f1_score 0.9649994224327134 
+ 
+time = 45.39 secondes
+
+Val loss 0.28941885992640354 micro_f1_score 0.7533664068036854
+ 
+----------
+Epoch 15/40
+time = 852.31 secondes
+
+Train loss 0.029671277492810545 micro_f1_score 0.9702605087220473 
+ 
+time = 43.51 secondes
+
+Val loss 0.31495216830832057 micro_f1_score 0.7491166077738516
+ 
+----------
+Epoch 16/40
+time = 857.75 secondes
+
+Train loss 0.02768835957048813 micro_f1_score 0.9727203065134099 
+ 
+time = 39.64 secondes
+
+Val loss 0.30399592782630297 micro_f1_score 0.7569296375266525
+ 
+----------
+Epoch 17/40
+time = 840.69 secondes
+
+Train loss 0.02404075851569556 micro_f1_score 0.9780434532704909 
+ 
+time = 40.26 secondes
+
+Val loss 0.3114149583900561 micro_f1_score 0.7518531591951995
+ 
+----------
+Epoch 18/40
+time = 851.78 secondes
+
+Train loss 0.020203010157182778 micro_f1_score 0.9800473969879978 
+ 
+time = 39.18 secondes
+
+Val loss 0.31276018880918377 micro_f1_score 0.7649769585253456
+ 
+----------
+Epoch 19/40
+time = 857.41 secondes
+
+Train loss 0.018598732364737337 micro_f1_score 0.9810441030344721 
+ 
+time = 39.06 secondes
+
+Val loss 0.34384334490436025 micro_f1_score 0.7553080403759137
+ 
+----------
+Epoch 20/40
+time = 850.48 secondes
+
+Train loss 0.01709394310401786 micro_f1_score 0.9836653690557973 
+ 
+time = 40.22 secondes
+
+Val loss 0.3314106196897929 micro_f1_score 0.7627541919372101
+ 
+----------
+Epoch 21/40
+time = 852.19 secondes
+
+Train loss 0.016005543618502833 micro_f1_score 0.9844769060604905 
+ 
+time = 39.78 secondes
+
+Val loss 0.338510555322053 micro_f1_score 0.7531380753138075
+ 
+----------
+Epoch 22/40
+time = 967.69 secondes
+
+Train loss 0.013590196963150038 micro_f1_score 0.9869198794950997 
+ 
+time = 56.22 secondes
+
+Val loss 0.3421919168751748 micro_f1_score 0.7545164718384697
+ 
+----------
+Epoch 23/40
+time = 1144.53 secondes
+
+Train loss 0.012821088460020235 micro_f1_score 0.9872327451503488 
+ 
+time = 53.40 secondes
+
+Val loss 0.35929612070322037 micro_f1_score 0.7557440791799223
+ 
+----------
+Epoch 24/40
+time = 1118.11 secondes
+
+Train loss 0.011240063841939225 micro_f1_score 0.988956587966489 
+ 
+time = 52.60 secondes
+
+Val loss 0.35755065181216256 micro_f1_score 0.76013143483023
+ 
+----------
+Epoch 25/40
+time = 1098.63 secondes
+
+Train loss 0.01114971848240915 micro_f1_score 0.9889206167904055 
+ 
+time = 51.52 secondes
+
+Val loss 0.3722310085765651 micro_f1_score 0.748102638236357
+ 
+----------
+Epoch 26/40
+time = 1105.26 secondes
+
+Train loss 0.009360603893648725 micro_f1_score 0.9910156844830211 
+ 
+time = 55.48 secondes
+
+Val loss 0.38454402677836963 micro_f1_score 0.7567567567567568
+ 
+----------
+Epoch 27/40
+time = 1094.41 secondes
+
+Train loss 0.010215023001849961 micro_f1_score 0.989378307381886 
+ 
+time = 57.33 secondes
+
+Val loss 0.38422080581305457 micro_f1_score 0.758273381294964
+ 
+----------
+Epoch 28/40
+time = 1120.37 secondes
+
+Train loss 0.009088335950860988 micro_f1_score 0.99120100559936 
+ 
+time = 53.87 secondes
+
+Val loss 0.4066127343255965 micro_f1_score 0.7524822695035461
+ 
+----------
+Epoch 29/40
+time = 1042.18 secondes
+
+Train loss 0.007917056422468762 micro_f1_score 0.9922793138858251 
+ 
+time = 44.38 secondes
+
+Val loss 0.40450326084602073 micro_f1_score 0.7541899441340782
+ 
+----------
+Epoch 30/40
+time = 987.47 secondes
+
+Train loss 0.006802600750705932 micro_f1_score 0.9936915710268298 
+ 
+time = 44.32 secondes
+
+Val loss 0.3965540059277269 micro_f1_score 0.7624151482672383
+ 
+----------
+Epoch 31/40
+time = 980.92 secondes
+
+Train loss 0.005940027815000855 micro_f1_score 0.9941017542524448 
+ 
+time = 45.93 secondes
+
+Val loss 0.3889442644402629 micro_f1_score 0.7614579574160951
+ 
+----------
+Epoch 32/40
+time = 982.33 secondes
+
+Train loss 0.005253698308254709 micro_f1_score 0.9946776155717761 
+ 
+time = 44.45 secondes
+
+Val loss 0.40088378821240095 micro_f1_score 0.7604590892262125
+ 
+----------
+Epoch 33/40
+time = 983.11 secondes
+
+Train loss 0.005128928360493585 micro_f1_score 0.994715029846774 
+ 
+time = 45.06 secondes
+
+Val loss 0.4125991190066103 micro_f1_score 0.7579617834394904
+ 
+----------
+Epoch 34/40
+time = 985.94 secondes
+
+Train loss 0.003815354908553533 micro_f1_score 0.9960474308300394 
+ 
+time = 43.78 secondes
+
+Val loss 0.43314101302721464 micro_f1_score 0.7450564971751411
+ 
+----------
+Epoch 35/40
+time = 980.73 secondes
+
+Train loss 0.003397152926743991 micro_f1_score 0.9966547555690718 
+ 
+time = 44.07 secondes
+
+Val loss 0.4132840952179471 micro_f1_score 0.7578649699540474
+ 
+----------
+Epoch 36/40
+time = 956.24 secondes
+
+Train loss 0.0031637991189855455 micro_f1_score 0.9969981380856482 
+ 
+time = 38.50 secondes
+
+Val loss 0.4259606182086663 micro_f1_score 0.7531083481349912
+ 
+----------
+Epoch 37/40
+time = 852.50 secondes
+
+Train loss 0.0030918667536818313 micro_f1_score 0.9970351223962293 
+ 
+time = 38.95 secondes
+
+Val loss 0.4350962276097204 micro_f1_score 0.7556980056980056
+ 
+----------
+Epoch 38/40
+time = 867.88 secondes
+
+Train loss 0.0021166184218207097 micro_f1_score 0.9980237154150198 
+ 
+time = 38.22 secondes
+
+Val loss 0.43519973217463886 micro_f1_score 0.756512678013199
+ 
+----------
+Epoch 39/40
+time = 1068.01 secondes
+
+Train loss 0.0014047965025154325 micro_f1_score 0.9987082066869301 
+ 
+time = 52.29 secondes
+
+Val loss 0.43213248033015456 micro_f1_score 0.7596460176991151
+ 
+----------
+Epoch 40/40
+time = 1115.33 secondes
+
+Train loss 0.0015392826250840823 micro_f1_score 0.9987462482428479 
+ 
+time = 54.87 secondes
+
+Val loss 0.4251712583860413 micro_f1_score 0.7622775800711744
+ 
+----------
+best_f1_socre 0.7649769585253456 best_epoch 18
+
+average train time 939.045694321394
+
+average val time 46.84961758255959
+ 
+time = 60.88 secondes
+
+test_f1_score 0.7385146804835925
+
+----------
