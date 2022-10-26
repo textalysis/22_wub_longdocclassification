@@ -12,8 +12,8 @@ import torch.nn as nn
 import trainer
 from sklearn.metrics import classification_report
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        #'datasets': ["Hyperpartisan","ECtHR"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
+        'datasets': ["Hyperpartisan", "ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         #'seeds': [5],
         #'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -51,38 +51,54 @@ def available_device():
     return device
 
 
-for seed in para["seeds"]:
-    train.seed_everything(seed)
+for dataset in para["datasets"]:
+    if dataset == "Hyperpartisan":
+        data_train, data_val, data_test = get_dataset("Hyperpartisan")
+        loss_fn = nn.CrossEntropyLoss()
+        num_labels = 2
+        class_type = "single_label"
+    elif dataset == "20newsgroups":
+        data_train, data_val, data_test = get_dataset("20newsgroups")
+        loss_fn = nn.CrossEntropyLoss()
+        num_labels = 20
+        class_type = "single_label"
+    else:
+        data_train, data_val, data_test = get_dataset("ECtHR")
+        loss_fn = nn.BCEWithLogitsLoss()
+        num_labels = 10
+        class_type = "multi_label"
 
-    for dataset in para["datasets"]:
-        if dataset == "Hyperpartisan":
-            data_train, data_val, data_test = get_dataset("Hyperpartisan")
-            loss_fn = nn.CrossEntropyLoss()
-            num_labels = 2
-            class_type = "single_label"
-        elif dataset == "20newsgroups":
-            data_train, data_val, data_test = get_dataset("20newsgroups")
-            loss_fn = nn.CrossEntropyLoss()
-            num_labels = 20
-            class_type = "single_label"
+    tokenizer = tokenize('BERT')
+    #data_4392 = data_test['data'][4392]
+    #label_4392 = data_test['target'][4392]
+    #data_6229 = data_test['data'][6229]
+    #label_6229 = data_test['target'][6229]
+    #data_test['data'] = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
+    #data_test['target'] = [x for i,x in enumerate(data_test['target']) if i not in [4392,6229]]
+    data_test = filter_testset(tokenizer, data_test)
+
+    for summarizer in para["summarizer"]:        
+        if summarizer == "bert_summarizer":
+            print("using bert_summarizer")
+            #if dataset == "20newsgroups":
+            #    data_test['data'] = bert_summarizer(data_test['data'])
+            #    data_test['data'] = data_test['data'] + [data_4392, data_6229]
+            #    data_test['target'] = data_test['target'] + [label_4392, label_6229]
+            #else:
+            data_test['data'] = bert_summarizer(data_test['data'])
         else:
-            data_train, data_val, data_test = get_dataset("ECtHR")
-            loss_fn = nn.BCEWithLogitsLoss()
-            num_labels = 10
-            class_type = "multi_label"
+            print("using text rank")
+            #if dataset == "20newsgroups":
+            #    data_test['data'] = text_rank(data_test['data'])
+            #    data_test['data'] = data_test['data'] + [data_4392, data_6229]
+            #    data_test['target'] = data_test['target'] + [label_4392, label_6229]
+            #else:
+            #print("using text rank")
+            data_test['data'] = text_rank(data_test['data'])
 
-        for truncation in para['truncations']:
-            tokenizer = tokenize('BERT')
-            data_test = filter_testset(tokenizer, data_test)
-            if truncation == "head":
-                for summarizer in para["summarizer"]:
-                    if summarizer == "bert_summarizer":
-                        print("using bert_summarizer") 
-                        data_test['data'] = bert_summarizer(data_test['data'])
-                    else:
-                        print("using text rank")
-                        data_test['data'] = text_rank(data_test['data'])
-
+        for seed in para["seeds"]:
+            for truncation in para['truncations']:
+                if truncation == "head":
                     #summarizer_path = os.path.join('data', "{}".format(summarizer), "{}".format(dataset))       
                     #with open(os.path.join(summarizer_path, "data_test_sum.txt"),encoding='utf-8') as f:
                     #    data_test['data'] = f.readlines()
@@ -120,3 +136,4 @@ for seed in para["seeds"]:
                         print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}'+"\n")
 
            
+
