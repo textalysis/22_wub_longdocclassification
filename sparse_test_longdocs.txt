@@ -1190,3 +1190,473 @@ time = 132.18 secondes
 
 test_accuracy 0.8779020309448242 macro_avg {'precision': 0.88258227943468, 'recall': 0.8773785130137348, 'f1-score': 0.8779938811876675, 'support': 2326} weighted_avg {'precision': 0.8838992687824271, 'recall': 0.8779019776440241, 'f1-score': 0.8788960165912387, 'support': 2326}
 
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_512_4
+ 
+time = 131.87 secondes
+
+test_accuracy 0.8869304060935974 macro_avg {'precision': 0.8878541875095604, 'recall': 0.8803396690910634, 'f1-score': 0.8806780636116684, 'support': 2326} weighted_avg {'precision': 0.8903626391141183, 'recall': 0.8869303525365434, 'f1-score': 0.8850193454653463, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_512_5
+ 
+time = 132.93 secondes
+
+test_accuracy 0.8761823177337646 macro_avg {'precision': 0.8733354924103551, 'recall': 0.8740274310757995, 'f1-score': 0.8726962085426162, 'support': 2326} weighted_avg {'precision': 0.8773784823929273, 'recall': 0.8761822871883062, 'f1-score': 0.8755442547182701, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_256_1_best.bin'
+##########
+20newsgroups_Longformer_4096_256_1
+ 
+time = 165.61 secondes
+
+test_accuracy 0.04987102374434471 macro_avg {'precision': 0.037507684942141316, 'recall': 0.050045988013167196, 'f1-score': 0.015223682405082132, 'support': 2326} weighted_avg {'precision': 0.05728440622295333, 'recall': 0.04987102321582115, 'f1-score': 0.01807800996272811, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_256_2_best.bin'
+##########
+20newsgroups_Longformer_4096_256_2
+ 
+time = 169.13 secondes
+
+test_accuracy 0.047721412032842636 macro_avg {'precision': 0.00949223522891276, 'recall': 0.04895471464019851, 'f1-score': 0.011784429642067325, 'support': 2326} weighted_avg {'precision': 0.010550631319824992, 'recall': 0.04772141014617369, 'f1-score': 0.01229588890161234, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_256_3_best.bin'
+##########
+20newsgroups_Longformer_4096_256_3
+ 
+time = 163.38 secondes
+
+test_accuracy 0.032674118876457214 macro_avg {'precision': 0.004415016887962284, 'recall': 0.05212815353660424, 'f1-score': 0.006628137002916798, 'support': 2326} weighted_avg {'precision': 0.0031882290611320156, 'recall': 0.03267411865864144, 'f1-score': 0.004670493313571652, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_256_4_best.bin'
+##########
+20newsgroups_Longformer_4096_256_4
+ 
+time = 162.79 secondes
+
+test_accuracy 0.03955288231372833 macro_avg {'precision': 0.005835003471099753, 'recall': 0.0388954697094232, 'f1-score': 0.01012091250142208, 'support': 2326} weighted_avg {'precision': 0.006083917467553098, 'recall': 0.03955288048151333, 'f1-score': 0.010523956711110012, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_256_5_best.bin'
+##########
+20newsgroups_Longformer_4096_256_5
+ 
+time = 163.25 secondes
+
+test_accuracy 0.04557180032134056 macro_avg {'precision': 0.00533427298128425, 'recall': 0.04484475507174666, 'f1-score': 0.008271093876205917, 'support': 2326} weighted_avg {'precision': 0.0054470924837091645, 'recall': 0.04557179707652623, 'f1-score': 0.00832329491998177, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_512_1_best.bin'
+##########
+20newsgroups_Longformer_4096_512_1
+ 
+time = 211.27 secondes
+
+test_accuracy 0.04600172117352486 macro_avg {'precision': 0.013223456460663746, 'recall': 0.05475463457384908, 'f1-score': 0.013218468459455577, 'support': 2326} weighted_avg {'precision': 0.012829368236493393, 'recall': 0.04600171969045572, 'f1-score': 0.01134222286772228, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_512_2_best.bin'
+##########
+20newsgroups_Longformer_4096_512_2
+ 
+time = 212.39 secondes
+
+test_accuracy 0.09200344234704971 macro_avg {'precision': 0.0060329576631497125, 'recall': 0.04958539167254764, 'f1-score': 0.009733381004099238, 'support': 2326} weighted_avg {'precision': 0.010035535877168439, 'recall': 0.09200343938091143, 'f1-score': 0.017161738676396424, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_512_3_best.bin'
+##########
+20newsgroups_Longformer_4096_512_3
+ 
+time = 213.20 secondes
+
+test_accuracy 0.03826311230659485 macro_avg {'precision': 0.00504092823354867, 'recall': 0.048345883051765404, 'f1-score': 0.006897166638323603, 'support': 2326} weighted_avg {'precision': 0.004320714678763999, 'recall': 0.03826311263972485, 'f1-score': 0.005800889663528912, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_512_4_best.bin'
+##########
+20newsgroups_Longformer_4096_512_4
+ 
+time = 211.82 secondes
+
+test_accuracy 0.05674978718161583 macro_avg {'precision': 0.01773522768385934, 'recall': 0.05091398374188512, 'f1-score': 0.011740817064421176, 'support': 2326} weighted_avg {'precision': 0.02792870258467293, 'recall': 0.05674978503869303, 'f1-score': 0.013865046713657923, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Longformer_4096_512_5_best.bin'
+##########
+20newsgroups_Longformer_4096_512_5
+ 
+time = 214.18 secondes
+
+test_accuracy 0.046861566603183746 macro_avg {'precision': 0.015104888965160063, 'recall': 0.05403177503983956, 'f1-score': 0.015719452620768147, 'support': 2326} weighted_avg {'precision': 0.014670676756225985, 'recall': 0.0468615649183147, 'f1-score': 0.01519284662770326, 'support': 2326}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_64_1
+ 
+time = 56.32 secondes
+
+test_accuracy 0.8839190602302551 macro_avg {'precision': 0.8822466745488974, 'recall': 0.8791070608009882, 'f1-score': 0.8768141148984894, 'support': 1878} weighted_avg {'precision': 0.8874868596786021, 'recall': 0.8839190628328009, 'f1-score': 0.8819179419147781, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_64_2
+ 
+time = 55.73 secondes
+
+test_accuracy 0.8636847734451294 macro_avg {'precision': 0.8659503554011023, 'recall': 0.86090181698763, 'f1-score': 0.8601762865503544, 'support': 1878} weighted_avg {'precision': 0.8722822695093099, 'recall': 0.8636847710330139, 'f1-score': 0.8646121313253909, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_64_3
+ 
+time = 55.89 secondes
+
+test_accuracy 0.8514376878738403 macro_avg {'precision': 0.8488808276960086, 'recall': 0.8430834878005367, 'f1-score': 0.8424330829396487, 'support': 1878} weighted_avg {'precision': 0.8558137039589425, 'recall': 0.8514376996805112, 'f1-score': 0.8505779517621718, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_64_4
+ 
+time = 56.74 secondes
+
+test_accuracy 0.8706070184707642 macro_avg {'precision': 0.8698723890036935, 'recall': 0.8635494183313386, 'f1-score': 0.8638356768733276, 'support': 1878} weighted_avg {'precision': 0.8731420009553623, 'recall': 0.8706070287539937, 'f1-score': 0.869101697018632, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_64_5
+ 
+time = 56.80 secondes
+
+test_accuracy 0.8668796420097351 macro_avg {'precision': 0.8682389730581315, 'recall': 0.8580903993091697, 'f1-score': 0.8589194733067067, 'support': 1878} weighted_avg {'precision': 0.8720850364807861, 'recall': 0.8668796592119276, 'f1-score': 0.8646103203491062, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_128_1
+Attention type 'block_sparse' is not possible if sequence_length: 1024 <= num global tokens: 2 * config.block_size + min. num sliding tokens: 3 * config.block_size + config.num_random_blocks * config.block_size + additional buffer: config.num_random_blocks * config.block_size = 1408 with config.block_size = 128, config.num_random_blocks = 3. Changing attention type to 'original_full'...
+ 
+time = 43.42 secondes
+
+test_accuracy 0.8892438411712646 macro_avg {'precision': 0.8855953424520149, 'recall': 0.8812393740498174, 'f1-score': 0.8798041341845144, 'support': 1878} weighted_avg {'precision': 0.8939702498793344, 'recall': 0.8892438764643238, 'f1-score': 0.8879732429515186, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_128_2
+Attention type 'block_sparse' is not possible if sequence_length: 1024 <= num global tokens: 2 * config.block_size + min. num sliding tokens: 3 * config.block_size + config.num_random_blocks * config.block_size + additional buffer: config.num_random_blocks * config.block_size = 1408 with config.block_size = 128, config.num_random_blocks = 3. Changing attention type to 'original_full'...
+ 
+time = 43.49 secondes
+
+test_accuracy 0.8785942196846008 macro_avg {'precision': 0.8791469361883403, 'recall': 0.8758866344831896, 'f1-score': 0.8738521658757177, 'support': 1878} weighted_avg {'precision': 0.8859400324983158, 'recall': 0.8785942492012779, 'f1-score': 0.8779650733126116, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_128_3
+Attention type 'block_sparse' is not possible if sequence_length: 1024 <= num global tokens: 2 * config.block_size + min. num sliding tokens: 3 * config.block_size + config.num_random_blocks * config.block_size + additional buffer: config.num_random_blocks * config.block_size = 1408 with config.block_size = 128, config.num_random_blocks = 3. Changing attention type to 'original_full'...
+ 
+time = 43.73 secondes
+
+test_accuracy 0.8775292634963989 macro_avg {'precision': 0.8746065776071393, 'recall': 0.8688468495266498, 'f1-score': 0.8691238115728421, 'support': 1878} weighted_avg {'precision': 0.8801788821212789, 'recall': 0.8775292864749734, 'f1-score': 0.8768435406755833, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_128_4
+Attention type 'block_sparse' is not possible if sequence_length: 1024 <= num global tokens: 2 * config.block_size + min. num sliding tokens: 3 * config.block_size + config.num_random_blocks * config.block_size + additional buffer: config.num_random_blocks * config.block_size = 1408 with config.block_size = 128, config.num_random_blocks = 3. Changing attention type to 'original_full'...
+ 
+time = 44.16 secondes
+
+test_accuracy 0.8748668432235718 macro_avg {'precision': 0.8725010645770501, 'recall': 0.8695300063062243, 'f1-score': 0.8684109856827232, 'support': 1878} weighted_avg {'precision': 0.8795868009080775, 'recall': 0.874866879659212, 'f1-score': 0.8746823428545598, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_1024_128_5
+Attention type 'block_sparse' is not possible if sequence_length: 1024 <= num global tokens: 2 * config.block_size + min. num sliding tokens: 3 * config.block_size + config.num_random_blocks * config.block_size + additional buffer: config.num_random_blocks * config.block_size = 1408 with config.block_size = 128, config.num_random_blocks = 3. Changing attention type to 'original_full'...
+ 
+time = 43.32 secondes
+
+test_accuracy 0.8833865523338318 macro_avg {'precision': 0.8812642475712245, 'recall': 0.8761576939834897, 'f1-score': 0.8755627305498986, 'support': 1878} weighted_avg {'precision': 0.8902672453219446, 'recall': 0.8833865814696485, 'f1-score': 0.8833524147939144, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_2048_64_1
+ 
+time = 103.55 secondes
+
+test_accuracy 0.8588924407958984 macro_avg {'precision': 0.8642595499697855, 'recall': 0.8469547532334888, 'f1-score': 0.8502032367089261, 'support': 1878} weighted_avg {'precision': 0.8656668692250145, 'recall': 0.8588924387646433, 'f1-score': 0.8579644968752136, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_64_2_best.bin'
+##########
+20newsgroups_Bigbird_2048_64_2
+ 
+time = 100.81 secondes
+
+test_accuracy 0.097444087266922 macro_avg {'precision': 0.00565893960054544, 'recall': 0.046728826728826736, 'f1-score': 0.00983758956219795, 'support': 1878} weighted_avg {'precision': 0.011154346302780341, 'recall': 0.09744408945686901, 'f1-score': 0.019835850085823045, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Bigbird_2048_64_3
+ 
+time = 101.55 secondes
+
+test_accuracy 0.8652821779251099 macro_avg {'precision': 0.8681987859683356, 'recall': 0.856247873232933, 'f1-score': 0.8581279460589248, 'support': 1878} weighted_avg {'precision': 0.8729871190180736, 'recall': 0.8652822151224707, 'f1-score': 0.8657480178385986, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_64_4_best.bin'
+##########
+20newsgroups_Bigbird_2048_64_4
+ 
+time = 102.77 secondes
+
+test_accuracy 0.03301384299993515 macro_avg {'precision': 0.0016515716568993074, 'recall': 0.05, 'f1-score': 0.0031975244971634864, 'support': 1878} weighted_avg {'precision': 0.0010904945977396917, 'recall': 0.03301384451544196, 'f1-score': 0.0021112515316734416, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_64_5_best.bin'
+##########
+20newsgroups_Bigbird_2048_64_5
+ 
+time = 103.42 secondes
+
+test_accuracy 0.0670926496386528 macro_avg {'precision': 0.0033599999999999997, 'recall': 0.05, 'f1-score': 0.006296851574212893, 'support': 1878} weighted_avg {'precision': 0.004508626198083067, 'recall': 0.0670926517571885, 'f1-score': 0.008449449396707396, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_128_1_best.bin'
+##########
+20newsgroups_Bigbird_2048_128_1
+ 
+time = 102.29 secondes
+
+test_accuracy 0.08519701659679413 macro_avg {'precision': 0.004287245444801715, 'recall': 0.05, 'f1-score': 0.007897334649555774, 'support': 1878} weighted_avg {'precision': 0.007305210555572678, 'recall': 0.08519701810436635, 'f1-score': 0.01345658726228886, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_128_2_best.bin'
+##########
+20newsgroups_Bigbird_2048_128_2
+ 
+time = 103.02 secondes
+
+test_accuracy 0.05165069177746773 macro_avg {'precision': 0.007570969469737547, 'recall': 0.049430042287185144, 'f1-score': 0.005711942464197842, 'support': 1878} weighted_avg {'precision': 0.008593770053613203, 'recall': 0.0516506922257721, 'f1-score': 0.006075763185775091, 'support': 1878}
+
+normalizer.cc(51) LOG(INFO) precompiled_charsmap is empty. use identity normalization.
+Some weights of the model checkpoint at google/bigbird-roberta-base were not used when initializing BigBirdForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BigBirdForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BigBirdForSequenceClassification were not initialized from the model checkpoint at google/bigbird-roberta-base and are newly initialized: ['classifier.out_proj.bias', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+Exception
+[Errno 2] No such file or directory: 'best_models/20newsgroups_Bigbird_2048_128_3_best.bin'
+##########
+20newsgroups_Bigbird_2048_128_3
