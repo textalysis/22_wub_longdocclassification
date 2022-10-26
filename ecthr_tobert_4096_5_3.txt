@@ -219,3 +219,43 @@ Val loss 0.3335140501378012 micro_f1_score 0.7828877005347594
  
 ----------
 Epoch 21/40
+time = 668.14 secondes
+
+Train loss 0.009550834182752894 micro_f1_score 0.9906962556241898 
+ 
+time = 43.64 secondes
+
+Val loss 0.31794096553911927 micro_f1_score 0.7887527036770007
+ 
+----------
+Epoch 22/40
+time = 667.79 secondes
+
+Train loss 0.008402184325730248 micro_f1_score 0.9922959572845156 
+ 
+time = 43.71 secondes
+
+Val loss 0.34601713845231497 micro_f1_score 0.7921288014311271
+ 
+----------
+Epoch 23/40
+time = 664.84 secondes
+
+Train loss 0.007418682005005099 micro_f1_score 0.9931071251761302 
+ 
+time = 43.55 secondes
+
+Val loss 0.343955575992338 micro_f1_score 0.7877917414721725
+ 
+----------
+Epoch 24/40
+time = 667.39 secondes
+
+Train loss 0.00623320322173075 micro_f1_score 0.9940192754561731 
+ 
+time = 43.26 secondes
+
+Val loss 0.35252522139764225 micro_f1_score 0.7862068965517242
+ 
+----------
+Epoch 25/40

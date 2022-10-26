@@ -77,6 +77,7 @@ for dataset in para["datasets"]:
                 for attention_window in para['attention_windows']:
                     for seed in para["seeds"]:
                         tokenizer = tokenize('longformer')
+                        data_test = filter_testset(tokenizer, data_test)
                         max_len = spase_max_len
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Longformer(attention_window=attention_window, num_labels=num_labels)
@@ -118,6 +119,7 @@ for dataset in para["datasets"]:
                 for block_size in para['block_sizes']:
                     for seed in para["seeds"]:
                         tokenizer = tokenize("bigbird")
+                        data_test = filter_testset(tokenizer, data_test)
                         max_len = spase_max_len
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Bigbird(block_size=block_size,num_labels=num_labels)
