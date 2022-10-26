@@ -259,3 +259,5 @@ Val loss 0.35252522139764225 micro_f1_score 0.7862068965517242
  
 ----------
 Epoch 25/40
+Exception
+CUDA out of memory. Tried to allocate 720.00 MiB (GPU 0; 79.20 GiB total capacity; 63.60 GiB already allocated; 607.31 MiB free; 63.72 GiB reserved in total by PyTorch)

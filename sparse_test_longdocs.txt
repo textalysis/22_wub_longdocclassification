@@ -1134,3 +1134,59 @@ time = 134.83 secondes
 
 test_accuracy 0.8809114694595337 macro_avg {'precision': 0.8801233614392435, 'recall': 0.8751601993444516, 'f1-score': 0.8753281574070784, 'support': 2326} weighted_avg {'precision': 0.8838784289129888, 'recall': 0.8809114359415305, 'f1-score': 0.8798898035940846, 'support': 2326}
 
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_256_5
+ 
+time = 137.68 secondes
+
+test_accuracy 0.8899398446083069 macro_avg {'precision': 0.892062284018936, 'recall': 0.8876743132272875, 'f1-score': 0.8875622955501214, 'support': 2326} weighted_avg {'precision': 0.8938843120869993, 'recall': 0.8899398108340498, 'f1-score': 0.8894279001961846, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_512_1
+ 
+time = 129.01 secondes
+
+test_accuracy 0.884780764579773 macro_avg {'precision': 0.8868125732316348, 'recall': 0.8800671324722391, 'f1-score': 0.8809339366085556, 'support': 2326} weighted_avg {'precision': 0.8882732804115034, 'recall': 0.884780739466896, 'f1-score': 0.8841001168619164, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_512_2
+ 
+time = 129.21 secondes
+
+test_accuracy 0.8856406211853027 macro_avg {'precision': 0.8860587685784053, 'recall': 0.8800031273782546, 'f1-score': 0.8798859418638096, 'support': 2326} weighted_avg {'precision': 0.8890581061064189, 'recall': 0.8856405846947549, 'f1-score': 0.8836772622551889, 'support': 2326}
+
+Some weights of the model checkpoint at allenai/longformer-base-4096 were not used when initializing LongformerForSequenceClassification: ['lm_head.decoder.weight', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing LongformerForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of LongformerForSequenceClassification were not initialized from the model checkpoint at allenai/longformer-base-4096 and are newly initialized: ['classifier.out_proj.weight', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+##########
+20newsgroups_Longformer_2048_512_3
+ 
+time = 132.18 secondes
+
+test_accuracy 0.8779020309448242 macro_avg {'precision': 0.88258227943468, 'recall': 0.8773785130137348, 'f1-score': 0.8779938811876675, 'support': 2326} weighted_avg {'precision': 0.8838992687824271, 'recall': 0.8779019776440241, 'f1-score': 0.8788960165912387, 'support': 2326}
+
