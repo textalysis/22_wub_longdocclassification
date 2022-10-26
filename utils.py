@@ -178,6 +178,7 @@ def filter_testset(tokenizer, data_test):
     
     return data_test
 
+
 def tokenize(tokenizer):
     if tokenizer=='BERT':
         #  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', cache_dir=CACHE_DIR)

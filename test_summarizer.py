@@ -76,6 +76,13 @@ for seed in para["seeds"]:
             data_test = filter_testset(tokenizer, data_test)
             if truncation == "head":
                 for summarizer in para["summarizer"]:
+                    if summarizer == "bert_summarizer":
+                        print("using bert_summarizer") 
+                        data_test['data'] = bert_summarizer(data_test['data'])
+                    else:
+                        print("using text rank")
+                        data_test['data'] = text_rank(data_test['data'])
+
                     #summarizer_path = os.path.join('data', "{}".format(summarizer), "{}".format(dataset))       
                     #with open(os.path.join(summarizer_path, "data_test_sum.txt"),encoding='utf-8') as f:
                     #    data_test['data'] = f.readlines()

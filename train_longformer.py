@@ -13,8 +13,8 @@ import trainer
 
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        'datasets': ["20newsgroups"],
-        'seeds': [3],
+        'datasets': ["Hyperpartisan"],
+        'seeds': [4],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
@@ -28,7 +28,7 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
        'model_names': ["Longformer"],
         #'sparse_max_lens': [1024, 2048, 4096],
         'sparse_max_lens': [2048],
-        'attention_windows': [256, 512],
+        'attention_windows': [256],
         #'attention_windows': [512],
         #'block_sizes': [64, 128],
         #'block_sizes': [64],
@@ -41,7 +41,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:2")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 

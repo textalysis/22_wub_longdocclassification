@@ -30,8 +30,8 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'sparse_max_lens': [1024],
         #'attention_windows': [256, 512],
         'attention_windows': [512],
-        'block_sizes': [64, 128],
-        #'block_sizes': [64],
+        #'block_sizes': [64, 128],
+        'block_sizes': [128],
         'truncations': ["head_tail", "tail", "head"]
 }
 
@@ -41,7 +41,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:1")  # specify  device
+        device = torch.device("cuda:2")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
