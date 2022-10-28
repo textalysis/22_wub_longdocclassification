@@ -3,6 +3,7 @@ from models.BERT import BERT
 from models.PoBERT import PoBERT
 from models.RoBERT import RoBERT
 from models.ToBERT import ToBERT
+from models.ToBERT_freeze import ToBERT_freeze
 from models.Bigbird import Bigbird
 from models.Longformer import Longformer
 import train

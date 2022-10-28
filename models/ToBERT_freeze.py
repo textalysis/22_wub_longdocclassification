@@ -4,9 +4,9 @@ import torch.nn.functional as F
 from transformers import BertModel, RobertaModel
 
 
-class ToBERT(nn.Module):
+class ToBERT_freeze(nn.Module):
     def __init__(self, n_classes):
-        super(ToBERT, self).__init__()
+        super(ToBERT_freeze, self).__init__()
         #self.bert = BertModel.from_pretrained('bert-base-uncased')  # bert model from huggingface
         self.bert = RobertaModel.from_pretrained("roberta-base")
         #self.encoder_layer = nn.TransformerEncoderLayer(d_model=self.bert.config.hidden_size, nhead=8, batch_first=True)

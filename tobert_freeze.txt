@@ -1,0 +1,63 @@
+[nltk_data] Downloading package punkt to /vol/fob-
+[nltk_data]     vol3/nebenf20/wubingti/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+/usr/lib64/python3.6/site-packages/h5py/__init__.py:39: UserWarning: h5py is running against HDF5 1.10.8 when it was built against 1.10.7, this may cause problems
+  '{0}.{1}.{2}'.format(*version.hdf5_built_version_tuple)
+datasets imported
+Some weights of the model checkpoint at roberta-base were not used when initializing RobertaModel: ['lm_head.decoder.weight', 'lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.dense.weight', 'lm_head.dense.bias', 'lm_head.layer_norm.weight']
+- This IS expected if you are initializing RobertaModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+There are 3 GPU(s) available.
+We will use the GPU: NVIDIA A100 80GB PCIe
+/vol/fob-vol3/nebenf20/wubingti/.local/lib/python3.6/site-packages/transformers/optimization.py:309: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  FutureWarning,
+##########
+ECtHR_ToBERT_freeze_256_25_1
+----------
+Epoch 1/40
+time = 510.68 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Train loss 0.3263825966968193 micro_f1_score 0.4561735150731271 
+ 
+time = 55.17 secondes
+
+/usr/lib64/python3.6/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Val loss 0.3591709679267446 micro_f1_score 0.0
+ 
+----------
+Epoch 2/40
+time = 499.43 secondes
+
+Train loss 0.31653238851744847 micro_f1_score 0.461785517137552 
+ 
+time = 54.97 secondes
+
+Val loss 0.34515887645424387 micro_f1_score 0.07862068965517241
+ 
+----------
+Epoch 3/40
+time = 484.53 secondes
+
+Train loss 0.2778407150292182 micro_f1_score 0.5334699453551912 
+ 
+time = 54.21 secondes
+
+Val loss 0.30312278891196015 micro_f1_score 0.4094640270400773
+ 
+----------
+Epoch 4/40
+time = 494.87 secondes
+
+Train loss 0.24903057988833738 micro_f1_score 0.5777506342196749 
+ 
+time = 54.47 secondes
+
+Val loss 0.31396949975216976 micro_f1_score 0.49627791563275436
+ 
+----------
+Epoch 5/40
