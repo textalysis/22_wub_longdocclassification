@@ -3,7 +3,6 @@ from models.BERT import BERT
 from models.PoBERT import PoBERT
 from models.RoBERT import RoBERT
 from models.ToBERT import ToBERT
-from models.ToBERT_freeze import ToBERT_freeze
 from models.Bigbird import Bigbird
 from models.Longformer import Longformer
 import train
@@ -11,24 +10,24 @@ import train
 from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
+from sklearn.metrics import classification_report
 
 para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
         'datasets': ["ECtHR"],
         #'seeds': [1, 2, 3, 4, 5],
-        'seeds': [1],
+        'seeds': [4, 5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
-        'learning_rate': 5e-5,
+        'learning_rate': 2e-5,
         #'chunk_lens': [256, 512],
         'chunk_lens': [256],
-        #'overlap_lens': [25, 50],
-        'overlap_lens': [25],
-        'total_len': 16384,
+        'overlap_lens': [25, 50],
         #'total_len':1024,
+        'total_len':4096,
         'epochs': 40,
         'max_len': 512,
-        'model_names': ["ToBERT_freeze"],
+        'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
         'sparse_max_lens': [1024, 2048, 4096],
         'attention_windows': [256, 512],
         'block_sizes': [64, 128],
@@ -44,7 +43,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -55,8 +54,6 @@ def available_device():
 
 
 for seed in para["seeds"]:
-    train.seed_everything(seed)
-
     for dataset in para["datasets"]:
         if dataset == "Hyperpartisan":
             data_train, data_val, data_test = get_dataset("Hyperpartisan")
@@ -76,33 +73,44 @@ for seed in para["seeds"]:
         print("datasets imported")
 
         tokenizer = tokenize('BERT')
+        data_test = filter_testset(tokenizer, data_test)
         for chunk_len in para['chunk_lens']:
             for overlap_len in para['overlap_lens']:
-                train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size,
-                                            approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size,
-                                                   approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                 test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
-                model = ToBERT_freeze(num_labels)
+                model = ToBERT(num_labels)
                 device = available_device()
-                model = model.to(device)
-                optimizer = AdamW(model.parameters(), lr=learning_rate)
-                total_steps = len(train_data_loader) * para['epochs']
-                scheduler = get_linear_schedule_with_warmup(
-                                        optimizer,
-                                        num_warmup_steps=0,
-                                        num_training_steps=total_steps
-                                    )
-                loss_fn = loss_fn.to(device)
+                #filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
                 filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
-                # try catch: continue next loop when memory not enough
-                try:
-                    if class_type == "multi_label":
-                        # use micro f1 as metric
-                        trainer.trainer_hierarchical_multi_label(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                    else:
-                        trainer.trainer_hierarchical(para['epochs'], model, train_data_loader, val_data_loader, data_train, data_val, loss_fn, optimizer, device, scheduler, filename, class_type, test_data_loader, data_test)
-                except Exception as e:
-                    print("Exception")
-                    print(e)
+                model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
+                model = model.to(device)
+                loss_fn = loss_fn.to(device)
+
+                print('#' * 10)
+                print(filename)
+
+                if class_type == "multi_label":
+                    # use micro f1 as metric
+                    test_loss, test_acc, test_real, test_pred, test_time = train.hierarchical_eval_model(
+                        model,
+                        test_data_loader,
+                        loss_fn,
+                        device,
+                        len(data_test['data']),
+                        class_type
+                    )
+                    test_report = classification_report(test_real, test_pred, output_dict=True)
+                    print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+
+                else:
+                    test_loss, test_acc, test_real, test_pred, test_time = train.hierarchical_eval_model(
+                        model,
+                        test_data_loader,
+                        loss_fn,
+                        device,
+                        len(data_test['data']),
+                        class_type
+                    )
+                    test_report = classification_report(test_real, test_pred, output_dict=True)
+                    print(f'test_accuracy {test_acc} macro_avg {test_report["macro avg"]} weighted_avg {test_report["weighted avg"]}'+"\n")
+
