@@ -178,6 +178,22 @@ def filter_testset(tokenizer, data_test):
     
     return data_test
 
+def filter_short_testset(tokenizer, data_test):
+    #tokenizer = tokenize('BERT')
+    long_docs = []
+    long_labels = []
+    i = 0
+    for data in data_test['data']:
+        if(len(tokenizer.tokenize(data)) <= 510):
+            long_docs.append(data)
+            long_labels.append(data_test['target'][i])
+        i = i+1
+
+    data_test["data"] = long_docs
+    data_test["target"] = long_labels
+
+    return data_test
+
 
 def tokenize(tokenizer):
     if tokenizer=='BERT':
