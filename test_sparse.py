@@ -13,8 +13,8 @@ import trainer
 from sklearn.metrics import classification_report
 
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
-        #'datasets': ["20newsgroups"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
+        'datasets': ["ECtHR"],
         'seeds': [1,2,3,4,5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
