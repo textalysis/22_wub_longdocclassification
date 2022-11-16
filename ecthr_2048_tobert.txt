@@ -2604,3 +2604,13 @@ Val loss 0.1940666480508984 micro_f1_score 0.7813303932377802
  
 ----------
 Epoch 8/40
+time = 675.30 secondes
+
+Train loss 0.06558235196547733 micro_f1_score 0.9289776069649791 
+ 
+time = 47.85 secondes
+
+Val loss 0.21479635129942268 micro_f1_score 0.7679104477611941
+ 
+----------
+Epoch 9/40
