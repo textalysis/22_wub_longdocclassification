@@ -25,8 +25,8 @@ para = {#'datasets': ["Hyperpartisan", "20newsgroups", "ECtHR"],
         'total_len': 4096,
         'epochs': 40,
         'max_len': 512,
-        'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
-       #'model_names': ["Bigbird"],
+       #'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
+       'model_names': ["Bigbird"],
         'sparse_max_lens': [1024, 2048, 4096],
         #'sparse_max_lens': [1024],
         'attention_windows': [256, 512],
@@ -71,7 +71,7 @@ for dataset in para["datasets"]:
         class_type = "multi_label"
     print("datasets imported")
 
-    for model_name in para['model_names'][1:3]:
+    for model_name in para['model_names']:
         for spase_max_len in para['sparse_max_lens']: 
             if model_name == "Longformer":
                 for attention_window in para['attention_windows']:
