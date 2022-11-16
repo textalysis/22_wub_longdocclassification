@@ -13,7 +13,7 @@ import trainer
 from sklearn.metrics import classification_report
 
 para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        'datasets': ["Hyperpartisan", "ECtHR"],
+        'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         #'seeds': [5],
         #'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -41,7 +41,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:1")  # specify  device
+        device = torch.device("cuda:0")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -75,7 +75,7 @@ for dataset in para["datasets"]:
     #label_6229 = data_test['target'][6229]
     #data_test['data'] = [x for i,x in enumerate(data_test['data']) if i not in [4392,6229]]
     #data_test['target'] = [x for i,x in enumerate(data_test['target']) if i not in [4392,6229]]
-    data_test = filter_short_testset(tokenizer, data_test)
+    #data_test = filter_testset(tokenizer, data_test)
 
     for summarizer in para["summarizer"]:        
         if summarizer == "bert_summarizer":
@@ -122,7 +122,7 @@ for dataset in para["datasets"]:
                                 class_type
                             )
                         test_report = classification_report(test_real, test_pred, output_dict=True)
-                        print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                        print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
                     else:
                         test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
                             model,

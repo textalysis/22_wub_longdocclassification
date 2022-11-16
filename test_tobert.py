@@ -12,16 +12,16 @@ import torch.nn as nn
 import trainer
 from sklearn.metrics import classification_report
 
-para = {'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
-        #'datasets': ["ECtHR"],
+para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
+        'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         #'seeds': [1, 2, 3],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
-        'chunk_lens': [256, 512],
-        #'chunk_lens': [256],
+        #'chunk_lens': [256, 512],
+        'chunk_lens': [256],
         'overlap_lens': [25, 50],
         #'total_len':1024,
         'total_len':4096,
@@ -43,7 +43,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:0")  # specify  device
+        device = torch.device("cuda:1")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
@@ -73,7 +73,7 @@ for seed in para["seeds"]:
         print("datasets imported")
 
         tokenizer = tokenize('BERT')
-        data_test = filter_short_testset(tokenizer, data_test)
+        #data_test = filter_testset(tokenizer, data_test)
         for chunk_len in para['chunk_lens']:
             for overlap_len in para['overlap_lens']:
                 test_data_loader = create_data_loader("long", data_test, tokenizer, max_len, batch_size,
@@ -82,11 +82,7 @@ for seed in para["seeds"]:
                 device = available_device()
                 #filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
                 filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
-                try:    
-                    model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
-                except Exception as e:
-                    print("Exception")
-                    print(e)
+                model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
                 model = model.to(device)
                 loss_fn = loss_fn.to(device)
 
@@ -104,7 +100,7 @@ for seed in para["seeds"]:
                         class_type
                     )
                     test_report = classification_report(test_real, test_pred, output_dict=True)
-                    print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                    print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
 
                 else:
                     test_loss, test_acc, test_real, test_pred, test_time = train.hierarchical_eval_model(

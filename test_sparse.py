@@ -77,7 +77,7 @@ for dataset in para["datasets"]:
                 for attention_window in para['attention_windows']:
                     for seed in para["seeds"]:
                         tokenizer = tokenize('longformer')
-                        data_test = filter_short_testset(tokenizer, data_test)
+                        #data_test = filter_testset(tokenizer, data_test)
                         max_len = spase_max_len
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Longformer(attention_window=attention_window, num_labels=num_labels)
@@ -102,7 +102,7 @@ for dataset in para["datasets"]:
                                     class_type
                                 )
                             test_report = classification_report(test_real, test_pred, output_dict=True)
-                            print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                            print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
                         else:
                             test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
                                 model,
@@ -119,7 +119,7 @@ for dataset in para["datasets"]:
                 for block_size in para['block_sizes']:
                     for seed in para["seeds"]:
                         tokenizer = tokenize("bigbird")
-                        data_test = filter_short_testset(tokenizer, data_test)
+                        #data_test = filter_testset(tokenizer, data_test)
                         max_len = spase_max_len
                         test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
                         model = Bigbird(block_size=block_size,num_labels=num_labels)
@@ -144,7 +144,7 @@ for dataset in para["datasets"]:
                                     class_type
                                 )
                             test_report = classification_report(test_real, test_pred, output_dict=True)
-                            print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                            print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
                         else:
                             test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
                                 model,

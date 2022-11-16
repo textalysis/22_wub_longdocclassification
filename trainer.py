@@ -250,7 +250,7 @@ def trainer_multi_label(epochs, model, train_data_loader, val_data_loader, data_
         class_type
     )
     test_report = classification_report(test_real, test_pred, output_dict=True)
-    print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+    print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
     print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))
@@ -332,7 +332,7 @@ def trainer_hierarchical_multi_label(epochs, model, train_data_loader, val_data_
         class_type
     )
     test_report = classification_report(test_real, test_pred, output_dict=True)
-    print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+    print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
     print('-' * 10)
     fig, ax = plt.subplots()
     ax.set_yticks(np.arange(0, 1.1, 0.1))

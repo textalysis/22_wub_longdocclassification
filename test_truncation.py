@@ -13,8 +13,8 @@ import trainer
 from sklearn.metrics import classification_report
 
 
-para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        #'datasets': ["ECtHR","Hyperpartisan"],
+para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
+        'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         #'seeds': [1,3,5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
@@ -75,7 +75,7 @@ for seed in para["seeds"]:
 
         for truncation in para['truncations']:
             tokenizer = tokenize('BERT')
-            data_test = filter_short_testset(tokenizer, data_test)
+            #data_test = filter_testset(tokenizer, data_test)
             if truncation == "head":
                 #for summarizer in para["summarizer"]:
                     summarizer = para["summarizer"][0]
@@ -100,7 +100,7 @@ for seed in para["seeds"]:
                             class_type
                         )
                         test_report = classification_report(test_real, test_pred, output_dict=True)
-                        print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                        print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
 
                     else:
                         test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
@@ -137,7 +137,7 @@ for seed in para["seeds"]:
                         class_type
                     )
                     test_report = classification_report(test_real, test_pred, output_dict=True)
-                    print(f'test_f1_score {test_report["micro avg"]["f1-score"]}' + "\n")
+                    print(f'test_f1_score {test_report["micro avg"]["f1-score"]} test_macro_f1_score {test_report["macro avg"]["f1-score"]}' + "\n")
 
                 else:
                     test_loss, test_acc, test_real, test_pred, test_time = train.eval_model(
