@@ -12,19 +12,19 @@ import torch.nn as nn
 import trainer
 from sklearn.metrics import classification_report
 
-para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
-        'datasets': ["ECtHR"],
+para = {'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
+        #'datasets': ["ECtHR"],
         'seeds': [1, 2, 3, 4, 5],
         #'seeds': [1, 2, 3],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
-        #'chunk_lens': [256, 512],
-        'chunk_lens': [256],
+        'chunk_lens': [256, 512],
+        #'chunk_lens': [256],
         'overlap_lens': [25, 50],
         #'total_len':1024,
-        'total_len':4096,
+        'total_len':2048,
         'epochs': 40,
         'max_len': 512,
         'model_names': ["ToBERT", "Longformer", "Bigbird", "BERT"],
@@ -80,8 +80,8 @@ for seed in para["seeds"]:
                                                    approach="all", chunk_len=chunk_len, overlap_len=overlap_len, total_len=total_len)
                 model = ToBERT(num_labels)
                 device = available_device()
-                #filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
-                filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
+                filename = "{}_{}_{}_{}_{}_{}".format(dataset, model_name,total_len, chunk_len, overlap_len, seed)
+                #filename = "{}_{}_{}_{}_{}".format(dataset, model_name, chunk_len, overlap_len, seed)
                 model.load_state_dict(torch.load(os.path.join('best_models', "{}_best.bin".format(filename))))
                 model = model.to(device)
                 loss_fn = loss_fn.to(device)
