@@ -12,17 +12,17 @@ import torch.nn as nn
 import trainer
 
 para = {#'datasets': ["20newsgroups", "ECtHR","Hyperpartisan"],
-        'datasets': ["ECtHR"],
-        'seeds': [1, 2, 3, 4, 5],
-        #'seeds': [5],
+        'datasets': ["20newsgroups"],
+        #'seeds': [1, 2, 3, 4, 5],
+        'seeds': [5],
         'summarizer': ["none", "bert_summarizer", "text_rank"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
-        'chunk_lens': [256, 512],
-        #'chunk_lens': [256],
-        'overlap_lens': [25, 50],
-        #'overlap_lens': [50],
+        #'chunk_lens': [256, 512],
+        'chunk_lens': [512],
+        #'overlap_lens': [25, 50],
+        'overlap_lens': [25],
         #'total_len': 4096,
         'total_len':2048,
         'epochs': 40,
@@ -43,7 +43,7 @@ total_len = para["total_len"]
 
 def available_device():
     if torch.cuda.is_available():
-        device = torch.device("cuda:1")  # specify  device
+        device = torch.device("cuda:0")  # specify  device
         print('There are %d GPU(s) available.' % torch.cuda.device_count())
         print('We will use the GPU:', torch.cuda.get_device_name(0))
 
