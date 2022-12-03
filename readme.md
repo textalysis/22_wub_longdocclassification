@@ -2,9 +2,9 @@
 
 To run hierarchial method: python3 train_hierarchial.py (or run in background: nohup python3 -u train_hierarchial.py > output.txt &)
 
-To run sparse method: python3 train_sparse.py
+To run sparse method: python3 train_sparse.py (or run in background)
 
-To run truncation method: python3 train_trun_sum.py
+To run truncation method: python3 train_trun_sum.py (or run in background)
 
 To run summarization method: first summarize the text and then adjust summarizer part in train_trun_sum.py
 
