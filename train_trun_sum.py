@@ -11,12 +11,12 @@ from transformers import get_linear_schedule_with_warmup, AdamW
 import torch.nn as nn
 import trainer
 
-para = {#'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
-        'datasets': ["Hyperpartisan"],
-        #'seeds': [1, 2, 3, 4, 5],
-        'seeds': [5],
+para = {'datasets': ["Hyperpartisan", "20newsgroups","ECtHR"],
+        #'datasets': ["Hyperpartisan"],
+        'seeds': [1, 2, 3, 4, 5],
+        #'seeds': [5],
         #'summarizer': ["none", "bert_summarizer", "text_rank"],
-        'summarizer': ["bert_summarizer", "text_rank"],
+        'summarizer': ["none"],
         'tokenizers': ["BERT", "longformer", "bigbird"],
         'batch_size': 16,
         'learning_rate': 2e-5,
@@ -76,6 +76,7 @@ for seed in para["seeds"]:
             tokenizer = tokenize('BERT')
             if truncation == "head":
                 for summarizer in para["summarizer"]:
+                    """
                     summarizer_path = os.path.join('data', "{}".format(summarizer), "{}".format(dataset))
                     with open(os.path.join(summarizer_path, "data_train_sum.txt"),encoding='utf-8') as f:
                         data_train['data'] = f.readlines()
@@ -85,7 +86,7 @@ for seed in para["seeds"]:
                             
                     with open(os.path.join(summarizer_path, "data_test_sum.txt"),encoding='utf-8') as f:
                         data_test['data'] = f.readlines()
-
+                    """
                     train_data_loader = create_data_loader("short", data_train, tokenizer, max_len, batch_size)
                     val_data_loader = create_data_loader("short",  data_val, tokenizer, max_len, batch_size)
                     test_data_loader = create_data_loader("short", data_test, tokenizer, max_len, batch_size)
@@ -110,7 +111,7 @@ for seed in para["seeds"]:
                     except Exception as e:
                         print("Exception")
                         print(e)
-            """
+            
             else:
                 train_data_loader = create_data_loader("long", data_train, tokenizer, max_len, batch_size, approach=truncation)
                 val_data_loader = create_data_loader("long", data_val, tokenizer, max_len, batch_size, approach=truncation)
@@ -136,5 +137,5 @@ for seed in para["seeds"]:
                 except Exception as e:
                     print("Exception")
                     print(e)
-            """
+            
 
